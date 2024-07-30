@@ -1,8 +1,16 @@
 import type { Metadata } from "next";
 
+import { Inter, Merriweather } from "next/font/google";
+
 import { cn } from "@/lib/utils";
 import NavBar from "@/components/ui/NavBar";
 
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const merriweather = Merriweather({
+  weight: ["400"],
+  subsets: ["latin"],
+  variable: "--font-merriweather",
+});
 
 export const metadata: Metadata = {
   title: "Dashboard - ArtStore",
@@ -18,8 +26,9 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          "min-h-screen bg-slate-50 antialiased",
-
+          "min-h-screen bg-slate-50 font-sans antialiased",
+          inter.variable,
+          merriweather.variable
         )}
       >
         <NavBar />
