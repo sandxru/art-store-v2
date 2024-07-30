@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 
 import { cn } from "@/lib/utils";
+import NavBar from "@/components/ui/NavBar";
 
 export const metadata: Metadata = {
   title: "Dashboard - ArtStore",
@@ -18,6 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn("min-h-screen bg-slate-50 antialiased")}>
+        <NavBar/>
         {children}
       </body>
     </html>
