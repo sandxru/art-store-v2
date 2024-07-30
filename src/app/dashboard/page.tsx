@@ -30,63 +30,54 @@ import {
 export default function Dashboard() {
   return (
     <div className="flex min-h-screen w-full flex-col">
-      
+      <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-10">
+        <div className="flex items-center justify-between">
+          <h2 className="text-3xl font-bold tracking-tight">
+            Welcome, Admin 👋🏻
+          </h2>
 
-      <div className="flex-1 space-y-4 pl-8 pr-8 pt-6">
-        <div className="flex items-center justify-between space-y-2">
-          <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
-          <div className="flex items-center space-x-2">
-            <Button asChild size="sm" className="ml-auto gap-1">
-              <Link href="#" className="text-base">
-                <Plus className="h-5 w-5" />
-                New Order
-              </Link>
-            </Button>
-          </div>
+          <Button asChild size="sm" className="ml-auto gap-1">
+            <Link href="#" className="text-base">
+              <Plus className="h-5 w-5" />
+              New Order
+            </Link>
+          </Button>
         </div>
-      </div>
 
-      <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
-        
-        <div className="grid gap-4 md:grid-cols-2.5 md:gap-6 lg:grid-cols-4">
-          
+        <div className="grid gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-4">
           <Card x-chunk="dashboard-01-chunk-0">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 mt-3">
               <CardTitle className="text-lg font-medium">
                 Pending Orders
               </CardTitle>
               <Package className="h-7 w-7 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-3xl font-bold">5</div>
+              <div className="text-3xl font-bold mb-5">5</div>
             </CardContent>
           </Card>
 
           <Card x-chunk="dashboard-01-chunk-1">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 mt-3">
               <CardTitle className="text-lg font-medium">
                 Completed Orders
               </CardTitle>
               <PackageCheck className="h-7 w-7 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-3xl font-bold">5</div>
+              <div className="text-3xl font-bold">260</div>
             </CardContent>
           </Card>
 
           <Card x-chunk="dashboard-01-chunk-1">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-lg font-medium">
-                All Orders
-              </CardTitle>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 mt-3">
+              <CardTitle className="text-lg font-medium">All Orders</CardTitle>
               <Package2 className="h-7 w-7 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-3xl font-bold">5</div>
+              <div className="text-3xl font-bold">265</div>
             </CardContent>
           </Card>
-
-
         </div>
         <div className="grid gap-4 md:gap-8 lg:grid-cols-2 xl:grid-cols-3">
           <Card className="xl:col-span-2" x-chunk="dashboard-01-chunk-4">
