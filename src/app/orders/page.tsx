@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/card";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import NavBar from "@/components/ui/NavBar";
 
 async function getData(): Promise<Payment[]> {
   // Fetch data from your API here.
@@ -42,6 +43,7 @@ export default async function DemoPage() {
 
   return (
     <>
+    <NavBar/>
       <div className="flex min-h-screen w-full flex-col">
         <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-10">
           <Breadcrumb className="hidden md:flex">

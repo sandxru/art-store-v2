@@ -26,9 +26,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import NavBar from "@/components/ui/NavBar";
 
 export default function Dashboard() {
   return (
+    <>
+    <NavBar/>
     <div className="flex min-h-screen w-full flex-col">
       <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-10">
         <div className="flex items-center justify-between">
@@ -46,11 +49,11 @@ export default function Dashboard() {
 
         <div className="grid gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-4">
           <Card x-chunk="dashboard-01-chunk-0">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 mt-3">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 mt-1">
               <CardTitle className="text-lg font-medium">
                 Pending Orders
               </CardTitle>
-              <Package className="h-7 w-7 text-muted-foreground" />
+              <Package className="h-10 w-10 text-muted-foreground" />
             </CardHeader>
             <CardContent>
               <div className="text-3xl font-bold mb-5">5</div>
@@ -58,11 +61,11 @@ export default function Dashboard() {
           </Card>
 
           <Card x-chunk="dashboard-01-chunk-1">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 mt-3">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 mt-1">
               <CardTitle className="text-lg font-medium">
                 Completed Orders
               </CardTitle>
-              <PackageCheck className="h-7 w-7 text-muted-foreground" />
+              <PackageCheck className="h-10 w-10 text-muted-foreground" />
             </CardHeader>
             <CardContent>
               <div className="text-3xl font-bold">260</div>
@@ -70,12 +73,12 @@ export default function Dashboard() {
           </Card>
 
           <Card x-chunk="dashboard-01-chunk-1">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 mt-3">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 mt-1">
               <CardTitle className="text-lg font-medium">All Orders</CardTitle>
-              <Package2 className="h-7 w-7 text-muted-foreground" />
+              <Package2 className="h-10 w-10 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-3xl font-bold">265</div>
+              <div className="text-3xl font-bold font-mono">270</div>
             </CardContent>
           </Card>
         </div>
@@ -302,5 +305,6 @@ export default function Dashboard() {
         </div>
       </main>
     </div>
+    </>
   );
 }
