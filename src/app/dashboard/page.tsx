@@ -65,7 +65,7 @@ export default function Dashboard() {
               <PackageCheck className="h-7 w-7 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-3xl font-bold">260</div>
+              <div className="text-3xl font-bold">265</div>
             </CardContent>
           </Card>
 
