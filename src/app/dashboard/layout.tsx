@@ -1,15 +1,19 @@
 import type { Metadata } from "next";
 
-import { Inter, Merriweather } from "next/font/google";
+import { Inter, Oregano } from "next/font/google";
 
 import { cn } from "@/lib/utils";
 import NavBar from "@/components/ui/NavBar";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const merriweather = Merriweather({
-  weight: ["400"],
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-merriweather",
+  variable: "--font-inter",
+  weight: ["100", "200", "300", "400"],
+});
+const oregano = Oregano({
+  subsets: ["latin"],
+  variable: "--font-oregano",
+  weight: ["400"],
 });
 
 export const metadata: Metadata = {
@@ -28,7 +32,7 @@ export default function RootLayout({
         className={cn(
           "min-h-screen bg-slate-50 font-sans antialiased",
           inter.variable,
-          merriweather.variable
+          oregano.variable
         )}
       >
         <NavBar />

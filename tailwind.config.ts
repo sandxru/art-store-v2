@@ -19,8 +19,8 @@ const config = {
     },
     extend: {
       fontFamily: {
-        sans: ['var(--font-inter)', 'sans-serif'],
-        serif: ['var(--font-oregano)', 'serif'],
+        inter: ['var(--font-inter)', 'inter'],
+        oregano: ['var(--font-oregano)', 'oregano'],
       },
       colors: {
         border: "hsl(var(--border))",

@@ -83,7 +83,7 @@ export default function Dashboard() {
           <Card className="xl:col-span-2" x-chunk="dashboard-01-chunk-4">
             <CardHeader className="flex flex-row items-center">
               <div className="grid gap-2">
-                <CardTitle>Rencet Orders</CardTitle>
+                <CardTitle className="text-2xl">Recent Orders</CardTitle>
                 <CardDescription>
                   Recent orders from your store.
                 </CardDescription>

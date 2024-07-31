@@ -2,7 +2,7 @@ import { Payment, columns } from "./columns";
 import { DataTable } from "@/components/ui/data-table";
 
 import Link from "next/link";
-import { File, ListFilter, MoreHorizontal, PlusCircle } from "lucide-react";
+import { File, PlusCircle } from "lucide-react";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -20,22 +20,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 async function getData(): Promise<Payment[]> {
   // Fetch data from your API here.
   return [
     {
-      id: "728ed52f",
+      cl_id: "728ed52f",
+      cl_name: "Sandaru Fernando",
       amount: 100,
       status: "pending",
       email: "m@example.com",
@@ -55,7 +48,7 @@ export default async function DemoPage() {
             <BreadcrumbList>
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
-                  <Link className="text-base text-slate-500" href="#">
+                  <Link className="text-base text-slate-500" href="/dashboard">
                     Dashboard
                   </Link>
                 </BreadcrumbLink>
@@ -63,7 +56,7 @@ export default async function DemoPage() {
               <BreadcrumbSeparator />
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
-                  <Link className="text-base text-slate-800" href="#">
+                  <Link className="text-base text-slate-800" href="/orders">
                     Orders
                   </Link>
                 </BreadcrumbLink>
@@ -73,7 +66,7 @@ export default async function DemoPage() {
 
           <Card x-chunk="dashboard-06-chunk-0">
             <CardHeader>
-              <CardTitle>Orders</CardTitle>
+              <CardTitle className="text-2xl">Orders</CardTitle>
               <CardDescription>
                 Manage your orders and view their details.
               </CardDescription>

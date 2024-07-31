@@ -1,9 +1,10 @@
-"use client"
+"use client";
 
-import { ColumnDef } from "@tanstack/react-table"
-import { MoreHorizontal } from "lucide-react"
+import { ColumnDef } from "@tanstack/react-table";
+import { MoreHorizontal } from "lucide-react";
+import { Trash2, Pencil,Eye } from "lucide-react";
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,36 +12,42 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu";
 
-// This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
 export type Payment = {
-  id: string
-  amount: number
-  status: "pending" | "processing" | "success" | "failed"
-  email: string
-}
+  id: string;
+  amount: number;
+  status: "pending" | "processing" | "success" | "failed";
+  email: string;
+};
 
 export const columns: ColumnDef<Payment>[] = [
   {
-    accessorKey: "status",
+    accessorKey: "cl_id",
+    header: "Order ID",
+  },
+  {
+    accessorKey: "cl_name",
+    header: "Name",
+  },
+  {
+    accessorKey: "cl_status",
     header: "Status",
   },
   {
-    accessorKey: "email",
-    header: "Email",
+    accessorKey: "cl_method",
+    header: "Method",
   },
   {
-    accessorKey: "amount",
+    accessorKey: "cl_amount",
     header: "Amount",
   },
   {
     header: "Action",
-    id: "actions",
+    id: "cl_actions",
     cell: ({ row }) => {
-      const payment = row.original
- 
+      const payment = row.original;
+
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -51,17 +58,15 @@ export const columns: ColumnDef<Payment>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
-            >
-              Copy payment ID
-            </DropdownMenuItem>
+            <DropdownMenuItem><Eye className="w-5 h-5 pr-1"/>View Order</DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
+            <DropdownMenuItem><Pencil className="w-5 h-4 pr-1"/>Edit Order</DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem className="text-red-500"><Trash2 className="w-5 h-4 pr-1 text-red-500"/>Delete Order</DropdownMenuItem>
+            
           </DropdownMenuContent>
         </DropdownMenu>
-      )
+      );
     },
-  }
-]
+  },
+];
