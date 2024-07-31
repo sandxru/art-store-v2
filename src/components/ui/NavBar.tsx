@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -7,9 +8,16 @@ import {
   CircleUser,
   House,
   Menu,
+  Sun,
+  User,
   Package2,
+  Settings,
+  Headset,
+  LogOut,
+  Settings2,
   Contact,
   Package,
+  Settings2Icon,
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -103,20 +111,44 @@ const NavBar = () => {
         </SheetContent>
       </Sheet>
       <div className="justify-end flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
+        
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="secondary" size="icon" className="rounded-full">
-              <CircleUser className="h-5 w-5" />
+              <CircleUser className="h-6 w-6" />
+
               <span className="sr-only">Toggle user menu</span>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <div className="min-w-48">
+              <DropdownMenuLabel className="py-2">Administrator Name</DropdownMenuLabel>
+            </div>
+
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Settings</DropdownMenuItem>
-            <DropdownMenuItem>Support</DropdownMenuItem>
+            <DropdownMenuItem>
+              <User className="w-5 h-4 pr-1" />
+              Profile
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Settings2Icon className="w-5 h-4 pr-1" />
+              Preferences
+            </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Logout</DropdownMenuItem>
+            <DropdownMenuItem>
+              <Settings className="w-5 h-4 pr-1" />
+              Settings
+            </DropdownMenuItem>
+
+            <DropdownMenuItem>
+              <Headset className="w-5 h-4 pr-1" />
+              Support
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem className="text-red-500">
+              <LogOut className="text-red-500 w-5 h-4 pr-1" />
+              Sign out
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
