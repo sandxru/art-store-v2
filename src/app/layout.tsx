@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Merriweather } from "next/font/google";
+import { Inter, Oregano } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
@@ -8,9 +8,9 @@ const inter = Inter({
   variable: "--font-inter",
   weight: ["100", "200", "300", "400"],
 });
-const merriweather = Merriweather({
+const oregano = Oregano({
   subsets: ["latin"],
-  variable: "--font-merriweather",
+  variable: "--font-oregano",
   weight: ["400"],
 });
 
@@ -30,7 +30,7 @@ export default function RootLayout({
         className={cn(
           "min-h-screen bg-slate-50 font-sans antialiased",
           inter.variable,
-          merriweather.variable
+          oregano.variable
         )}
       >
         {children}

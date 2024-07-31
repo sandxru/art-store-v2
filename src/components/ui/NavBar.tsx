@@ -9,7 +9,6 @@ import {
   Menu,
   Package2,
   Contact,
-  Brush,
   Package,
 } from "lucide-react";
 import {
@@ -24,36 +23,36 @@ import {
 const NavBar = () => {
   return (
     <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
-      <nav className="hidden flex-col gap-6 font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-8">
+      <nav className="hidden flex-col gap-6 font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
         <div className="flex p-4">
           <Logo />
         </div>
 
-        <div className="flex gap-2 items-center">
+        <div className="flex gap-2 items-center border-r-2 border-slate-100 pr-5">
           <House className="h-5 w-5 text-muted-foreground" />
           <Link
             href="/dashboard"
-            className="text-base text-muted-foreground transition-colors hover:text-foreground"
+            className="text-base text-slate-500 transition-colors hover:text-slate-600"
           >
             Dashboard
           </Link>
         </div>
 
-        <div className="flex gap-2 items-center">
+        <div className="flex gap-2 items-center border-r-2 border-slate-100 pr-5">
           <Package className="h-5 w-5 text-muted-foreground" />
           <Link
             href="/orders"
-            className="text-base text-muted-foreground transition-colors hover:text-foreground"
+            className="text-base text-slate-500 transition-colors hover:text-slate-600"
           >
             Orders
           </Link>
         </div>
 
-        <div className="flex gap-2 items-center">
+        <div className="flex gap-2 items-center ">
           <Contact className="h-5 w-5 text-muted-foreground" />
           <Link
             href="/orders"
-            className="text-base text-muted-foreground transition-colors hover:text-foreground"
+            className="text-base text-slate-500 transition-colors hover:text-slate-600"
           >
             Customers
           </Link>
@@ -69,28 +68,37 @@ const NavBar = () => {
         </SheetTrigger>
         <SheetContent side="left">
           <nav className="grid gap-6 text-lg font-medium">
-            <Link
-              href="#"
-              className="flex items-center gap-2 text-lg font-semibold"
-            >
-              <Package2 className="h-6 w-6" />
-            </Link>
-            <Link href="/dashboard" className="hover:text-foreground">
-              Dashboard
-            </Link>
-            <Link
-              href="/orders"
-              className="text-muted-foreground hover:text-foreground"
-            >
-              Orders
-            </Link>
+            <Logo />
 
-            <Link
-              href="#"
-              className="text-muted-foreground hover:text-foreground"
-            >
-              Customers
-            </Link>
+            <div className="flex gap-2 items-center">
+              <House className="h-5 w-5 text-muted-foreground" />
+              <Link
+                href="/dashboard"
+                className="text-base text-muted-foreground transition-colors hover:text-foreground"
+              >
+                Dashboard
+              </Link>
+            </div>
+
+            <div className="flex gap-2 items-center">
+              <Package className="h-5 w-5 text-muted-foreground" />
+              <Link
+                href="/orders"
+                className="text-base text-muted-foreground transition-colors hover:text-foreground"
+              >
+                Orders
+              </Link>
+            </div>
+
+            <div className="flex gap-2 items-center">
+              <Contact className="h-5 w-5 text-muted-foreground" />
+              <Link
+                href="/orders"
+                className="text-base text-muted-foreground transition-colors hover:text-foreground"
+              >
+                Customers
+              </Link>
+            </div>
           </nav>
         </SheetContent>
       </Sheet>
