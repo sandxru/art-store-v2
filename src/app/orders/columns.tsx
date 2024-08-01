@@ -42,7 +42,7 @@ export const columns: ColumnDef<Payment>[] = [
           src="/assets/images/log.jpg"
           width={120}
           height={120}
-          className="h-40 w-auto p-0 border-slate-400 rounded-lg "
+          className="h-44 w-auto p-0 border-white border-4 rounded-lg drop-shadow"
         />
       );
     },
