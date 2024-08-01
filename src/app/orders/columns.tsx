@@ -2,7 +2,8 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
-import { Trash2, Pencil,Eye } from "lucide-react";
+import { Trash2, Pencil, Eye } from "lucide-react";
+import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -21,7 +22,7 @@ export type Payment = {
   email: string;
 };
 
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef = [
   {
     accessorKey: "cl_id",
     header: "Order ID",
@@ -29,6 +30,22 @@ export const columns: ColumnDef<Payment>[] = [
   {
     accessorKey: "cl_name",
     header: "Name",
+  },
+  {
+    accessorKey: "cl_image",
+    header: "Image",
+    cell: ({ row }) => {
+      const payment = row.original;
+
+      return (
+        <Image
+          src="/assets/images/log.jpg"
+          width={120}
+          height={120}
+          className="h-40 w-auto p-0 border-slate-400 rounded-lg "
+        />
+      );
+    },
   },
   {
     accessorKey: "cl_status",
@@ -58,12 +75,24 @@ export const columns: ColumnDef<Payment>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem><Eye className="w-5 h-5 pr-1"/>View Order</DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem><Pencil className="w-5 h-4 pr-1"/>Edit Order</DropdownMenuItem>
+            <DropdownMenuItem>
+              <Eye className="w-5 h-5 pr-1" />
+              <div className="pr-1" />
+              View
+            </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className="text-red-500"><Trash2 className="w-5 h-4 pr-1 text-red-500"/>Delete Order</DropdownMenuItem>
-            
+            <DropdownMenuItem>
+              <Pencil className="w-5 h-4 pr-1" />
+              <div className="pr-1" />
+              Edit
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem className="text-red-500">
+              <Trash2 className="w-5 h-4 pr-1 text-red-500" />
+              <div className="pr-1" />
+              Delete
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );

@@ -4,6 +4,8 @@ import {
   ArrowUpRight,
   Package,
   Package2,
+  PackagePlus,
+  Calendar,
   PackageCheck,
 } from "lucide-react";
 
@@ -48,12 +50,23 @@ export default function Dashboard() {
         </div>
 
         <div className="grid gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-4">
+          
+        <Card x-chunk="dashboard-01-chunk-1">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 mt-1">
+              <CardTitle className="text-lg font-medium text-slate-700">Last 30 Days</CardTitle>
+              <Calendar className="h-10 w-10 text-muted-foreground text-slate-200" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-3xl font-bold">270</div>
+            </CardContent>
+          </Card>
+          
           <Card x-chunk="dashboard-01-chunk-0">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 mt-1">
-              <CardTitle className="text-lg font-medium">
+              <CardTitle className="text-lg font-medium text-slate-700">
                 Pending Orders
               </CardTitle>
-              <Package className="h-10 w-10 text-muted-foreground" />
+              <Package className="h-10 w-10 text-muted-foreground text-slate-200" />
             </CardHeader>
             <CardContent>
               <div className="text-3xl font-bold mb-5">5</div>
@@ -62,10 +75,10 @@ export default function Dashboard() {
 
           <Card x-chunk="dashboard-01-chunk-1">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 mt-1">
-              <CardTitle className="text-lg font-medium">
+              <CardTitle className="text-lg font-medium text-slate-700">
                 Completed Orders
               </CardTitle>
-              <PackageCheck className="h-10 w-10 text-muted-foreground" />
+              <PackageCheck className="h-10 w-10 text-muted-foreground text-slate-200" />
             </CardHeader>
             <CardContent>
               <div className="text-3xl font-bold">260</div>
@@ -74,13 +87,16 @@ export default function Dashboard() {
 
           <Card x-chunk="dashboard-01-chunk-1">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 mt-1">
-              <CardTitle className="text-lg font-medium">All Orders</CardTitle>
-              <Package2 className="h-10 w-10 text-muted-foreground" />
+              <CardTitle className="text-lg font-medium text-slate-700">All Orders</CardTitle>
+              <Package2 className="h-10 w-10 text-muted-foreground text-slate-200" />
             </CardHeader>
             <CardContent>
-              <div className="text-3xl font-bold font-mono">270</div>
+              <div className="text-3xl font-bold">270</div>
             </CardContent>
           </Card>
+
+          
+
         </div>
         <div className="grid gap-4 md:gap-8 lg:grid-cols-2 xl:grid-cols-3">
           <Card className="xl:col-span-2" x-chunk="dashboard-01-chunk-4">
