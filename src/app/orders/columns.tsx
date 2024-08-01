@@ -22,7 +22,7 @@ export type Payment = {
   email: string;
 };
 
-export const columns: ColumnDef = [
+export const columns: ColumnDef<Payment>[] = [
   {
     accessorKey: "cl_id",
     header: "Order ID",
