@@ -30,9 +30,11 @@ async function getData(): Promise<Payment[]> {
     {
       cl_id: "728ed52f",
       cl_name: "Sandaru Fernando",
-      amount: 100,
-      status: "pending",
-      email: "m@example.com",
+      cl_image: "public/images/log.jpg",
+      cl_status: "Pending",
+      cl_method: 'Pick-up',
+      cl_amount: 100,
+    
     },
     // ...
   ];
@@ -104,6 +106,8 @@ export default async function DemoPage() {
                     <DataTable columns={columns} data={data} />
                   </div>
                 </TabsContent>
+
+                
               </Tabs>
             </CardContent>
           </Card>
