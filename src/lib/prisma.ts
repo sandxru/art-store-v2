@@ -134,4 +134,24 @@ export async function getOrdersWithStatusP() {
   return orders;
 }
 
+export async function getOrdersWithStatusC() {
+  const orders = await prisma.order.findMany({
+    where: {
+      status: "c"
+    }
+  });
+  return orders;
+}
+
+export async function getOrdersWithStatusAll() {
+  const orders = await prisma.order.findMany({
+    where: {
+      status: {
+        in: ['p', 'c']
+      }
+    }
+  });
+  return orders;
+}
+
 export default prisma;

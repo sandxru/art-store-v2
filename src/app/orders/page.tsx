@@ -21,7 +21,7 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import NavBar from "@/components/ui/NavBar";
 
-import { getOrdersWithStatusP, countCompletedOrders } from "@/lib/prisma";
+import { getOrdersWithStatusP, countCompletedOrders, getOrdersWithStatusC, getOrdersWithStatusAll } from "@/lib/prisma";
 
 export const metadata: Metadata = {
   title: "Orders - ArtStore",
@@ -29,7 +29,9 @@ export const metadata: Metadata = {
 };
 
 export default async function Orders() {
-  const data = await getOrdersWithStatusP();
+  const pending_data = await getOrdersWithStatusP();
+  const completed_data = await getOrdersWithStatusC();
+  const all_data = await getOrdersWithStatusAll();
 
   return (
     <>
@@ -91,7 +93,19 @@ export default async function Orders() {
 
                 <TabsContent value="tab-pending">
                   <div className="mx-auto py-2">
-                    <DataTable columns={columns} data={data} />
+                    <DataTable columns={columns} data={pending_data} />
+                  </div>
+                </TabsContent>
+
+                <TabsContent value="tab-completed">
+                  <div className="mx-auto py-2">
+                    <DataTable columns={columns} data={completed_data} />
+                  </div>
+                </TabsContent>
+
+                <TabsContent value="tab-all">
+                  <div className="mx-auto py-2">
+                    <DataTable columns={columns} data={all_data} />
                   </div>
                 </TabsContent>
               </Tabs>
