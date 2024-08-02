@@ -1,7 +1,8 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import {
-  countLast30Orders,
+  countOrdersInCurrentMonth,
+  getOrderPercentageChange,
   countPendingOrders,
   countCompletedOrders,
   countAllOrders,
@@ -43,7 +44,8 @@ export const metadata: Metadata = {
 };
 
 export default async function Dashboard() {
-  const last_30_orders = await countLast30Orders();
+  const month_orders = await countOrdersInCurrentMonth();
+  const percent_change = await getOrderPercentageChange();
   const pending_orders = await countPendingOrders();
   const completed_orders = await countCompletedOrders();
   const all_orders = await countAllOrders();
@@ -69,13 +71,18 @@ export default async function Dashboard() {
             <Card x-chunk="dashboard-01-chunk-1">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 mt-1">
                 <CardTitle className="text-lg font-medium text-slate-700">
-                  Last 30 Days
+                  This Month
                 </CardTitle>
                 <Calendar className="h-10 w-10 text-muted-foreground text-slate-200" />
               </CardHeader>
               <CardContent>
-                <div className="text-3xl font-bold">{last_30_orders}</div>
+                <div className="text-3xl font-bold">{month_orders}</div>
               </CardContent>
+              <CardContent>
+                  <div className="text-sm text-muted-foreground -mt-4">
+                    {percent_change}
+                  </div>
+                </CardContent>
             </Card>
 
             <Card x-chunk="dashboard-01-chunk-0">
