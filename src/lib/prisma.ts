@@ -124,4 +124,14 @@ export async function getOrderPercentageChange(): Promise<string> {
   }
 }
 
+
+export async function getOrdersWithStatusP() {
+  const orders = await prisma.order.findMany({
+    where: {
+      status: "p"
+    }
+  });
+  return orders;
+}
+
 export default prisma;
