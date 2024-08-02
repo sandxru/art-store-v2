@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum OrderStatus {
+  p
+  c
+}
+
+model Order {
+  id        Int         @id @default(autoincrement()) // Primary key
+  cname     String?
+  delivery  Int?
+  status    OrderStatus @default(p)
+  notes     String?      @db.Text
+  photo     String?
+  frameID   Int?
+  price     Int?
+  contact   String?
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  address   String?
+}
+
+model Admin {
+  id       Int    @id @default(autoincrement()) // Primary key
+  name     String // Required
+  email    String // Required
+  password String // Required
+}

@@ -39,7 +39,7 @@ export const columns: ColumnDef<Payment>[] = [
 
       return (
         <Image
-          src="/assets/images/log.jpg"
+          src="https://res.cloudinary.com/artbyshimara/image/upload/v1687279266/kcifixqknccjbfomj9pq.jpg"
           width={120}
           height={120}
           className="h-44 w-auto p-0 border-white border-4 rounded-lg drop-shadow"
