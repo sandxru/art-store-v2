@@ -15,18 +15,18 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 export type Order = {
-  cl_id: number;
-  cl_cname: string;
-  cl_delivery: number;
-  cl_status: "p" | "c";
+  id: number;
+  cname: string;
+  delivery: number;
+  status: "p" | "c";
   //cl_notes: string;
-  cl_photo: string;
-  //cl_frameID: number;
-  // cl_price: number;
-  // cl_contact:string;
-  // cl_createdAt: string;
-  // cl_updatedAt: string;
-  // cl_address: string;
+  photo: string;
+  // frameID: number;
+  // price: number;
+  // contact:string;
+  // createdAt: string;
+  // updatedAt: string;
+  // address: string;
 };
 
 export const columns: ColumnDef<Order>[] = [
