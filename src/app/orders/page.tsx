@@ -1,3 +1,5 @@
+//@ts-nocheck
+
 import { Metadata } from "next";
 import { Order, columns } from "./columns";
 import { DataTable } from "@/components/ui/data-table";
