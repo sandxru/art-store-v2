@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
-  weight: ["100", "200", "300", "400", ],
+  weight: ["100", "200", "300", "400"],
 });
 const oregano = Oregano({
   subsets: ["latin"],
