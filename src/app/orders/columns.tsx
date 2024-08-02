@@ -4,7 +4,6 @@ import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
 import { Trash2, Pencil, Eye } from "lucide-react";
 import Image from "next/image";
-
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -15,49 +14,58 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-export type Payment = {
-  id: string;
-  amount: number;
-  status: "pending" | "processing" | "success" | "failed";
-  email: string;
+export type Order = {
+  cl_id: number;
+  cl_cname: string;
+  cl_delivery: number;
+  cl_status: "p" | "c";
+  //cl_notes: string;
+  cl_photo: string;
+  //cl_frameID: number;
+  // cl_price: number;
+  // cl_contact:string;
+  // cl_createdAt: string;
+  // cl_updatedAt: string;
+  // cl_address: string;
 };
 
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<Order>[] = [
   {
-    accessorKey: "cl_id",
+    accessorKey: "id",
     header: "Order ID",
   },
   {
-    accessorKey: "cl_name",
+    accessorKey: "cname",
     header: "Name",
   },
   {
-    accessorKey: "cl_image",
+    accessorKey: "photo",
     header: "Image",
     cell: ({ row }) => {
-      const payment = row.original;
+      const photo = row.original;
 
       return (
         <Image
-          src="https://res.cloudinary.com/artbyshimara/image/upload/v1687279266/kcifixqknccjbfomj9pq.jpg"
-          width={120}
-          height={120}
+          src={photo.photo}
+          alt="img"
+          width={1080}
+          height={1080}
           className="h-44 w-auto p-0 border-white border-4 rounded-lg drop-shadow"
         />
       );
     },
   },
   {
-    accessorKey: "cl_status",
+    accessorKey: "status",
     header: "Status",
   },
   {
-    accessorKey: "cl_method",
-    header: "Method",
+    accessorKey: "delivery",
+    header: "Delivery Method",
   },
   {
-    accessorKey: "cl_amount",
-    header: "Amount",
+    accessorKey: "price",
+    header: "Price",
   },
   {
     header: "Action",
