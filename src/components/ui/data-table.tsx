@@ -57,7 +57,7 @@ export function DataTable<TData, TValue>({
       <div className="mb-4">
         <input
           type="text"
-          placeholder="Search..."
+          placeholder="Search"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           className="border rounded-md p-2"

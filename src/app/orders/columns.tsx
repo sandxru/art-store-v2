@@ -159,7 +159,7 @@ export const columns: ColumnDef<Order>[] = [
     header: "Action",
     id: "cl_actions",
     cell: ({ row }) => {
-      const payment = row.original;
+      const rowdata = row.original;
 
       return (
         <DropdownMenu>
