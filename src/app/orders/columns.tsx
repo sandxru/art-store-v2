@@ -21,8 +21,8 @@ export type Order = {
   status: "p" | "c";
   //cl_notes: string;
   photo: string;
-  // frameID: number;
-  // price: number;
+  frameID: number;
+  price: number;
   // contact:string;
   // createdAt: string;
   // updatedAt: string;
@@ -54,6 +54,10 @@ export const columns: ColumnDef<Order>[] = [
         />
       );
     },
+  },
+  {
+    accessorKey: "frameID",
+    header: "Frame Option",
   },
   {
     accessorKey: "status",
