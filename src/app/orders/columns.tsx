@@ -65,31 +65,48 @@ export const columns: ColumnDef<Order>[] = [
     header: "Status",
     cell: ({ row }) => {
       const rowdata = row.original;
-      var order_status = rowdata.status
+      var order_status = rowdata.status;
       var label;
-      if (order_status == 'p') {
+      if (order_status == "p") {
         label = "Pending";
-      }else{
-        label = "Completed"
+      } else {
+        label = "Completed";
       }
 
       return (
-        // <Badge className="text-xs bg-green-500">
-        //   {label}
-        // </Badge>
-
-        <Badge className={`text-xs py-1 text-white rounded-sm border-0 border-slate-200 ${order_status === 'p' ? 'bg-yellow-500' : order_status === 'c' ? 'bg-green-500' : ''}`}>
+        <Badge
+          className={`text-xs py-1 text-white rounded-md border-0 border-slate-200 ${
+            order_status === "p"
+              ? "bg-yellow-500"
+              : order_status === "c"
+              ? "bg-green-500"
+              : ""
+          }`}
+        >
           {label}
         </Badge>
-        
-
-
       );
     },
   },
   {
     accessorKey: "delivery",
     header: "Delivery Method",
+    cell: ({ row }) => {
+      const rowdata = row.original;
+      var order_delivery = rowdata.delivery;
+      var label;
+      if (order_delivery == 1) {
+        label = "Delivery";
+      } else {
+        label = "Pick-up";
+      }
+
+      return (
+        <Badge className="text-xs py-1 rounded-md" variant='outline'>
+          {label}
+        </Badge>
+      );
+    },
   },
   {
     accessorKey: "price",
