@@ -1,7 +1,7 @@
 //@ts-nocheck
 
 import { Metadata } from "next";
-import { Order, columns } from "./columns";
+import { Order, columns } from "../columns";
 import { DataTable } from "@/components/ui/data-table";
 import Link from "next/link";
 import { File, PlusCircle } from "lucide-react";
@@ -57,8 +57,16 @@ export default async function Orders() {
               <BreadcrumbSeparator />
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
-                  <Link className="text-base text-slate-800" href="/orders">
+                  <Link className="text-base text-slate-500" href="/orders">
                     Orders
+                  </Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbLink asChild>
+                  <Link className="text-base text-slate-800" href="/new-order">
+                    New Order
                   </Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
@@ -74,50 +82,7 @@ export default async function Orders() {
             </CardHeader>
 
             <CardContent>
-              <Tabs defaultValue="tab-pending">
-                <div className="flex items-center">
-                  <TabsList>
-                    <TabsTrigger value="tab-pending">Pendings</TabsTrigger>
-                    <TabsTrigger value="tab-completed">Completed</TabsTrigger>
-                    <TabsTrigger value="tab-all">All Orders</TabsTrigger>
-                  </TabsList>
-
-                  <div className="ml-auto flex items-center gap-2">
-                    <Button size="sm" variant="outline" className="h-8 gap-1">
-                      <File className="h-3.5 w-3.5" />
-                      <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                        Export
-                      </span>
-                    </Button>
-                    <Link href="/orders/new-order">
-                      <Button size="sm" className="h-8 gap-1">
-                        <PlusCircle className="h-4 w-4" />
-                        <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                          Add Order
-                        </span>
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
-
-                <TabsContent value="tab-pending">
-                  <div className="mx-auto py-2">
-                    <DataTable columns={columns} data={pending_data} />
-                  </div>
-                </TabsContent>
-
-                <TabsContent value="tab-completed">
-                  <div className="mx-auto py-2">
-                    <DataTable columns={columns} data={completed_data} />
-                  </div>
-                </TabsContent>
-
-                <TabsContent value="tab-all">
-                  <div className="mx-auto py-2">
-                    <DataTable columns={columns} data={all_data} />
-                  </div>
-                </TabsContent>
-              </Tabs>
+              
             </CardContent>
           </Card>
         </main>
