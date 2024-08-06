@@ -13,6 +13,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Badge } from "@/components/ui/badge";
 
 export type Order = {
   id: number;
@@ -42,11 +43,11 @@ export const columns: ColumnDef<Order>[] = [
     accessorKey: "photo",
     header: "Image",
     cell: ({ row }) => {
-      const photo = row.original;
+      const rowdata = row.original;
 
       return (
         <Image
-          src={photo.photo}
+          src={rowdata.photo}
           alt="img"
           width={1080}
           height={1080}
@@ -62,6 +63,29 @@ export const columns: ColumnDef<Order>[] = [
   {
     accessorKey: "status",
     header: "Status",
+    cell: ({ row }) => {
+      const rowdata = row.original;
+      var order_status = rowdata.status
+      var label;
+      if (order_status == 'p') {
+        label = "Pending";
+      }else{
+        label = "Completed"
+      }
+
+      return (
+        // <Badge className="text-xs bg-green-500">
+        //   {label}
+        // </Badge>
+
+        <Badge className={`text-xs py-1 text-white rounded-sm border-0 border-slate-200 ${order_status === 'p' ? 'bg-yellow-500' : order_status === 'c' ? 'bg-green-500' : ''}`}>
+          {label}
+        </Badge>
+        
+
+
+      );
+    },
   },
   {
     accessorKey: "delivery",
