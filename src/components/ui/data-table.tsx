@@ -1,7 +1,6 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-
 import {
   ColumnDef,
   flexRender,
@@ -10,7 +9,6 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-
 import {
   Table,
   TableBody,
@@ -19,7 +17,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import React from "react";
+import React, { useState, useMemo } from "react";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -30,25 +28,41 @@ export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [sorting, setSorting] = useState([{ id: "id", desc: true }]);
+
+  const filteredData = useMemo(() => {
+    return data.filter((row) => {
+      return columns.some((column) => {
+        const cellValue = row[column.accessorKey as keyof TData];
+        return cellValue
+          ? cellValue.toString().toLowerCase().includes(searchQuery.toLowerCase())
+          : false;
+      });
+    });
+  }, [data, searchQuery, columns]);
+
   const table = useReactTable({
-    data,
+    data: filteredData,
     columns,
+    state: { sorting },
+    onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-
     getSortedRowModel: getSortedRowModel(),
-    state: {
-      sorting: [
-        {
-          id: "id", // Replace with your column ID
-          desc: true, // Set to true for descending order
-        },
-      ],
-    },
   });
 
   return (
     <div>
+      <div className="mb-4">
+        <input
+          type="text"
+          placeholder="Search..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="border rounded-md p-2"
+        />
+      </div>
       <div className="rounded-md border">
         <Table>
           <TableHeader>

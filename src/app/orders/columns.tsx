@@ -25,7 +25,7 @@ export type Order = {
   frameID: number;
   price: number;
   // contact:string;
-  // createdAt: string;
+  createdAt: string;
   // updatedAt: string;
   // address: string;
 };
@@ -36,8 +36,20 @@ export const columns: ColumnDef<Order>[] = [
     header: "Order ID",
   },
   {
+    accessorKey: "createdAt",
+    header: "Date",
+    cell: ({ row }) => {
+      const rowdata = row.original;
+      const date = new Date(rowdata.createdAt);
+      const options = { year: "numeric", month: "long", day: "numeric" };
+      const formattedDate = date.toLocaleDateString("en-US", options);
+
+      return <p>{formattedDate}</p>;
+    },
+  },
+  {
     accessorKey: "cname",
-    header: "Name",
+    header: "Customer",
   },
   {
     accessorKey: "photo",
@@ -51,7 +63,7 @@ export const columns: ColumnDef<Order>[] = [
           alt="img"
           width={1080}
           height={1080}
-          className="h-44 w-auto p-0 border-white border-4 rounded-lg drop-shadow"
+          className="h-36 w-auto p-0 border-white border-4 rounded-lg drop-shadow"
         />
       );
     },
@@ -59,6 +71,61 @@ export const columns: ColumnDef<Order>[] = [
   {
     accessorKey: "frameID",
     header: "Frame Option",
+    cell: ({ row }) => {
+      const rowdata = row.original;
+      var order_frame = rowdata.frameID;
+      var label;
+      if (order_frame == 0) {
+        label = "No Frame";
+      } else if (order_frame == 1) {
+        label = "6 x 9";
+      } else if (order_frame == 3) {
+        label = "8 x 12";
+      } else if (order_frame == 5) {
+        label = "12 x 18";
+      }
+
+      return (
+        <Badge className="text-xs py-1 rounded-md" variant="outline">
+          {label}
+        </Badge>
+      );
+    },
+  },
+
+  {
+    accessorKey: "delivery",
+    header: "Delivery Method",
+    cell: ({ row }) => {
+      const rowdata = row.original;
+      var order_delivery = rowdata.delivery;
+      var label;
+      if (order_delivery == 1) {
+        label = "Delivery";
+      } else {
+        label = "Pick-up";
+      }
+
+      return (
+        <Badge className="text-xs py-1 rounded-md" variant="outline">
+          {label}
+        </Badge>
+      );
+    },
+  },
+  {
+    accessorKey: "price",
+    header: "Amount",
+    cell: ({ row }) => {
+      const rowdata = row.original;
+      var order_price = Intl.NumberFormat("en-US").format(rowdata.price);
+
+      return (
+        <Badge className="text-xs py-1 rounded-md" variant="outline">
+          {order_price + " LKR"}
+        </Badge>
+      );
+    },
   },
   {
     accessorKey: "status",
@@ -87,30 +154,6 @@ export const columns: ColumnDef<Order>[] = [
         </Badge>
       );
     },
-  },
-  {
-    accessorKey: "delivery",
-    header: "Delivery Method",
-    cell: ({ row }) => {
-      const rowdata = row.original;
-      var order_delivery = rowdata.delivery;
-      var label;
-      if (order_delivery == 1) {
-        label = "Delivery";
-      } else {
-        label = "Pick-up";
-      }
-
-      return (
-        <Badge className="text-xs py-1 rounded-md" variant='outline'>
-          {label}
-        </Badge>
-      );
-    },
-  },
-  {
-    accessorKey: "price",
-    header: "Price",
   },
   {
     header: "Action",
