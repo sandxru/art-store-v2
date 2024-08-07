@@ -34,7 +34,7 @@ export type Order = {
 export const columns: ColumnDef<Order>[] = [
   {
     accessorKey: "id",
-    header: "Order ID",
+    header: "#",
   },
   {
     accessorKey: "createdAt",
@@ -96,15 +96,17 @@ export const columns: ColumnDef<Order>[] = [
 
   {
     accessorKey: "delivery",
-    header: "Delivery Method",
+    header: "Delivery",
     cell: ({ row }) => {
       const rowdata = row.original;
       var order_delivery = rowdata.delivery;
       var label;
-      if (order_delivery == 1) {
-        label = "Delivery";
-      } else {
+      if (order_delivery == 0) {
         label = "Pick-up";
+      } else if (order_delivery == 1){
+        label = "Courier";
+      }else if (order_delivery == 2){
+        label = "Softcopy Only"
       }
 
       return (
