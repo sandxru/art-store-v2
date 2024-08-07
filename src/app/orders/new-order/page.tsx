@@ -3,6 +3,7 @@
 import { Metadata } from "next";
 import { Order, columns } from "../columns";
 import { DataTable } from "@/components/ui/data-table";
+import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { File, PlusCircle } from "lucide-react";
 import {
@@ -13,6 +14,10 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Select } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+
 import {
   Card,
   CardContent,
@@ -40,6 +45,7 @@ export default async function Orders() {
   const completed_data = await getOrdersWithStatusC();
   const all_data = await getOrdersWithStatusAll();
 
+  const method = "delivery";
   return (
     <>
       <NavBar />
@@ -73,18 +79,44 @@ export default async function Orders() {
             </BreadcrumbList>
           </Breadcrumb>
 
-          <Card x-chunk="dashboard-06-chunk-0">
-            <CardHeader>
-              <CardTitle className="text-2xl">Orders</CardTitle>
-              <CardDescription>
-                Manage your orders and view their details.
-              </CardDescription>
-            </CardHeader>
+          <div className="">
+            <Card x-chunk="dashboard-06-chunk-0">
+              <CardHeader>
+                <CardTitle className="text-2xl">Orders</CardTitle>
+                <CardDescription>
+                  Manage your orders and view their details.
+                </CardDescription>
+              </CardHeader>
 
-            <CardContent>
-              
-            </CardContent>
-          </Card>
+              <CardContent>
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                  <div className="grid gap-3">
+                    <Label htmlFor="email">Email</Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="m@example.com"
+                      required
+                    />
+                  </div>
+
+                  <div className="grid gap-3">
+                    <Label htmlFor="email">Email</Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="m@example.com"
+                      required
+                    />
+                  </div>
+                  <div className="grid gap-3 col-span-1 md:col-span-2">
+                  <Label htmlFor="email">Notes</Label>
+                  <Textarea placeholder="Enter notes" rows={8} />
+                </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         </main>
       </div>
     </>
