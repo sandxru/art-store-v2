@@ -15,9 +15,16 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Select } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import {
   Card,
   CardContent,
@@ -44,8 +51,8 @@ export default async function Orders() {
   const pending_data = await getOrdersWithStatusP();
   const completed_data = await getOrdersWithStatusC();
   const all_data = await getOrdersWithStatusAll();
-
   const method = "delivery";
+
   return (
     <>
       <NavBar />
@@ -79,41 +86,84 @@ export default async function Orders() {
             </BreadcrumbList>
           </Breadcrumb>
 
-          <div className="">
+          <div className="max-w-3xl">
             <Card x-chunk="dashboard-06-chunk-0">
               <CardHeader>
-                <CardTitle className="text-2xl">Orders</CardTitle>
-                <CardDescription>
-                  Manage your orders and view their details.
-                </CardDescription>
+                <CardTitle className="text-2xl">New Order</CardTitle>
+                <CardDescription>Add new order to the system</CardDescription>
               </CardHeader>
 
               <CardContent>
+              <form id="myForm">
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                   <div className="grid gap-3">
-                    <Label htmlFor="email">Email</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="m@example.com"
-                      required
-                    />
+                    <Label htmlFor="email">Customer Name</Label>
+                    <Input id="cname" type="text" required />
                   </div>
 
                   <div className="grid gap-3">
-                    <Label htmlFor="email">Email</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="m@example.com"
-                      required
-                    />
+                    <Label htmlFor="email">Method</Label>
+                    <Select>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectItem value="apple">Delivery</SelectItem>
+                          <SelectItem value="banana">Pick-up</SelectItem>
+                          <SelectItem value="blueberry">
+                            Softcopy Only
+                          </SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
                   </div>
+
+                  <div className="grid gap-3">
+                    <Label htmlFor="email">Frame</Label>
+                    <Select>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectItem value="apple">No frame</SelectItem>
+                          <SelectItem value="apple">6 x 0</SelectItem>
+                          <SelectItem value="banana">8 x 12</SelectItem>
+                          <SelectItem value="blueberry">12 x 18</SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div className="grid gap-3">
+                    <Label htmlFor="email">Price</Label>
+                    <Input id="email" type="email" required />
+                  </div>
+
+                  <div className="grid gap-3">
+                    <Label htmlFor="email">Contact Info</Label>
+                    <Input id="email" type="email" required />
+                  </div>
+
+                  <div className="grid gap-3">
+                    <Label htmlFor="email">Image</Label>
+                    <Input id="email" type="file" required />
+                  </div>
+
                   <div className="grid gap-3 col-span-1 md:col-span-2">
-                  <Label htmlFor="email">Notes</Label>
-                  <Textarea placeholder="Enter notes" rows={8} />
-                </div>
-                </div>
+                    <Label htmlFor="email">Notes</Label>
+                    <Textarea rows={6} />
+                  </div>
+
+                  <div className="grid gap-3 col-span-1 md:col-span-2">
+                    <Label htmlFor="email">Address</Label>
+                    <Textarea rows={6} />
+                  </div>
+
+                  <Button type="submit">Submit</Button>
+                  <Button type="reset">Reset</Button>
+                </div></form>
               </CardContent>
             </Card>
           </div>
