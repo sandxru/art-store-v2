@@ -41,17 +41,13 @@ import {
   getOrdersWithStatusC,
   getOrdersWithStatusAll,
 } from "@/lib/prisma";
+import { addOrder } from "./newordersubmit";
 
 export const metadata: Metadata = {
   title: "New Order - ArtStore",
 };
 
 export default async function Orders() {
-  const pending_data = await getOrdersWithStatusP();
-  const completed_data = await getOrdersWithStatusC();
-  const all_data = await getOrdersWithStatusAll();
-  const method = "delivery";
-
   return (
     <>
       <NavBar />
@@ -93,76 +89,75 @@ export default async function Orders() {
               </CardHeader>
 
               <CardContent>
-              <form id="myForm">
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                  <div className="grid gap-3">
-                    <Label htmlFor="email">Customer Name</Label>
-                    <Input id="cname" type="text" required />
-                  </div>
+                <form action={addOrder}>
+                  <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                    <div className="grid gap-3">
+                      <Label>Customer Name</Label>
+                      <Input id="cname" name="cname" type="text" required />
+                    </div>
 
-                  <div className="grid gap-3">
-                    <Label htmlFor="email">Method</Label>
-                    <Select>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectGroup>
-                          <SelectItem value="apple">Delivery</SelectItem>
-                          <SelectItem value="banana">Pick-up</SelectItem>
-                          <SelectItem value="blueberry">
-                            Softcopy Only
-                          </SelectItem>
-                        </SelectGroup>
-                      </SelectContent>
-                    </Select>
-                  </div>
+                    <div className="grid gap-3">
+                      <Label>Method</Label>
+                      <Select id="method" name="method">
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectGroup>
+                            <SelectItem value="1">Courier</SelectItem>
+                            <SelectItem value="0">Pick-up</SelectItem>
+                            <SelectItem value="2">Softcopy Only</SelectItem>
+                          </SelectGroup>
+                        </SelectContent>
+                      </Select>
+                    </div>
 
-                  <div className="grid gap-3">
-                    <Label htmlFor="email">Frame</Label>
-                    <Select>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectGroup>
-                          <SelectItem value="apple">No frame</SelectItem>
-                          <SelectItem value="apple">6 x 0</SelectItem>
-                          <SelectItem value="banana">8 x 12</SelectItem>
-                          <SelectItem value="blueberry">12 x 18</SelectItem>
-                        </SelectGroup>
-                      </SelectContent>
-                    </Select>
-                  </div>
+                    <div className="grid gap-3">
+                      <Label>Frame</Label>
+                      <Select id="frameID" name="frameID">
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectGroup>
+                            <SelectItem value="0">No frame</SelectItem>
+                            <SelectItem value="1">6 x 0</SelectItem>
+                            <SelectItem value="3">8 x 12</SelectItem>
+                            <SelectItem value="5">12 x 18</SelectItem>
+                          </SelectGroup>
+                        </SelectContent>
+                      </Select>
+                    </div>
 
-                  <div className="grid gap-3">
-                    <Label htmlFor="email">Price</Label>
-                    <Input id="email" type="email" required />
-                  </div>
+                    <div className="grid gap-3">
+                      <Label>Price</Label>
+                      <Input id="price" type="number" name="price" required />
+                    </div>
 
-                  <div className="grid gap-3">
-                    <Label htmlFor="email">Contact Info</Label>
-                    <Input id="email" type="email" required />
-                  </div>
+                    <div className="grid gap-3">
+                      <Label>Contact Info</Label>
+                      <Input id="contact" type="text" name="contact" required />
+                    </div>
 
-                  <div className="grid gap-3">
-                    <Label htmlFor="email">Image</Label>
-                    <Input id="email" type="file" required />
-                  </div>
+                    <div className="grid gap-3">
+                      <Label>Image</Label>
+                      <Input id="photo" type="file" name="photo" required />
+                    </div>
 
-                  <div className="grid gap-3 col-span-1 md:col-span-2">
-                    <Label htmlFor="email">Notes</Label>
-                    <Textarea rows={6} />
-                  </div>
+                    <div className="grid gap-3 col-span-1 md:col-span-2">
+                      <Label>Notes</Label>
+                      <Textarea id="note" type="text" name="notes" rows={6} />
+                    </div>
 
-                  <div className="grid gap-3 col-span-1 md:col-span-2">
-                    <Label htmlFor="email">Address</Label>
-                    <Textarea rows={6} />
-                  </div>
+                    <div className="grid gap-3 col-span-1 md:col-span-2">
+                      <Label>Address</Label>
+                      <Textarea id="address" type="text" name="address" rows={6} />
+                    </div>
 
-                  <Button type="submit">Submit</Button>
-                  <Button type="reset">Reset</Button>
-                </div></form>
+                    <Button type="submit">Submit</Button>
+                    <Button type="reset">Reset</Button>
+                  </div>
+                </form>
               </CardContent>
             </Card>
           </div>
