@@ -124,12 +124,11 @@ export async function getOrderPercentageChange(): Promise<string> {
   }
 }
 
-
 export async function getOrdersWithStatusP() {
   const orders = await prisma.order.findMany({
     where: {
-      status: "p"
-    }
+      status: "p",
+    },
   });
   return orders;
 }
@@ -137,8 +136,8 @@ export async function getOrdersWithStatusP() {
 export async function getOrdersWithStatusC() {
   const orders = await prisma.order.findMany({
     where: {
-      status: "c"
-    }
+      status: "c",
+    },
   });
   return orders;
 }
@@ -147,9 +146,50 @@ export async function getOrdersWithStatusAll() {
   const orders = await prisma.order.findMany({
     where: {
       status: {
-        in: ['p', 'c']
-      }
-    }
+        in: ["p", "c"],
+      },
+    },
+  });
+  return orders;
+}
+
+
+export type Order = {
+  id: number;
+  cname: string;
+  delivery: number;
+  status: "p" | "c";
+  notes: string;
+  photo: string;
+  frameID: number;
+  price: number;
+  contact:string;
+  createdAt: string;
+  updatedAt: string;
+  address: string;
+};
+export async function createOrder(
+  cname: string,
+  delivery: number,
+  notes: string,
+  photo: string,
+  frameID: number,
+  price: number,
+  contact: string,
+  address: string
+) {
+  const orders = await prisma.order.create({
+    data: {
+      cname: cname,
+      delivery: delivery,
+      status: "p",
+      notes: notes,
+      photo: photo,
+      frameID: frameID,
+      price: price,
+      contact: contact,
+      address: address,
+    },
   });
   return orders;
 }
