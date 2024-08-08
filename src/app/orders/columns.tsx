@@ -21,14 +21,14 @@ export type Order = {
   cname: string;
   delivery: number;
   status: "p" | "c";
-  //cl_notes: string;
+  notes: string;
   photo: string;
   frameID: number;
   price: number;
-  // contact:string;
+  contact:string;
   createdAt: string;
-  // updatedAt: string;
-  // address: string;
+  updatedAt: string;
+  address: string;
 };
 
 export const columns: ColumnDef<Order>[] = [

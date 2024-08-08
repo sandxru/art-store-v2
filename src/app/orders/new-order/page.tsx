@@ -98,7 +98,7 @@ export default async function Orders() {
 
                     <div className="grid gap-3">
                       <Label>Method</Label>
-                      <Select id="method" name="method">
+                      <Select id="method" name="delivery">
                         <SelectTrigger>
                           <SelectValue placeholder="Select" />
                         </SelectTrigger>
