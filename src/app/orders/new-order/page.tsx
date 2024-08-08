@@ -1,11 +1,6 @@
-//@ts-nocheck
-
 import { Metadata } from "next";
-import { Order, columns } from "../columns";
-import { DataTable } from "@/components/ui/data-table";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
-import { File, PlusCircle } from "lucide-react";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -21,7 +16,6 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
@@ -32,15 +26,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import NavBar from "@/components/ui/NavBar";
 
-import {
-  getOrdersWithStatusP,
-  countCompletedOrders,
-  getOrdersWithStatusC,
-  getOrdersWithStatusAll,
-} from "@/lib/prisma";
 import { addOrder } from "./newordersubmit";
 
 export const metadata: Metadata = {
@@ -98,8 +85,8 @@ export default async function Orders() {
 
                     <div className="grid gap-3">
                       <Label>Method</Label>
-                      <Select id="method" name="delivery">
-                        <SelectTrigger>
+                      <Select>
+                        <SelectTrigger id="method" name="delivery">
                           <SelectValue placeholder="Select" />
                         </SelectTrigger>
                         <SelectContent>
@@ -114,14 +101,14 @@ export default async function Orders() {
 
                     <div className="grid gap-3">
                       <Label>Frame</Label>
-                      <Select id="frameID" name="frameID">
-                        <SelectTrigger>
+                      <Select>
+                        <SelectTrigger id="frameID" name="frameID">
                           <SelectValue placeholder="Select" />
                         </SelectTrigger>
                         <SelectContent>
                           <SelectGroup>
                             <SelectItem value="0">No frame</SelectItem>
-                            <SelectItem value="1">6 x 0</SelectItem>
+                            <SelectItem value="1">6 x 8</SelectItem>
                             <SelectItem value="3">8 x 12</SelectItem>
                             <SelectItem value="5">12 x 18</SelectItem>
                           </SelectGroup>
@@ -146,12 +133,12 @@ export default async function Orders() {
 
                     <div className="grid gap-3 col-span-1 md:col-span-2">
                       <Label>Notes</Label>
-                      <Textarea id="note" type="text" name="notes" rows={6} />
+                      <Textarea id="note" name="notes" rows={6} />
                     </div>
 
                     <div className="grid gap-3 col-span-1 md:col-span-2">
                       <Label>Address</Label>
-                      <Textarea id="address" type="text" name="address" rows={6} />
+                      <Textarea id="address" name="address" rows={6} />
                     </div>
 
                     <Button type="submit">Submit</Button>

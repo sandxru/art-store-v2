@@ -16,31 +16,51 @@ export async function addOrder(formData: FormData) {
   const arrayBuffer = await photo.arrayBuffer();
   const buffer = new Uint8Array(arrayBuffer);
 
-  await new Promise((resolve, reject) => {
+  await new Promise<void>((resolve, reject) => {
     cloudinary.uploader
       .upload_stream({}, function (error, result) {
-        console.log("Error: ", error);
-        console.log("Result: ", result);
+        if (error) {
+          console.error("Error: ", error);
+          return reject(error); // Reject the promise on error
+        }
 
-        const cname = formData.get("cname");
-        const delivery: number = Number(formData.get("delivery"));
-        const notes = formData.get("notes");
-        const photo = result?.secure_url;
-        const frameID = Number(formData.get("frameID"));
-        const price = Number(formData.get("price"));
-        const contact = formData.get("contact");
-        const address = formData.get("address");
+        if (result) {
+          console.log("Result: ", result);
 
-        createOrder(
-          cname,
-          delivery,
-          notes,
-          photo,
-          frameID,
-          price,
-          contact,
-          address
-        );
+          // const cname = formData.get("cname");
+          // const delivery: number = Number(formData.get("delivery"));
+          // const notes = formData.get("notes");
+          // const photoUrl = result.secure_url;
+          // const frameID = Number(formData.get("frameID"));
+          // const price = Number(formData.get("price"));
+          // const contact = formData.get("contact");
+          // const address = formData.get("address");
+
+          const cname = (formData.get("cname") as string) ?? "";
+          const delivery = Number(formData.get("delivery")) ?? 0;
+          const notes = (formData.get("notes") as string) ?? "";
+          const photo = result.secure_url;
+          const frameID = Number(formData.get("frameID")) ?? 0;
+          const price = Number(formData.get("price")) ?? 0;
+          const contact = (formData.get("contact") as string) ?? "";
+          const address = (formData.get("address") as string) ?? "";
+
+          createOrder(
+            cname,
+            delivery,
+            notes,
+            photo,
+            frameID,
+            price,
+            contact,
+            address
+          );
+        } else {
+          console.error("Upload failed, no result received.");
+          return reject(new Error("Upload failed, no result received."));
+        }
+
+        resolve(); // Resolve the promise if everything succeeded
       })
       .end(buffer);
   });
