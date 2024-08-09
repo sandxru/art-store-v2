@@ -25,7 +25,6 @@ import NavBar from "@/components/ui/NavBar";
 
 import {
   getOrdersWithStatusP,
-  countCompletedOrders,
   getOrdersWithStatusC,
   getOrdersWithStatusAll,
 } from "@/lib/prisma";

@@ -1,4 +1,3 @@
-//@ts-nocheck
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
@@ -25,7 +24,7 @@ export type Order = {
   photo: string;
   frameID: number;
   price: number;
-  contact:string;
+  contact: string;
   createdAt: string;
   updatedAt: string;
   address: string;
@@ -42,7 +41,12 @@ export const columns: ColumnDef<Order>[] = [
     cell: ({ row }) => {
       const rowdata = row.original;
       const date = new Date(rowdata.createdAt);
-      const options = { year: "numeric", month: "long", day: "numeric" };
+
+      const options: Intl.DateTimeFormatOptions = {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      };
       const formattedDate = date.toLocaleDateString("en-US", options);
 
       return <p>{formattedDate}</p>;
@@ -103,10 +107,10 @@ export const columns: ColumnDef<Order>[] = [
       var label;
       if (order_delivery == 0) {
         label = "Pick-up";
-      } else if (order_delivery == 1){
+      } else if (order_delivery == 1) {
         label = "Courier";
-      }else if (order_delivery == 2){
-        label = "Softcopy Only"
+      } else if (order_delivery == 2) {
+        label = "Softcopy Only";
       }
 
       return (

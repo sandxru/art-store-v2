@@ -1,3 +1,4 @@
+"use client"
 import { Metadata } from "next";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
@@ -30,9 +31,9 @@ import NavBar from "@/components/ui/NavBar";
 
 import { addOrder } from "./newordersubmit";
 
-export const metadata: Metadata = {
-  title: "New Order - ArtStore",
-};
+// export const metadata: Metadata = {
+//   title: "New Order - ArtStore",
+// };
 
 export default async function Orders() {
   return (
@@ -76,7 +77,7 @@ export default async function Orders() {
               </CardHeader>
 
               <CardContent>
-                <form action={addOrder}>
+                <form action={addOrder} method="post">
                   <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                     <div className="grid gap-3">
                       <Label>Customer Name</Label>
@@ -85,8 +86,12 @@ export default async function Orders() {
 
                     <div className="grid gap-3">
                       <Label>Method</Label>
-                      <Select>
-                        <SelectTrigger id="method" name="delivery">
+                      <Select
+                        onValueChange={(value) =>
+                          (document.getElementById('delivery') as HTMLInputElement).value = value
+                        }
+                      >
+                        <SelectTrigger>
                           <SelectValue placeholder="Select" />
                         </SelectTrigger>
                         <SelectContent>
@@ -97,12 +102,17 @@ export default async function Orders() {
                           </SelectGroup>
                         </SelectContent>
                       </Select>
+                      <input type="hidden" id="delivery" name="delivery" />
                     </div>
 
                     <div className="grid gap-3">
                       <Label>Frame</Label>
-                      <Select>
-                        <SelectTrigger id="frameID" name="frameID">
+                      <Select
+                        onValueChange={(value) =>
+                          (document.getElementById('frameID') as HTMLInputElement).value = value
+                        }
+                      >
+                        <SelectTrigger>
                           <SelectValue placeholder="Select" />
                         </SelectTrigger>
                         <SelectContent>
@@ -114,6 +124,7 @@ export default async function Orders() {
                           </SelectGroup>
                         </SelectContent>
                       </Select>
+                      <input type="hidden" id="frameID" name="frameID" />
                     </div>
 
                     <div className="grid gap-3">
