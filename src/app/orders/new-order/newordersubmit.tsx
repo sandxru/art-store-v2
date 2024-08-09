@@ -1,5 +1,4 @@
 "use server";
-
 import { createOrder } from "@/lib/prisma";
 import { v2 as cloudinary } from "cloudinary";
 
@@ -27,23 +26,14 @@ export async function addOrder(formData: FormData) {
         if (result) {
           console.log("Result: ", result);
 
-          const cname = formData.get("cname");
-          const delivery: number = Number(formData.get("delivery"));
-          const notes = formData.get("notes");
+          const cname = (formData.get("cname") as string) ?? "";
+          const delivery = Number(formData.get("delivery")) ?? 0;
+          const notes = (formData.get("notes") as string) ?? "";
           const photo = result.secure_url;
-          const frameID = Number(formData.get("frameID"));
-          const price = Number(formData.get("price"));
-          const contact = formData.get("contact");
-          const address = formData.get("address");
-
-          // const cname = (formData.get("cname") as string) ?? "";
-          // const delivery = Number(formData.get("delivery")) ?? 0;
-          // const notes = (formData.get("notes") as string) ?? "";
-          // const photo = result.secure_url;
-          // const frameID = Number(formData.get("frameID")) ?? 0;
-          // const price = Number(formData.get("price")) ?? 0;
-          // const contact = (formData.get("contact") as string) ?? "";
-          // const address = (formData.get("address") as string) ?? "";
+          const frameID = Number(formData.get("frameID")) ?? 0;
+          const price = Number(formData.get("price")) ?? 0;
+          const contact = (formData.get("contact") as string) ?? "";
+          const address = (formData.get("address") as string) ?? "";
 
           createOrder(
             cname,
