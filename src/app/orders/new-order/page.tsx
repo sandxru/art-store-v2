@@ -1,4 +1,3 @@
-"use client"
 import { Metadata } from "next";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
@@ -9,17 +8,6 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import {
   Card,
   CardContent,
@@ -30,10 +18,11 @@ import {
 import NavBar from "@/components/ui/NavBar";
 
 import { addOrder } from "./newordersubmit";
+import NewForm from "@/components/ui/NewForm";
 
-// export const metadata: Metadata = {
-//   title: "New Order - ArtStore",
-// };
+export const metadata: Metadata = {
+  title: "New Order - ArtStore",
+};
 
 export default async function Orders() {
   return (
@@ -77,7 +66,7 @@ export default async function Orders() {
               </CardHeader>
 
               <CardContent>
-                <form action={addOrder} method="post">
+                {/* <form action={addOrder} method="post">
                   <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                     <div className="grid gap-3">
                       <Label>Customer Name</Label>
@@ -88,7 +77,11 @@ export default async function Orders() {
                       <Label>Method</Label>
                       <Select
                         onValueChange={(value) =>
-                          (document.getElementById('delivery') as HTMLInputElement).value = value
+                          ((
+                            document.getElementById(
+                              "delivery"
+                            ) as HTMLInputElement
+                          ).value = value)
                         }
                       >
                         <SelectTrigger>
@@ -109,7 +102,11 @@ export default async function Orders() {
                       <Label>Frame</Label>
                       <Select
                         onValueChange={(value) =>
-                          (document.getElementById('frameID') as HTMLInputElement).value = value
+                          ((
+                            document.getElementById(
+                              "frameID"
+                            ) as HTMLInputElement
+                          ).value = value)
                         }
                       >
                         <SelectTrigger>
@@ -155,7 +152,10 @@ export default async function Orders() {
                     <Button type="submit">Submit</Button>
                     <Button type="reset">Reset</Button>
                   </div>
-                </form>
+                </form> */}
+<NewForm></NewForm>
+
+
               </CardContent>
             </Card>
           </div>
