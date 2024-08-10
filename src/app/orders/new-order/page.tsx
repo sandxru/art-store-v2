@@ -55,7 +55,6 @@ export default async function Orders() {
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
-
           <div className="max-w-3xl">
             <Card x-chunk="dashboard-06-chunk-0">
               <CardHeader>

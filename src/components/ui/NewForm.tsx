@@ -11,7 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { addOrder } from "@/app/orders/new-order/newordersubmit";
+import { addOrder } from "@/lib/newordersubmit";
 
 const NewForm = () => {
   return (
