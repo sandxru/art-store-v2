@@ -323,21 +323,6 @@ export default async function Dashboard() {
                   </div>
                   <div className="ml-auto font-medium">+$99.00</div>
                 </div>
-                <div className="flex items-center gap-4">
-                  <Avatar className="hidden h-9 w-9 sm:flex">
-                    <AvatarImage src="/avatars/05.png" alt="Avatar" />
-                    <AvatarFallback>SD</AvatarFallback>
-                  </Avatar>
-                  <div className="grid gap-1">
-                    <p className="text-sm font-medium leading-none">
-                      Sofia Davis
-                    </p>
-                    <p className="text-sm text-muted-foreground">
-                      sofia.davis@email.com
-                    </p>
-                  </div>
-                  <div className="ml-auto font-medium">+$39.00</div>
-                </div>
               </CardContent>
             </Card>
           </div>
