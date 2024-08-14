@@ -1,8 +1,7 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { MoreHorizontal } from "lucide-react";
-import { Trash2, Pencil, Eye } from "lucide-react";
+import { MoreHorizontal, Trash2, Pencil, Eye } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,6 +13,16 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { useState } from "react";
 
 export type Order = {
   id: number;
@@ -139,26 +148,72 @@ export const columns: ColumnDef<Order>[] = [
     header: "Status",
     cell: ({ row }) => {
       const rowdata = row.original;
-      var order_status = rowdata.status;
-      var label;
-      if (order_status == "p") {
-        label = "Pending";
-      } else {
-        label = "Completed";
-      }
+      const order_status = rowdata.status;
+
+      const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+      const handleStatusChange = async () => {
+        try {
+          const newStatus = order_status === "p" ? "c" : "p";
+
+          await fetch(`/api/orders/${rowdata.id}/status`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ status: newStatus }),
+          });
+
+          // Optional: Refetch the data or update the UI optimistically
+          window.location.reload(); // Reload the page after updating
+        } catch (error) {
+          console.error("Failed to update the status:", error);
+        }
+      };
 
       return (
-        <Badge
-          className={`text-xs py-1 text-white rounded-md border-0 border-slate-200 ${
-            order_status === "p"
-              ? "bg-yellow-500"
-              : order_status === "c"
-              ? "bg-green-500"
-              : ""
-          }`}
-        >
-          {label}
-        </Badge>
+        <>
+          <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+            <AlertDialogTrigger>
+              <Badge
+                onClick={() => setIsDialogOpen(true)}
+                className={`cursor-pointer text-xs py-1 text-white rounded-md border-0 border-slate-200 ${
+                  order_status === "p"
+                    ? "bg-yellow-500"
+                    : order_status === "c"
+                    ? "bg-green-500"
+                    : ""
+                }`}
+              >
+                {order_status === "p" ? "Pending" : "Completed"}
+              </Badge>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogTitle>Confirm Status Change</AlertDialogTitle>
+              <AlertDialogDescription>
+                Are you sure you want to change the status to{" "}
+                {order_status === "p" ? "Completed" : "Pending"}?
+              </AlertDialogDescription>
+              <div className="flex gap-4">
+                <AlertDialogAction
+                  onClick={() => {
+                    handleStatusChange();
+                    setIsDialogOpen(false); // Close dialog on confirmation
+                  }}
+                  className="bg-green-500 text-white hover:bg-green-600"
+                >
+                  Confirm
+                </AlertDialogAction>
+                <AlertDialogCancel
+                  onClick={() => setIsDialogOpen(false)} // Close dialog on cancellation
+                  className="bg-red-500 text-white hover:bg-red-600"
+                >
+                  Cancel
+                </AlertDialogCancel>
+              </div>
+            </AlertDialogContent>
+          </AlertDialog>
+        </>
       );
     },
   },
