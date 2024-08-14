@@ -204,7 +204,7 @@ export async function getLatestOrders() {
       orderBy: {
         createdAt: "desc",
       },
-      take: 10,
+      take: 5,
     });
 
     // Format the createdAt field
