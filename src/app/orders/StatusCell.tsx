@@ -12,6 +12,7 @@ import {
   AlertDialogTrigger,
   AlertDialogFooter,
 } from "@/components/ui/alert-dialog";
+import Spinner from "@/components/ui/Spinner";
 
 type StatusCellProps = {
   id: number;
@@ -21,10 +22,12 @@ type StatusCellProps = {
 const StatusCell: React.FC<StatusCellProps> = ({ id, status }) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [currentStatus, setCurrentStatus] = useState(status);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleStatusChange = async () => {
     try {
       const newStatus = currentStatus === "p" ? "c" : "p";
+      setIsLoading(true); // Show loading overlay
 
       await fetch(`/api/orders/${id}/status`, {
         method: "PUT",
@@ -39,6 +42,8 @@ const StatusCell: React.FC<StatusCellProps> = ({ id, status }) => {
     } catch (error) {
       console.error("Failed to update the status:", error);
       setCurrentStatus(status); // Revert to previous status in case of failure
+    } finally {
+      setIsLoading(false); // Hide loading overlay
     }
   };
 
@@ -75,6 +80,13 @@ const StatusCell: React.FC<StatusCellProps> = ({ id, status }) => {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
+
+      {/* Loading overlay */}
+      {isLoading && (
+        <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex items-center justify-center z-50">
+          <Spinner />
+        </div>
+      )}
     </>
   );
 };
