@@ -186,14 +186,14 @@ export const columns: ColumnDef<Order>[] = [
                     : ""
                 }`}
               >
-                {order_status === "p" ? "Pending" : "Completed"}
+                {order_status === "p" ? "Pending" : "Complete"}
               </Badge>
             </AlertDialogTrigger>
             <AlertDialogContent>
               <AlertDialogTitle>Confirm Status Change</AlertDialogTitle>
               <AlertDialogDescription>
                 Are you sure you want to change the status to{" "}
-                {order_status === "p" ? "Completed" : "Pending"}?
+                {order_status === "p" ? "Complete" : "Pending"}?
               </AlertDialogDescription>
               <AlertDialogFooter>
                 <AlertDialogCancel onClick={() => setIsDialogOpen(false)}>
