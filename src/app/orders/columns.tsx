@@ -21,6 +21,7 @@ import {
   AlertDialogAction,
   AlertDialogCancel,
   AlertDialogTrigger,
+  AlertDialogFooter,
 } from "@/components/ui/alert-dialog";
 import { useState } from "react";
 
@@ -194,23 +195,19 @@ export const columns: ColumnDef<Order>[] = [
                 Are you sure you want to change the status to{" "}
                 {order_status === "p" ? "Completed" : "Pending"}?
               </AlertDialogDescription>
-              <div className="flex gap-4">
+              <AlertDialogFooter>
+                <AlertDialogCancel onClick={() => setIsDialogOpen(false)}>
+                  Cancel
+                </AlertDialogCancel>
                 <AlertDialogAction
                   onClick={() => {
                     handleStatusChange();
-                    setIsDialogOpen(false); // Close dialog on confirmation
+                    setIsDialogOpen(false);
                   }}
-                  className="bg-green-500 text-white hover:bg-green-600"
                 >
                   Confirm
                 </AlertDialogAction>
-                <AlertDialogCancel
-                  onClick={() => setIsDialogOpen(false)} // Close dialog on cancellation
-                  className="bg-red-500 text-white hover:bg-red-600"
-                >
-                  Cancel
-                </AlertDialogCancel>
-              </div>
+              </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>
         </>
