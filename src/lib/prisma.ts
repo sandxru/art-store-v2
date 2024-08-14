@@ -153,7 +153,6 @@ export async function getOrdersWithStatusAll() {
   return orders;
 }
 
-
 export type Order = {
   id: number;
   cname: string;
@@ -163,7 +162,7 @@ export type Order = {
   photo: string;
   frameID: number;
   price: number;
-  contact:string;
+  contact: string;
   createdAt: string;
   updatedAt: string;
   address: string;
@@ -192,6 +191,37 @@ export async function createOrder(
     },
   });
   return orders;
+}
+
+export async function getLatestOrders() {
+  try {
+    const orders = await prisma.order.findMany({
+      select: {
+        cname: true,
+        createdAt: true,
+        price: true,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+      take: 10,
+    });
+
+    // Format the createdAt field
+    const formattedOrders = orders.map((order) => ({
+      ...order,
+      createdAt: new Date(order.createdAt).toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      }),
+    }));
+
+    return formattedOrders;
+  } catch (error) {
+    console.error("Error retrieving latest orders:", error);
+    throw error;
+  }
 }
 
 export default prisma;
