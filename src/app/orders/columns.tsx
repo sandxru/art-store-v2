@@ -13,18 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
-import {
-  AlertDialog,
-  AlertDialogContent,
-  AlertDialogTitle,
-  AlertDialogDescription,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogTrigger,
-  AlertDialogFooter,
-} from "@/components/ui/alert-dialog";
-import { useState } from "react";
-
+import StatusCell from "./StatusCell";
 export type Order = {
   id: number;
   cname: string;
@@ -107,7 +96,6 @@ export const columns: ColumnDef<Order>[] = [
       );
     },
   },
-
   {
     accessorKey: "delivery",
     header: "Delivery",
@@ -148,70 +136,8 @@ export const columns: ColumnDef<Order>[] = [
     accessorKey: "status",
     header: "Status",
     cell: ({ row }) => {
-      const rowdata = row.original;
-      const order_status = rowdata.status;
-
-      const [isDialogOpen, setIsDialogOpen] = useState(false);
-
-      const handleStatusChange = async () => {
-        try {
-          const newStatus = order_status === "p" ? "c" : "p";
-
-          await fetch(`/api/orders/${rowdata.id}/status`, {
-            method: "PUT",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ status: newStatus }),
-          });
-
-          // Optional: Refetch the data or update the UI optimistically
-          window.location.reload(); // Reload the page after updating
-        } catch (error) {
-          console.error("Failed to update the status:", error);
-        }
-      };
-
-      return (
-        <>
-          <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-            <AlertDialogTrigger>
-              <Badge
-                onClick={() => setIsDialogOpen(true)}
-                className={`cursor-pointer text-xs py-1 text-white rounded-md border-0 border-slate-200 ${
-                  order_status === "p"
-                    ? "bg-yellow-500"
-                    : order_status === "c"
-                    ? "bg-green-500"
-                    : ""
-                }`}
-              >
-                {order_status === "p" ? "Pending" : "Complete"}
-              </Badge>
-            </AlertDialogTrigger>
-            <AlertDialogContent>
-              <AlertDialogTitle>Confirm Status Change</AlertDialogTitle>
-              <AlertDialogDescription>
-                Are you sure you want to change the status to{" "}
-                {order_status === "p" ? "Complete" : "Pending"}?
-              </AlertDialogDescription>
-              <AlertDialogFooter>
-                <AlertDialogCancel onClick={() => setIsDialogOpen(false)}>
-                  Cancel
-                </AlertDialogCancel>
-                <AlertDialogAction
-                  onClick={() => {
-                    handleStatusChange();
-                    setIsDialogOpen(false);
-                  }}
-                >
-                  Confirm
-                </AlertDialogAction>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
-        </>
-      );
+      const { id, status } = row.original;
+      return <StatusCell id={id} status={status} />;
     },
   },
   {
