@@ -15,7 +15,7 @@ export async function addOrder(formData: FormData) {
   const arrayBuffer = await photo.arrayBuffer();
   const buffer = new Uint8Array(arrayBuffer);
 
-  if (photo.name == "undefined") {
+  if (photo.name === "undefined") {
     console.log("No Photo Selected Part");
     const id = Number(formData.get("id"));
     const cname = formData.get("cname") as string;
@@ -55,8 +55,14 @@ export async function addOrder(formData: FormData) {
           if (result) {
             console.log("Result: ", result);
 
-            cloudinary.uploader.destroy(publicid);
-            console.log("Photo Deleted : " + publicid);
+            // Attempt to delete the old photo
+            try {
+              cloudinary.uploader.destroy(publicid);
+              console.log("Photo Deleted: " + publicid);
+            } catch (deleteError) {
+              console.error("Failed to delete old photo: ", deleteError);
+              // Continue without interrupting the process
+            }
 
             const id = Number(formData.get("id"));
             const cname = formData.get("cname") as string;
