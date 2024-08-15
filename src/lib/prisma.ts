@@ -224,4 +224,10 @@ export async function getLatestOrders() {
   }
 }
 
+export async function getOrderById(id: number) {
+  return prisma.order.findUnique({
+    where: { id },
+  });
+}
+
 export default prisma;

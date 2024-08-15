@@ -1,4 +1,6 @@
 import { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { getOrderById } from "@/lib/prisma"; // Create this function to get an order by ID
 import Link from "next/link";
 import {
   Breadcrumb,
@@ -15,14 +17,24 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import NavBar from "@/components/ui/NavBar";
-
 import EditForm from "@/components/ui/EditForm";
 
 export const metadata: Metadata = {
   title: "Edit Order - ArtStore",
 };
 
-export default async function Orders() {
+export default async function OrderEditPage({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const orderId = parseInt(params.id, 10);
+  const order = await getOrderById(orderId);
+
+  if (!order) {
+    notFound();
+  }
+
   return (
     <>
       <NavBar />
@@ -48,7 +60,10 @@ export default async function Orders() {
               <BreadcrumbSeparator />
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
-                  <Link className="text-base text-slate-800" href="/new-order">
+                  <Link
+                    className="text-base text-slate-800"
+                    href={`/orders/edit-order/${orderId}`}
+                  >
                     Edit Order
                   </Link>
                 </BreadcrumbLink>
@@ -59,11 +74,11 @@ export default async function Orders() {
             <Card x-chunk="dashboard-06-chunk-0">
               <CardHeader>
                 <CardTitle className="text-2xl">Edit Order</CardTitle>
-                <CardDescription>Add new order to the system</CardDescription>
+                <CardDescription>Edit Order</CardDescription>
               </CardHeader>
 
               <CardContent>
-                <EditForm />
+                <EditForm order={order} />
               </CardContent>
             </Card>
           </div>

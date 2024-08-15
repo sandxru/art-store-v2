@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -21,23 +21,48 @@ import {
   AlertDialogAction,
 } from "@/components/ui/alert-dialog";
 import Spinner from "@/components/ui/Spinner";
-import { addOrder } from "@/lib/newordersubmit";
 
-const NewForm = () => {
+type Order = {
+  id: number;
+  cname: string;
+  delivery: number;
+  status: "p" | "c";
+  notes: string;
+  photo: string;
+  frameID: number;
+  price: number;
+  contact: string;
+  createdAt: string;
+  updatedAt: string;
+  address: string;
+};
+
+type EditFormProps = {
+  order: Order;
+};
+
+const EditForm = ({ order }: EditFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [formData, setFormData] = useState<Order>(order);
+
+  useEffect(() => {
+    setFormData(order);
+  }, [order]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      // Submit the form data
-      await addOrder(new FormData(e.currentTarget as HTMLFormElement));
+      // Submit the form data to the update order function
+      // Use an appropriate function to handle the form submission
+      // For example, you might use a function `updateOrder` that you define elsewhere
+      // await updateOrder(new FormData(e.currentTarget as HTMLFormElement));
 
       // Show success alert dialog
       setIsDialogOpen(true);
     } catch (error) {
-      console.error("Failed to add the order:", error);
+      console.error("Failed to update the order:", error);
     } finally {
       setIsSubmitting(false);
     }
@@ -52,15 +77,21 @@ const NewForm = () => {
       >
         <div className="grid gap-3">
           <Label>Customer Name</Label>
-          <Input id="cname" name="cname" type="text" required />
+          <Input
+            id="cname"
+            name="cname"
+            type="text"
+            defaultValue={formData.cname}
+            required
+          />
         </div>
 
         <div className="grid gap-3">
           <Label>Method</Label>
           <Select
+            defaultValue={formData.delivery.toString()}
             onValueChange={(value) =>
-              ((document.getElementById("delivery") as HTMLInputElement).value =
-                value)
+              setFormData((prev) => ({ ...prev, delivery: parseInt(value) }))
             }
           >
             <SelectTrigger>
@@ -74,15 +105,14 @@ const NewForm = () => {
               </SelectGroup>
             </SelectContent>
           </Select>
-          <input type="hidden" id="delivery" name="delivery" />
         </div>
 
         <div className="grid gap-3">
           <Label>Frame</Label>
           <Select
+            defaultValue={formData.frameID.toString()}
             onValueChange={(value) =>
-              ((document.getElementById("frameID") as HTMLInputElement).value =
-                value)
+              setFormData((prev) => ({ ...prev, frameID: parseInt(value) }))
             }
           >
             <SelectTrigger>
@@ -97,46 +127,73 @@ const NewForm = () => {
               </SelectGroup>
             </SelectContent>
           </Select>
-          <input type="hidden" id="frameID" name="frameID" />
         </div>
 
         <div className="grid gap-3">
           <Label>Price</Label>
-          <Input id="price" type="number" name="price" required />
+          <Input
+            id="price"
+            type="number"
+            name="price"
+            defaultValue={formData.price}
+            required
+          />
         </div>
 
         <div className="grid gap-3">
           <Label>Contact Info</Label>
-          <Input id="contact" type="text" name="contact" required />
+          <Input
+            id="contact"
+            type="text"
+            name="contact"
+            defaultValue={formData.contact}
+            required
+          />
         </div>
 
         <div className="grid gap-3">
           <Label>Image</Label>
-
-          <Input id="photo" type="file" name="photo" required />
+          <Input
+            id="photo"
+            type="file"
+            name="photo"
+            accept="image/*"
+            // Allow users to upload a new image
+          />
         </div>
 
         <div className="grid gap-3 col-span-1 md:col-span-2 md:justify-end">
           <Image
-            src="https://res.cloudinary.com/sandxru/image/upload/v1723137236/gq5g3c4ez7dko4mhoxoq.jpg"
-            alt="img"
+            src={formData.photo}
+            alt="Order Image"
             width={1080}
             height={1080}
             className="h-24 w-auto p-0 border-white border-4 rounded-lg drop-shadow"
           />
         </div>
+
         <div className="grid gap-3 col-span-1 md:col-span-2">
           <Label>Notes</Label>
-          <Textarea id="note" name="notes" rows={6} />
+          <Textarea
+            id="note"
+            name="notes"
+            rows={6}
+            defaultValue={formData.notes}
+          />
         </div>
 
         <div className="grid gap-3 col-span-1 md:col-span-2">
           <Label>Address</Label>
-          <Textarea id="address" name="address" rows={6} />
+          <Textarea
+            id="address"
+            name="address"
+            rows={6}
+            defaultValue={formData.address}
+          />
         </div>
 
         <div className="grid gap-3 col-span-1 md:col-span-2">
-          <Button type="submit" disabled={isSubmitting} className="">
+          <Button type="submit" disabled={isSubmitting}>
             Update
           </Button>
         </div>
@@ -152,7 +209,7 @@ const NewForm = () => {
         <AlertDialogContent>
           <AlertDialogTitle>Success!</AlertDialogTitle>
           <AlertDialogDescription>
-            The order has been added successfully.
+            The order has been updated successfully.
           </AlertDialogDescription>
           <AlertDialogAction onClick={() => window.location.reload()}>
             OK
@@ -163,4 +220,4 @@ const NewForm = () => {
   );
 };
 
-export default NewForm;
+export default EditForm;
