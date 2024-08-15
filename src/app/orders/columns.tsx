@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
 import StatusCell from "./StatusCell";
+import Link from "next/link";
 export type Order = {
   id: number;
   cname: string;
@@ -146,6 +147,8 @@ export const columns: ColumnDef<Order>[] = [
     cell: ({ row }) => {
       const rowdata = row.original;
 
+      const id = rowdata.id;
+
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -157,17 +160,21 @@ export const columns: ColumnDef<Order>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <Eye className="w-5 h-5 pr-1" />
-              <div className="pr-1" />
-              View
-            </DropdownMenuItem>
+            <Link href={"orders/edit-order/" + id}>
+              <DropdownMenuItem>
+                <Eye className="w-5 h-5 pr-1" />
+                <div className="pr-1" />
+                View
+              </DropdownMenuItem>
+            </Link>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <Pencil className="w-5 h-4 pr-1" />
-              <div className="pr-1" />
-              Edit
-            </DropdownMenuItem>
+            <Link href={"orders/edit-order/" + id}>
+              <DropdownMenuItem>
+                <Pencil className="w-5 h-4 pr-1" />
+                <div className="pr-1" />
+                Edit
+              </DropdownMenuItem>
+            </Link>
             <DropdownMenuSeparator />
             <DropdownMenuItem className="text-red-500">
               <Trash2 className="w-5 h-4 pr-1 text-red-500" />

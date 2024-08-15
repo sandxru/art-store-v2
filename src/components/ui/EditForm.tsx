@@ -21,6 +21,7 @@ import {
   AlertDialogAction,
 } from "@/components/ui/alert-dialog";
 import Spinner from "@/components/ui/Spinner";
+import { addOrder } from "@/lib/updateordersubmit";
 
 type Order = {
   id: number;
@@ -54,10 +55,7 @@ const EditForm = ({ order }: EditFormProps) => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      // Submit the form data to the update order function
-      // Use an appropriate function to handle the form submission
-      // For example, you might use a function `updateOrder` that you define elsewhere
-      // await updateOrder(new FormData(e.currentTarget as HTMLFormElement));
+      await addOrder(new FormData(e.currentTarget as HTMLFormElement));
 
       // Show success alert dialog
       setIsDialogOpen(true);
@@ -77,6 +75,14 @@ const EditForm = ({ order }: EditFormProps) => {
       >
         <div className="grid gap-3">
           <Label>Customer Name</Label>
+          <Input
+            id="id"
+            name="id"
+            type="number"
+            defaultValue={formData.id}
+            required
+            className="hidden"
+          />
           <Input
             id="cname"
             name="cname"

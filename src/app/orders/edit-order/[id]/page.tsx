@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getOrderById } from "@/lib/prisma"; // Create this function to get an order by ID

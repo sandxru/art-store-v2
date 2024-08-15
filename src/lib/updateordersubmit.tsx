@@ -1,6 +1,5 @@
 "use server";
-
-import { createOrder } from "@/lib/prisma";
+import { updateOrder } from "@/lib/prisma";
 import { v2 as cloudinary } from "cloudinary";
 
 cloudinary.config({
@@ -16,43 +15,71 @@ export async function addOrder(formData: FormData) {
   const arrayBuffer = await photo.arrayBuffer();
   const buffer = new Uint8Array(arrayBuffer);
 
-  await new Promise<void>((resolve, reject) => {
-    cloudinary.uploader
-      .upload_stream({}, function (error, result) {
-        if (error) {
-          console.error("Error: ", error);
-          return reject(error); // Reject the promise on error
-        }
+  if (photo.name == "undefined") {
+    console.log("Photo Undefined Part");
+    const id = Number(formData.get("id"));
+    const cname = formData.get("cname") as string;
+    const delivery = Number(formData.get("delivery"));
+    const notes = formData.get("notes") as string;
+    const photo = undefined;
+    const frameID = Number(formData.get("frameID"));
+    const price = Number(formData.get("price"));
+    const contact = formData.get("contact") as string;
+    const address = formData.get("address") as string;
 
-        if (result) {
-          console.log("Result: ", result);
+    updateOrder(
+      id,
+      cname,
+      delivery,
+      notes,
+      photo,
+      frameID,
+      price,
+      contact,
+      address
+    );
+  } else {
+    console.log("Photo Not Undefined Part");
+    await new Promise<void>((resolve, reject) => {
+      cloudinary.uploader
+        .upload_stream({}, function (error, result) {
+          if (error) {
+            console.error("Error: ", error);
+            return reject(error); // Reject the promise on error
+          }
 
-          const cname = (formData.get("cname") as string) ?? "";
-          const delivery = Number(formData.get("delivery")) ?? 0;
-          const notes = (formData.get("notes") as string) ?? "";
-          const photo = result.secure_url;
-          const frameID = Number(formData.get("frameID")) ?? 0;
-          const price = Number(formData.get("price")) ?? 0;
-          const contact = (formData.get("contact") as string) ?? "";
-          const address = (formData.get("address") as string) ?? "";
+          if (result) {
+            console.log("Result: ", result);
 
-          createOrder(
-            cname,
-            delivery,
-            notes,
-            photo,
-            frameID,
-            price,
-            contact,
-            address
-          );
-        } else {
-          console.error("Upload failed, no result received.");
-          return reject(new Error("Upload failed, no result received."));
-        }
+            const id = Number(formData.get("id"));
+            const cname = formData.get("cname") as string;
+            const delivery = Number(formData.get("delivery"));
+            const notes = formData.get("notes") as string;
+            const photo = result.secure_url;
+            const frameID = Number(formData.get("frameID"));
+            const price = Number(formData.get("price"));
+            const contact = formData.get("contact") as string;
+            const address = formData.get("address") as string;
 
-        resolve(); // Resolve the promise if everything succeeded
-      })
-      .end(buffer);
-  });
+            updateOrder(
+              id,
+              cname,
+              delivery,
+              notes,
+              photo,
+              frameID,
+              price,
+              contact,
+              address
+            );
+          } else {
+            console.error("Upload failed, no result received.");
+            return reject(new Error("Upload failed, no result received."));
+          }
+
+          resolve(); // Resolve the promise if everything succeeded
+        })
+        .end(buffer);
+    });
+  }
 }

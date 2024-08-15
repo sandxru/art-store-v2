@@ -8,7 +8,7 @@ const prisma = global.prisma || new PrismaClient();
 
 if (process.env.NODE_ENV === "development") global.prisma = prisma;
 
-// Prisma Query Functions
+// Keep all the Prisma functions in this file.
 export async function countOrdersInCurrentMonth(): Promise<number> {
   const now = new Date();
   // Calculate start and end dates for the current calendar month
@@ -230,4 +230,34 @@ export async function getOrderById(id: number) {
   });
 }
 
+export async function updateOrder(
+  id: number,
+  cname: string,
+  delivery: number,
+  notes: string,
+  photo: string | undefined,
+  frameID: number,
+  price: number,
+  contact: string,
+  address: string
+) {
+  try {
+    await prisma.order.update({
+      where: { id },
+      data: {
+        cname,
+        delivery,
+        notes,
+        photo: photo ?? undefined, // Use existing photo if no new photo URL provided
+        frameID,
+        price,
+        contact,
+        address,
+      },
+    });
+    console.log(`Prisma: Order with ID ${id} updated successfully.`);
+  } catch (error) {
+    console.error(`Prisma: Failed to update order with ID ${id}:`, error);
+  }
+}
 export default prisma;
