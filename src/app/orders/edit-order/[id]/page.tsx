@@ -75,7 +75,7 @@ export default async function OrderEditPage({
             <Card x-chunk="dashboard-06-chunk-0">
               <CardHeader>
                 <CardTitle className="text-2xl">Edit Order</CardTitle>
-                <CardDescription>Edit Order</CardDescription>
+                <CardDescription>Update details of the order</CardDescription>
               </CardHeader>
 
               <CardContent>

@@ -3,9 +3,9 @@ import { createOrder } from "@/lib/prisma";
 import { v2 as cloudinary } from "cloudinary";
 
 cloudinary.config({
-  cloud_name: process.env.NEXT_CL_NAME,
-  api_key: process.env.NEXT_CL_API_KEY,
-  api_secret: process.env.NEXT_CL_SECRET,
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_SECRET,
 });
 
 export async function addOrder(formData: FormData) {

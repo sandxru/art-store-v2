@@ -80,7 +80,6 @@ const EditForm = ({ order }: EditFormProps) => {
             name="id"
             type="number"
             defaultValue={formData.id}
-            required
             className="hidden"
           />
           <Input
@@ -160,13 +159,7 @@ const EditForm = ({ order }: EditFormProps) => {
 
         <div className="grid gap-3">
           <Label>Image</Label>
-          <Input
-            id="photo"
-            type="file"
-            name="photo"
-            accept="image/*"
-            // Allow users to upload a new image
-          />
+          <Input id="photo" type="file" name="photo" />
         </div>
 
         <div className="grid gap-3 col-span-1 md:col-span-2 md:justify-end">
