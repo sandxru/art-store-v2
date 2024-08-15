@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,12 +12,43 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogAction,
+} from "@/components/ui/alert-dialog";
+import Spinner from "@/components/ui/Spinner";
 import { addOrder } from "@/lib/newordersubmit";
 
 const NewForm = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    try {
+      // Submit the form data
+      await addOrder(new FormData(e.currentTarget as HTMLFormElement));
+
+      // Show success alert dialog
+      setIsDialogOpen(true);
+    } catch (error) {
+      console.error("Failed to add the order:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
-    <form action={addOrder} method="post">
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+    <form onSubmit={handleSubmit} method="post" className="relative">
+      <div
+        className={`grid grid-cols-1 gap-4 md:grid-cols-2 ${
+          isSubmitting ? "opacity-50 pointer-events-none" : ""
+        }`}
+      >
         <div className="grid gap-3">
           <Label>Customer Name</Label>
           <Input id="cname" name="cname" type="text" required />
@@ -92,9 +124,31 @@ const NewForm = () => {
           <Textarea id="address" name="address" rows={6} />
         </div>
 
-        <Button type="submit">Submit</Button>
-        <Button type="reset">Reset</Button>
+        <Button type="submit" disabled={isSubmitting}>
+          Submit
+        </Button>
+        <Button type="reset" disabled={isSubmitting}>
+          Reset
+        </Button>
       </div>
+
+      {isSubmitting && (
+        <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-75 z-10">
+          <Spinner />
+        </div>
+      )}
+
+      <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <AlertDialogContent>
+          <AlertDialogTitle>Success!</AlertDialogTitle>
+          <AlertDialogDescription>
+            The order has been added successfully.
+          </AlertDialogDescription>
+          <AlertDialogAction onClick={() => window.location.reload()}>
+            OK
+          </AlertDialogAction>
+        </AlertDialogContent>
+      </AlertDialog>
     </form>
   );
 };
