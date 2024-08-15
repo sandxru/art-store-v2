@@ -111,7 +111,13 @@ const NewForm = () => {
 
         <div className="grid gap-3">
           <Label>Image</Label>
-          <Input id="photo" type="file" name="photo" required />
+          <Input
+            id="photo"
+            type="file"
+            name="photo"
+            required
+            accept="image/*"
+          />
         </div>
 
         <div className="grid gap-3 col-span-1 md:col-span-2">
