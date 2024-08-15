@@ -91,11 +91,11 @@ const EditForm = ({ order }: EditFormProps) => {
             required
           />
         </div>
-
         <div className="grid gap-3">
           <Label>Method</Label>
           <Select
-            defaultValue={formData.delivery.toString()}
+            name="delivery"
+            value={formData.delivery.toString()}
             onValueChange={(value) =>
               setFormData((prev) => ({ ...prev, delivery: parseInt(value) }))
             }
@@ -116,6 +116,7 @@ const EditForm = ({ order }: EditFormProps) => {
         <div className="grid gap-3">
           <Label>Frame</Label>
           <Select
+            name="frameID"
             defaultValue={formData.frameID.toString()}
             onValueChange={(value) =>
               setFormData((prev) => ({ ...prev, frameID: parseInt(value) }))
