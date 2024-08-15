@@ -17,7 +17,7 @@ model Order {
   cname     String?
   delivery  Int?
   status    OrderStatus @default(p)
-  notes     String?      @db.Text
+  notes     String?     @db.Text
   photo     String?
   frameID   Int?
   price     Int?

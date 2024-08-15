@@ -16,7 +16,7 @@ export async function addOrder(formData: FormData) {
   const buffer = new Uint8Array(arrayBuffer);
 
   if (photo.name == "undefined") {
-    console.log("Photo Undefined Part");
+    console.log("No Photo Selected Part");
     const id = Number(formData.get("id"));
     const cname = formData.get("cname") as string;
     const delivery = Number(formData.get("delivery"));
@@ -39,7 +39,11 @@ export async function addOrder(formData: FormData) {
       address
     );
   } else {
-    console.log("Photo Not Undefined Part");
+    console.log("New Photo Selected Part");
+    const oldphoto = formData.get("oldphoto") as string;
+
+    const publicid = oldphoto.split("/").slice(-1)[0].split(".")[0];
+
     await new Promise<void>((resolve, reject) => {
       cloudinary.uploader
         .upload_stream({}, function (error, result) {
@@ -50,6 +54,9 @@ export async function addOrder(formData: FormData) {
 
           if (result) {
             console.log("Result: ", result);
+
+            cloudinary.uploader.destroy(publicid);
+            console.log("Photo Deleted : " + publicid);
 
             const id = Number(formData.get("id"));
             const cname = formData.get("cname") as string;

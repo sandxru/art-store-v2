@@ -74,7 +74,6 @@ const EditForm = ({ order }: EditFormProps) => {
         }`}
       >
         <div className="grid gap-3">
-          <Label>Customer Name</Label>
           <Input
             id="id"
             name="id"
@@ -82,6 +81,16 @@ const EditForm = ({ order }: EditFormProps) => {
             defaultValue={formData.id}
             className="hidden"
           />
+
+          <Input
+            id="oldphoto"
+            name="oldphoto"
+            type="text"
+            defaultValue={formData.photo}
+            className="hidden"
+          />
+          <Label>Customer Name</Label>
+
           <Input
             id="cname"
             name="cname"
