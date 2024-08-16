@@ -30,6 +30,6 @@ model Order {
 model Admin {
   id       Int    @id @default(autoincrement()) // Primary key
   name     String // Required
-  email    String // Required
+  email    String @unique // Required
   password String // Required
 }

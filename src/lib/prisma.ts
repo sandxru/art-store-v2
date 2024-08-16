@@ -1,10 +1,13 @@
 import { PrismaClient } from "@prisma/client";
+import exp from "constants";
 
 declare global {
   var prisma: PrismaClient | undefined;
 }
 
-const prisma =
+//export const db = new PrismaClient();
+
+export const prisma =
   global.prisma ||
   new PrismaClient({
     log: ["info", "warn", "error"],
@@ -264,4 +267,12 @@ export async function updateOrder(
     console.error(`Prisma: Failed to update order with ID ${id}:`, error);
   }
 }
+
+export async function getAdminByEmail(email: string) {
+  const admin = prisma.admin.findUnique({
+    where: { email },
+  });
+  return admin;
+}
+
 export default prisma;
