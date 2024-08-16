@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -26,6 +27,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { logout } from "@/actions/auth";
 
 const NavBar = () => {
   return (
@@ -178,7 +180,8 @@ const NavBar = () => {
               Support
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className="text-red-500">
+
+            <DropdownMenuItem className="text-red-500" onClick={() => logout()}>
               <LogOut id="icon-log-out" className="text-red-500 w-5 h-4 pl-1" />
               <div className="pr-1" />
               Sign out

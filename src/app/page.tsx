@@ -11,6 +11,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import Logo from "@/components/ui/Logo";
+import { loginWithCreds } from "@/actions/auth";
 
 export default function Login() {
   return (
@@ -20,45 +21,12 @@ export default function Login() {
           <div className="scale-110 flex justify-center p-7">
             <Logo />
           </div>
-
-          <Card className="mx-auto max-w-sm p-1">
-            <CardHeader>
-              <CardTitle className="text-2xl">Login</CardTitle>
-              <CardDescription>
-                Enter your email below to login to your account
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="grid gap-5">
-                <div className="grid gap-3">
-                  <Label htmlFor="email">Email</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="m@example.com"
-                    required
-                  />
-                </div>
-                <div className="grid gap-3">
-                  <div className="flex items-center">
-                    <Label htmlFor="password">Password</Label>
-                  </div>
-                  <Input id="password" type="password" required />
-                </div>
-                <Link href={"/dashboard"}>
-                  <Button type="submit" className="w-full bg-slate-900">
-                    Login
-                  </Button>
-                </Link>
-              </div>
-              <div className="mt-4 text-center text-sm">
-                Don&apos;t have an account?{" "}
-                <Link href="#" className="underline">
-                  Contact Admin
-                </Link>
-              </div>
-            </CardContent>
-          </Card>
+          <div className="mt-4 text-center text-sm">
+            Click here to{" "}
+            <Link href="/sign-in" className="underline">
+              Sign In
+            </Link>
+          </div>
         </div>
       </div>
 
