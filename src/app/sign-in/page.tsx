@@ -12,6 +12,11 @@ import {
 } from "@/components/ui/card";
 import Logo from "@/components/ui/Logo";
 import { loginWithCreds } from "@/actions/auth";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Log In - ArtStore",
+};
 
 export default function Login() {
   return (
