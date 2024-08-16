@@ -4,8 +4,6 @@ import Credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { prisma } from "./lib/prisma";
 
-import authConfig from "@/auth.config";
-
 export const {
   handlers: { GET, POST },
   signIn,
@@ -14,13 +12,12 @@ export const {
 } = NextAuth({
   adapter: PrismaAdapter(prisma),
   session: { strategy: "jwt" },
-  ...authConfig,
   trustHost: true,
   providers: [
     Credentials({
       name: "Credentials",
       credentials: {
-        email: { label: "Email", type: "email" },
+        email: { label: "Email", type: "email", placeholder: "test@email.com" },
         password: { label: "Password", type: "password" },
       },
       authorize: async (credentials) => {

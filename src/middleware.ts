@@ -1,7 +1,4 @@
-//import { auth } from "@/auth";
-import authConfig from "./auth.config";
-import NextAuth from "next-auth";
-
+import { auth } from "@/auth";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
@@ -10,8 +7,6 @@ import type { NextRequest } from "next/server";
 //   console.log("Middleware :", req.nextUrl.pathname);
 //   console.log("Is Logged In :", isLoggedIn);
 // });
-
-const { auth } = NextAuth(authConfig);
 
 const protectedRoutes = ["/dashboard"];
 
