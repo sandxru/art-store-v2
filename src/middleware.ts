@@ -18,7 +18,7 @@ export default async function middleware(request: NextRequest) {
   );
 
   if (!session && isProtected) {
-    const absoluteUrl = new URL("/", request.nextUrl.origin);
+    const absoluteUrl = new URL("/sign-in", request.nextUrl.origin);
     return NextResponse.redirect(absoluteUrl.toString());
   }
   return NextResponse.next();

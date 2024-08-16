@@ -56,7 +56,10 @@ export default async function Orders() {
               <BreadcrumbSeparator />
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
-                  <Link className="text-base text-slate-800" href="/orders">
+                  <Link
+                    className="text-base text-slate-800"
+                    href="/dashboard/orders"
+                  >
                     Orders
                   </Link>
                 </BreadcrumbLink>
@@ -88,7 +91,7 @@ export default async function Orders() {
                         Export
                       </span>
                     </Button>
-                    <Link href="/orders/new-order">
+                    <Link href="/dashboard/orders/new-order">
                       <Button size="sm" className="h-8 gap-1">
                         <PlusCircle className="h-4 w-4" />
                         <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">

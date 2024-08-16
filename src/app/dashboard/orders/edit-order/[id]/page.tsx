@@ -53,7 +53,10 @@ export default async function OrderEditPage({
               <BreadcrumbSeparator />
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
-                  <Link className="text-base text-slate-500" href="/orders">
+                  <Link
+                    className="text-base text-slate-500"
+                    href="/dashboard/orders"
+                  >
                     Orders
                   </Link>
                 </BreadcrumbLink>
@@ -63,7 +66,7 @@ export default async function OrderEditPage({
                 <BreadcrumbLink asChild>
                   <Link
                     className="text-base text-slate-800"
-                    href={`/orders/edit-order/${orderId}`}
+                    href={`/dashboard/orders/edit-order/${orderId}`}
                   >
                     Edit Order
                   </Link>

@@ -40,7 +40,10 @@ export default async function Orders() {
               <BreadcrumbSeparator />
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
-                  <Link className="text-base text-slate-500" href="/orders">
+                  <Link
+                    className="text-base text-slate-500"
+                    href="/dashboard/orders"
+                  >
                     Orders
                   </Link>
                 </BreadcrumbLink>

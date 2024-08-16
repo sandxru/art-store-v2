@@ -60,7 +60,7 @@ export default async function Dashboard() {
             </h2>
 
             <Button asChild size="sm" className="ml-auto gap-1">
-              <Link href="/orders/new-order" className="text-base">
+              <Link href="/dashboard/orders/new-order" className="text-base">
                 <Plus className="h-5 w-5" />
                 New Order
               </Link>
@@ -131,7 +131,7 @@ export default async function Dashboard() {
                   </CardDescription>
                 </div>
                 <Button asChild size="sm" className="ml-auto gap-1">
-                  <Link href="/orders">
+                  <Link href="/dashboard/orders">
                     View All
                     <ArrowUpRight className="h-4 w-4" />
                   </Link>

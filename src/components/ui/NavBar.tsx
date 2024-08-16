@@ -50,7 +50,7 @@ const NavBar = () => {
         <div className="flex gap-2 items-center border-r-2 border-slate-100 pr-5">
           <Package className="h-5 w-5 text-muted-foreground" />
           <Link
-            href="/orders"
+            href="/dashboard/orders"
             className="text-base text-slate-500 transition-colors hover:text-slate-600"
           >
             Orders
@@ -88,7 +88,7 @@ const NavBar = () => {
         <div className="flex gap-2 items-center ">
           <Contact className="h-5 w-5 text-muted-foreground" />
           <Link
-            href="/orders"
+            href="/dashboard/orders"
             className="text-base text-slate-500 transition-colors hover:text-slate-600"
           >
             Customers
@@ -120,7 +120,7 @@ const NavBar = () => {
             <div className="flex gap-2 items-center">
               <Package className="h-5 w-5 text-muted-foreground" />
               <Link
-                href="/orders"
+                href="/dashboard/orders"
                 className="text-base text-muted-foreground transition-colors hover:text-foreground"
               >
                 Orders
@@ -130,7 +130,7 @@ const NavBar = () => {
             <div className="flex gap-2 items-center">
               <Contact className="h-5 w-5 text-muted-foreground" />
               <Link
-                href="/orders"
+                href="/dashboard/orders"
                 className="text-base text-muted-foreground transition-colors hover:text-foreground"
               >
                 Customers

@@ -160,7 +160,7 @@ export const columns: ColumnDef<Order>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <Link href={"orders/edit-order/" + id}>
+            <Link href={"dashboard/orders/edit-order/" + id}>
               <DropdownMenuItem>
                 <Eye className="w-5 h-5 pr-1" />
                 <div className="pr-1" />
