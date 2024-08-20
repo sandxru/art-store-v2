@@ -27,7 +27,11 @@ Setup the following Environment Variables.
 
 ## Screenshots
 
+### Login Page
+
 ![Login Page](https://raw.githubusercontent.com/sandxru/art-store-v2/main/screenshots/screen-shot-1.png)
+
+### Dashboard
 
 ![Dashboard](https://raw.githubusercontent.com/sandxru/art-store-v2/main/screenshots/screen-shot-2.png)
 
