@@ -19,7 +19,7 @@ This is a complete rewrite of the project [art-store-v1](https://github.com/sand
 Setup the following Environment Variables.
 
 `DATABASE_URL` : Database connection string for MySQL database. <br>
-`CLOUDINARY_NAME`
-`CLOUDINARY_API_KEY`
-`CLOUDINARY_SECRET`
-`NEXTAUTH_SECRET`
+`CLOUDINARY_NAME`<br>
+`CLOUDINARY_API_KEY`<br>
+`CLOUDINARY_SECRET`<br>
+`NEXTAUTH_SECRET`<br>
