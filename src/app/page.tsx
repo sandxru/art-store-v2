@@ -21,11 +21,12 @@ export default function Login() {
 
       <div className="min-h-screen hidden bg-muted lg:block">
         <Image
-          src="/assets/images/log.jpg"
+          src="/assets/images/cover-image.jpeg"
           alt="Image"
-          width="1080"
-          height="1080"
+          width="2160"
+          height="2160"
           className="max-h-screen object-cover dark:brightness-[0.2] dark:grayscale"
+          unoptimized
         />
       </div>
     </div>
