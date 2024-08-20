@@ -43,7 +43,7 @@ export default function Login() {
                       id="email"
                       type="email"
                       name="email"
-                      placeholder="m@example.com"
+                      placeholder="me@example.com"
                       required
                     />
                   </div>
