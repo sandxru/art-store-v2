@@ -62,7 +62,7 @@ export default async function Orders() {
             <Card x-chunk="dashboard-06-chunk-0">
               <CardHeader>
                 <CardTitle className="text-2xl">New Order</CardTitle>
-                <CardDescription>Add new order to the system</CardDescription>
+                <CardDescription>Add new order to the system.</CardDescription>
               </CardHeader>
 
               <CardContent>
