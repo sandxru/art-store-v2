@@ -25,6 +25,13 @@ Setup the following Environment Variables.
 `CLOUDINARY_SECRET`: Cloudinary Secret<br>
 `NEXTAUTH_SECRET` : Key for Auth.js<br>
 
+Run the following commands.
+
+`npm i`
+```npx prisma generate```
+`npx prisma migrate`
+`npm run dev`
+
 ## Screenshots
 
 ``Login Page``
