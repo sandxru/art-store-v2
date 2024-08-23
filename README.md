@@ -12,7 +12,7 @@ This is a complete rewrite of the project [art-store-v1](https://github.com/sand
 - **[Prisma](https://www.prisma.io/)** : An ORM (Object-Relational Mapping) tool for TypeScript and Node.js, providing a simple API for database access.
 - **[MySQL](https://www.mysql.com/)** : A relational database management system used for managing the application's data.
 - **[Auth.js](https://authjs.dev//)** : An authentication library.
-- **[Shadcn/UI](https://shadcn.dev/)** : A collection of reusable UI components built with Radix UI and Tailwind CSS.
+- **[Shadcn/UI](https://ui.shadcn.com/)** : A collection of reusable UI components built with Radix UI and Tailwind CSS.
 - **[Cloudinary](https://cloudinary.com/)** : End-to-end image and video management solution for websites and mobile apps.
 
 ## Installation
