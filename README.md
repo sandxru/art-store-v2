@@ -23,13 +23,13 @@ Setup the following Environment Variables.
 `CLOUDINARY_NAME` : Cloudinary Name<br>
 `CLOUDINARY_API_KEY`: Cloudinary API Key<br>
 `CLOUDINARY_SECRET`: Cloudinary Secret<br>
-`NEXTAUTH_SECRET` : Key for Auth.js<br>
+`NEXTAUTH_SECRET` : Key for Auth.js
 
 Run the following commands.
 
-`npm i`
-```npx prisma generate```
-`npx prisma migrate`
+`npm i`<br>
+`npx prisma generate`<br>
+`npx prisma migrate`<br>
 `npm run dev`
 
 ## Screenshots
