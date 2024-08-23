@@ -17,7 +17,7 @@ This is a complete rewrite of the project [art-store-v1](https://github.com/sand
 
 ## Installation
 
-1 - Setup the following Environment Variables.
+**1 - Setup the following Environment Variables.**
 
 `DATABASE_URL` : Database connection string for MySQL database<br>
 `CLOUDINARY_NAME` : Cloudinary Name<br>
@@ -25,7 +25,7 @@ This is a complete rewrite of the project [art-store-v1](https://github.com/sand
 `CLOUDINARY_SECRET`: Cloudinary Secret<br>
 `NEXTAUTH_SECRET` : Key for Auth.js
 
-2 - Run the following commands.
+**2 - Run the following commands.**
 
 `npm i`<br>
 `npx prisma generate`<br>
