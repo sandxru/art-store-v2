@@ -1,4 +1,5 @@
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import type { Metadata } from "next";
 import {
   countOrdersInCurrentMonth,
@@ -6,7 +7,6 @@ import {
   countPendingOrders,
   countCompletedOrders,
   countAllOrders,
-  getLatestOrders,
 } from "@/lib/prisma";
 
 import {
@@ -27,15 +27,12 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { Table, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import NavBar from "@/components/ui/NavBar";
+
+const RecentOrdersTableBody = dynamic(() => import("./RecentOrdersTableBody"), {
+  ssr: false,
+});
 
 export const metadata: Metadata = {
   title: "Dashboard - ArtStore",
@@ -47,7 +44,6 @@ export default async function Dashboard() {
   const pending_orders = await countPendingOrders();
   const completed_orders = await countCompletedOrders();
   const all_orders = await countAllOrders();
-  const latest_orders = await getLatestOrders();
 
   return (
     <>
@@ -146,23 +142,7 @@ export default async function Dashboard() {
                       <TableHead className="text-right">Amount</TableHead>
                     </TableRow>
                   </TableHeader>
-
-                  <TableBody>
-                    {latest_orders.map((order, index) => (
-                      <TableRow key={index}>
-                        <TableCell>
-                          <div className="font-medium">{order.cname}</div>
-                          <div className="hidden text-sm text-muted-foreground md:inline">
-                            {order.createdAt}
-                          </div>
-                        </TableCell>
-
-                        <TableCell className="text-right">
-                          {order.price?.toLocaleString("en-US") + " LKR"}
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
+                  <RecentOrdersTableBody />
                 </Table>
               </CardContent>
             </Card>

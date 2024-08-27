@@ -198,10 +198,11 @@ export async function createOrder(
   return orders;
 }
 
-export async function getLatestOrders() {
+export async function getRecentOrders() {
   try {
     const orders = await prisma.order.findMany({
       select: {
+        id: true,
         cname: true,
         createdAt: true,
         price: true,
