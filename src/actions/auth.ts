@@ -23,7 +23,7 @@ export const loginWithCreds = async (formData: FormData) => {
   };
 
   const existingUser = await getAdminByEmail(formData.get("email") as string);
-  console.log("Existing user:", existingUser);
+  console.log("Existing user:", existingUser?.email);
 
   try {
     await signIn("credentials", rawFormData);

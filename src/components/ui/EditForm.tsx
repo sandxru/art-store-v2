@@ -178,6 +178,7 @@ const EditForm = ({ order }: EditFormProps) => {
             width={1080}
             height={1080}
             className="h-24 w-auto p-0 border-white border-4 rounded-lg drop-shadow"
+            unoptimized
           />
         </div>
 
