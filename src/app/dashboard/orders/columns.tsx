@@ -1,7 +1,13 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { MoreHorizontal, Trash2, Pencil, Eye } from "lucide-react";
+import {
+  Link as LucideLink,
+  MoreHorizontal,
+  Trash2,
+  Pencil,
+  Eye,
+} from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import {
@@ -147,8 +153,20 @@ export const columns: ColumnDef<Order>[] = [
     id: "cl_actions",
     cell: ({ row }) => {
       const rowdata = row.original;
-
       const id = rowdata.id;
+
+      const handleCopyClick = () => {
+        navigator.clipboard
+          .writeText(rowdata.photo)
+          .then(() => {
+            console.log("Image URL copied to clipboard:", rowdata.photo); // Optional: Log to the console
+            //toast.success("Image URL copied to clipboard!");
+          })
+          .catch((error) => {
+            console.error("Failed to copy URL:", error);
+            //toast.error("Failed to copy URL.");
+          });
+      };
 
       return (
         <DropdownMenu>
@@ -160,6 +178,12 @@ export const columns: ColumnDef<Order>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem onClick={handleCopyClick}>
+              <LucideLink className="w-5 h-5 pr-1" />
+              <div className="pr-1" />
+              Copy Image URL
+            </DropdownMenuItem>
             <DropdownMenuSeparator />
             <Link href={"orders/edit-order/" + id}>
               <DropdownMenuItem>
