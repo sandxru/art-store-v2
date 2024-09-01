@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -27,6 +27,29 @@ import {
 import { logout } from "@/actions/auth";
 
 const NavBar = () => {
+  const [adminName, setAdminName] = useState(null);
+  useEffect(() => {
+    const fetchAdminName = async () => {
+      try {
+        const response = await fetch("/api/authdata");
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        console.log("Response data:", data);
+
+        if (data && data.user && data.user.name) {
+          setAdminName(data.user.name);
+        } else {
+          throw new Error("Name property is missing in the response data");
+        }
+      } catch (error) {
+        console.error("Error fetching admin name:", error);
+      }
+    };
+    fetchAdminName();
+  }, []);
+
   return (
     <header className="sticky z-50 top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
       <nav className="hidden flex-col gap-6 font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
@@ -149,7 +172,7 @@ const NavBar = () => {
           <DropdownMenuContent align="end">
             <div className="min-w-48">
               <DropdownMenuLabel className="py-2">
-                Administrator Name
+                {adminName}
               </DropdownMenuLabel>
             </div>
 
