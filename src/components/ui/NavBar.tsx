@@ -36,13 +36,7 @@ const NavBar = () => {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
-        console.log("Response data:", data);
-
-        if (data && data.user && data.user.name) {
-          setAdminName(data.user.name);
-        } else {
-          throw new Error("Name property is missing in the response data");
-        }
+        setAdminName(data.user.name);
       } catch (error) {
         console.error("Error fetching admin name:", error);
       }
