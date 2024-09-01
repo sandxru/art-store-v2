@@ -136,6 +136,7 @@ const NavBar = () => {
           </nav>
         </SheetContent>
       </Sheet>
+
       <div className="justify-end flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
