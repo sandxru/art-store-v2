@@ -29,6 +29,7 @@ import {
 
 import { Table, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import NavBar from "@/components/ui/NavBar";
+import { auth } from "@/auth";
 
 const RecentOrdersTableBody = dynamic(() => import("./RecentOrdersTableBody"), {
   ssr: false,
@@ -44,6 +45,7 @@ export default async function Dashboard() {
   const pending_orders = await countPendingOrders();
   const completed_orders = await countCompletedOrders();
   const all_orders = await countAllOrders();
+  const admin_name = (await auth())?.user?.name;
 
   return (
     <>
@@ -52,7 +54,7 @@ export default async function Dashboard() {
         <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-10">
           <div className="flex items-center justify-between">
             <h2 className="text-3xl font-bold tracking-tight">
-              Welcome, Admin 👋🏻
+              Welcome, {admin_name} 👋🏻
             </h2>
 
             <Button asChild size="sm" className="ml-auto gap-1">
