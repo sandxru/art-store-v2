@@ -1,5 +1,4 @@
 import Link from "next/link";
-import dynamic from "next/dynamic";
 import type { Metadata } from "next";
 import {
   countOrdersInCurrentMonth,
@@ -28,10 +27,7 @@ import {
 import { Table, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import NavBar from "@/components/ui/NavBar";
 import { auth } from "@/auth";
-
-const RecentOrdersTableBody = dynamic(() => import("./RecentOrdersTableBody"), {
-  ssr: false,
-});
+import RecentOrdersTableBody from "./RecentOrdersTableBody";
 
 export const metadata: Metadata = {
   title: "Dashboard - ArtStore",

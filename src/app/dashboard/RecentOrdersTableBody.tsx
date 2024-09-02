@@ -9,14 +9,14 @@ export default async function RecentOrdersTableBody() {
     <TableBody>
       {recent_orders.map((order, index) => (
         <TableRow key={index}>
-          <Link href={`/dashboard/orders/edit-order/${order.id}`}>
-            <TableCell>
+          <TableCell>
+            <Link href={`/dashboard/orders/edit-order/${order.id}`}>
               <div className="font-medium">{order.cname}</div>
-              <div className="hidden text-sm text-muted-foreground md:inline">
-                {order.createdAt}
-              </div>
-            </TableCell>
-          </Link>
+            </Link>
+            <div className="hidden text-sm text-muted-foreground md:inline">
+              {order.createdAt}
+            </div>
+          </TableCell>
           <TableCell className="text-right">
             {order.price?.toLocaleString("en-US") + " LKR"}
           </TableCell>
