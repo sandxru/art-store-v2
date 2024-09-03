@@ -31,9 +31,9 @@ export const loginWithCreds = async (formData: FormData) => {
     if (error instanceof AuthError) {
       switch (error.type) {
         case "CredentialsSignin":
-          return { error: "Invalid credentials" };
+          return { error: "Invalid credentials!" };
         default:
-          return { error: "Something went wrong" };
+          return { error: "Invalid credentials!" };
       }
     }
     throw error;

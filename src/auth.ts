@@ -35,6 +35,7 @@ export const {
 
         if (!admin) {
           console.log("User not found");
+          throw new Error("No user found with this email");
         } else {
           console.log("User found");
           const isMatch = bcrypt.compareSync(
@@ -42,6 +43,7 @@ export const {
             admin.password
           );
           if (!isMatch) {
+            console.log("Password does not match");
             throw new Error("Incorect password");
           }
         }

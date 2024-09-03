@@ -1,7 +1,10 @@
+"use client";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { TriangleAlert } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import {
   Card,
@@ -14,11 +17,25 @@ import Logo from "@/components/ui/Logo";
 import { loginWithCreds } from "@/actions/auth";
 import { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Log In - ArtStore",
-};
+// export const metadata: Metadata = {
+//   title: "Log In - ArtStore",
+// };
 
 export default function Login() {
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+    const response = await loginWithCreds(formData);
+
+    if (response?.error) {
+      setErrorMessage(response.error);
+    } else {
+      setErrorMessage(null);
+    }
+  };
   return (
     <div className="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
       <div className="flex items-center justify-center py-12">
@@ -35,7 +52,7 @@ export default function Login() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <form action={loginWithCreds}>
+              <form onSubmit={handleSubmit}>
                 <div className="grid gap-5">
                   <div className="grid gap-3">
                     <Label htmlFor="email">Email</Label>
@@ -64,6 +81,12 @@ export default function Login() {
                   </Button>
                 </div>
               </form>
+              {errorMessage && (
+                <div className="bg-destructive/15 p-2 mt-4 rounded-md flex items-center gap-x-2 text-sm text-destructive">
+                  <TriangleAlert className="h-5 w-5" />
+                  {errorMessage}
+                </div>
+              )}
               <div className="mt-4 text-center text-sm">
                 Don&apos;t have an account?{" "}
                 <Link href="#" className="underline">
