@@ -129,26 +129,23 @@ export async function getOrderPercentageChange(): Promise<string> {
   }
 }
 
-export async function getOrdersWithStatusP() {
-  const orders = await prisma.order.findMany({
-    where: {
-      status: "p",
-    },
-  });
-  return orders;
-}
-
-export async function getOrdersWithStatusC() {
-  const orders = await prisma.order.findMany({
-    where: {
-      status: "c",
-    },
-  });
-  return orders;
-}
+export type Order = {
+  id: number;
+  cname: string;
+  delivery: number;
+  status: "p" | "c";
+  notes: string | null;
+  photo: string;
+  frameID: number;
+  price: number;
+  contact: string;
+  createdAt: Date;
+  updatedAt: Date;
+  address: string | null;
+};
 
 export async function getOrdersWithStatusAll() {
-  const orders = await prisma.order.findMany({
+  const orders: Order[] = await prisma.order.findMany({
     where: {
       status: {
         in: ["p", "c"],
@@ -158,20 +155,24 @@ export async function getOrdersWithStatusAll() {
   return orders;
 }
 
-export type Order = {
-  id: number;
-  cname: string;
-  delivery: number;
-  status: "p" | "c";
-  notes: string;
-  photo: string;
-  frameID: number;
-  price: number;
-  contact: string;
-  createdAt: string;
-  updatedAt: string;
-  address: string;
-};
+export async function getOrdersWithStatusP() {
+  const orders: Order[] = await prisma.order.findMany({
+    where: {
+      status: "p",
+    },
+  });
+  return orders;
+}
+
+export async function getOrdersWithStatusC() {
+  const orders: Order[] = await prisma.order.findMany({
+    where: {
+      status: "c",
+    },
+  });
+  return orders;
+}
+
 export async function createOrder(
   cname: string,
   delivery: number,

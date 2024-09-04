@@ -1,10 +1,8 @@
-//@ts-nocheck
-
 import { Metadata } from "next";
-import { Order, columns } from "./columns";
+import { columns } from "./columns";
 import { DataTable } from "@/components/ui/data-table";
 import Link from "next/link";
-import { File, PlusCircle } from "lucide-react";
+import { PlusCircle } from "lucide-react";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -22,7 +20,6 @@ import {
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import NavBar from "@/components/ui/NavBar";
-
 import {
   getOrdersWithStatusP,
   getOrdersWithStatusC,

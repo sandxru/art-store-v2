@@ -1,5 +1,4 @@
 "use client";
-
 import { ColumnDef } from "@tanstack/react-table";
 import {
   Link as LucideLink,
@@ -21,20 +20,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import StatusCell from "./StatusCell";
 import Link from "next/link";
-export type Order = {
-  id: number;
-  cname: string;
-  delivery: number;
-  status: "p" | "c";
-  notes: string;
-  photo: string;
-  frameID: number;
-  price: number;
-  contact: string;
-  createdAt: string;
-  updatedAt: string;
-  address: string;
-};
+import { Order } from "@/lib/prisma";
 
 export const columns: ColumnDef<Order>[] = [
   {

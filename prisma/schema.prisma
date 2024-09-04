@@ -14,14 +14,14 @@ enum OrderStatus {
 
 model Order {
   id        Int         @id @default(autoincrement()) // Primary key
-  cname     String?
-  delivery  Int?
+  cname     String
+  delivery  Int
   status    OrderStatus @default(p)
   notes     String?     @db.Text
-  photo     String?
-  frameID   Int?
-  price     Int?
-  contact   String?
+  photo     String
+  frameID   Int
+  price     Int
+  contact   String
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
   address   String?
