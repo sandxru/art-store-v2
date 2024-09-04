@@ -1,21 +1,6 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import Link from "next/link";
+import { logout } from "@/actions/auth";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import Logo from "./Logo";
-import {
-  CircleUser,
-  House,
-  Menu,
-  User,
-  Settings,
-  Headset,
-  LogOut,
-  Contact,
-  Package,
-  Settings2Icon,
-} from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -24,7 +9,22 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { logout } from "@/actions/auth";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  CircleUser,
+  Contact,
+  Headset,
+  House,
+  LogOut,
+  Menu,
+  Package,
+  Settings,
+  Settings2Icon,
+  User,
+} from "lucide-react";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import Logo from "./Logo";
 
 const NavBar = () => {
   const [adminName, setAdminName] = useState(null);

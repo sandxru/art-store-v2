@@ -1,6 +1,5 @@
-import React from "react";
-import Link from "next/link";
 import { Brush } from "lucide-react";
+import Link from "next/link";
 
 const Logo = () => {
   return (
