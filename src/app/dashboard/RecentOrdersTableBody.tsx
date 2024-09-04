@@ -1,6 +1,7 @@
-import { TableBody, TableCell, TableRow } from "@/components/ui/table";
-import { getRecentOrders } from "@/lib/prisma";
+import React from "react";
 import Link from "next/link";
+import { getRecentOrders } from "@/lib/prisma";
+import { TableBody, TableCell, TableRow } from "@/components/ui/table";
 
 export default async function RecentOrdersTableBody() {
   const recent_orders = await getRecentOrders();

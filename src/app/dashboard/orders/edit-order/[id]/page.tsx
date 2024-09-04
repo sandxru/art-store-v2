@@ -1,4 +1,8 @@
 //@ts-nocheck
+import { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { getOrderById } from "@/lib/prisma"; // Create this function to get an order by ID
+import Link from "next/link";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -13,12 +17,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import EditForm from "@/components/ui/EditForm";
 import NavBar from "@/components/ui/NavBar";
-import { getOrderById } from "@/lib/prisma"; // Create this function to get an order by ID
-import { Metadata } from "next";
-import Link from "next/link";
-import { notFound } from "next/navigation";
+import EditForm from "@/components/ui/EditForm";
 
 export const metadata: Metadata = {
   title: "Edit Order - ArtStore",

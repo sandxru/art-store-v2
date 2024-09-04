@@ -1,18 +1,18 @@
 "use client";
 
+import React, { useState } from "react";
+import { Badge } from "@/components/ui/badge";
 import {
   AlertDialog,
+  AlertDialogContent,
+  AlertDialogTitle,
+  AlertDialogDescription,
   AlertDialogAction,
   AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogTitle,
   AlertDialogTrigger,
+  AlertDialogFooter,
 } from "@/components/ui/alert-dialog";
-import { Badge } from "@/components/ui/badge";
 import Spinner from "@/components/ui/Spinner";
-import React, { useState } from "react";
 
 type StatusCellProps = {
   id: number;

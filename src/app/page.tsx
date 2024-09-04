@@ -1,6 +1,6 @@
-import Logo from "@/components/ui/Logo";
 import Image from "next/image";
 import Link from "next/link";
+import Logo from "@/components/ui/Logo";
 
 export default function Login() {
   return (

@@ -1,14 +1,21 @@
-import {
-  countAllOrders,
-  countCompletedOrders,
-  countOrdersInCurrentMonth,
-  countPendingOrders,
-  getOrderPercentageChange,
-} from "@/lib/prisma";
-import type { Metadata } from "next";
 import Link from "next/link";
+import type { Metadata } from "next";
+import {
+  countOrdersInCurrentMonth,
+  getOrderPercentageChange,
+  countPendingOrders,
+  countCompletedOrders,
+  countAllOrders,
+} from "@/lib/prisma";
 
-import { auth } from "@/auth";
+import {
+  Plus,
+  ArrowUpRight,
+  Package,
+  Package2,
+  Calendar,
+  PackageCheck,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -17,16 +24,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import NavBar from "@/components/ui/NavBar";
 import { Table, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import {
-  ArrowUpRight,
-  Calendar,
-  Package,
-  Package2,
-  PackageCheck,
-  Plus,
-} from "lucide-react";
+import NavBar from "@/components/ui/NavBar";
+import { auth } from "@/auth";
 import RecentOrdersTableBody from "./RecentOrdersTableBody";
 
 export const metadata: Metadata = {

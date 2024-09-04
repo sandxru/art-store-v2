@@ -1,5 +1,13 @@
 "use client";
-import { Badge } from "@/components/ui/badge";
+import { ColumnDef } from "@tanstack/react-table";
+import {
+  Link as LucideLink,
+  MoreHorizontal,
+  Trash2,
+  Pencil,
+  Eye,
+} from "lucide-react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -9,18 +17,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Order } from "@/lib/prisma";
-import { ColumnDef } from "@tanstack/react-table";
-import {
-  Eye,
-  Link as LucideLink,
-  MoreHorizontal,
-  Pencil,
-  Trash2,
-} from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
 import StatusCell from "./StatusCell";
+import Link from "next/link";
+import { Order } from "@/lib/prisma";
 
 export const columns: ColumnDef<Order>[] = [
   {
