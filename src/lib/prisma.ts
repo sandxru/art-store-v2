@@ -1,5 +1,4 @@
 import { PrismaClient } from "@prisma/client";
-import exp from "constants";
 
 declare global {
   var prisma: PrismaClient | undefined;

@@ -1,15 +1,6 @@
 //@ts-nocheck
 "use client";
-
 import { Button } from "@/components/ui/button";
-import {
-  ColumnDef,
-  flexRender,
-  getCoreRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
 import {
   Table,
   TableBody,
@@ -18,7 +9,15 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import React, { useState, useMemo } from "react";
+import {
+  ColumnDef,
+  flexRender,
+  getCoreRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable,
+} from "@tanstack/react-table";
+import { useMemo, useState } from "react";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -37,7 +36,10 @@ export function DataTable<TData, TValue>({
       return columns.some((column) => {
         const cellValue = row[column.accessorKey as keyof TData];
         return cellValue
-          ? cellValue.toString().toLowerCase().includes(searchQuery.toLowerCase())
+          ? cellValue
+              .toString()
+              .toLowerCase()
+              .includes(searchQuery.toLowerCase())
           : false;
       });
     });
@@ -71,7 +73,10 @@ export function DataTable<TData, TValue>({
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id} className="font-medium text-slate-500">
+                    <TableHead
+                      key={header.id}
+                      className="font-medium text-slate-500"
+                    >
                       {header.isPlaceholder
                         ? null
                         : flexRender(
