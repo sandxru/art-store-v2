@@ -1,8 +1,3 @@
-import { Metadata } from "next";
-import { columns } from "./columns";
-import { DataTable } from "@/components/ui/data-table";
-import Link from "next/link";
-import { PlusCircle } from "lucide-react";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -18,13 +13,18 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { DataTable } from "@/components/ui/data-table";
 import NavBar from "@/components/ui/NavBar";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
-  getOrdersWithStatusP,
-  getOrdersWithStatusC,
   getOrdersWithStatusAll,
+  getOrdersWithStatusC,
+  getOrdersWithStatusP,
 } from "@/lib/prisma";
+import { PlusCircle } from "lucide-react";
+import { Metadata } from "next";
+import Link from "next/link";
+import { columns } from "./columns";
 
 export const metadata: Metadata = {
   title: "Orders - ArtStore",
