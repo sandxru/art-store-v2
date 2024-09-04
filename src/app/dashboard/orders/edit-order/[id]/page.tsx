@@ -1,4 +1,3 @@
-//@ts-nocheck
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -15,7 +14,7 @@ import {
 } from "@/components/ui/card";
 import EditForm from "@/components/ui/EditForm";
 import NavBar from "@/components/ui/NavBar";
-import { getOrderById } from "@/lib/prisma"; // Create this function to get an order by ID
+import { getOrderById, Order } from "@/lib/prisma";
 import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -30,7 +29,7 @@ export default async function OrderEditPage({
   params: { id: string };
 }) {
   const orderId = parseInt(params.id, 10);
-  const order = await getOrderById(orderId);
+  const order: Order = (await getOrderById(orderId)) as Order;
 
   if (!order) {
     notFound();

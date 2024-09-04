@@ -22,21 +22,22 @@ import {
 } from "@/components/ui/alert-dialog";
 import Spinner from "@/components/ui/Spinner";
 import { addOrder } from "@/lib/updateordersubmit";
+import { Order } from "@/lib/prisma";
 
-type Order = {
-  id: number;
-  cname: string;
-  delivery: number;
-  status: "p" | "c";
-  notes: string;
-  photo: string;
-  frameID: number;
-  price: number;
-  contact: string;
-  createdAt: string;
-  updatedAt: string;
-  address: string;
-};
+// export type Order = {
+//   id: number;
+//   cname: string;
+//   delivery: number;
+//   status: "p" | "c";
+//   notes: string | undefined;
+//   photo: string;
+//   frameID: number;
+//   price: number;
+//   contact: string;
+//   createdAt: Date;
+//   updatedAt: Date;
+//   address: string | undefined;
+// };
 
 type EditFormProps = {
   order: Order;
@@ -188,7 +189,7 @@ const EditForm = ({ order }: EditFormProps) => {
             id="note"
             name="notes"
             rows={6}
-            defaultValue={formData.notes}
+            defaultValue={formData.notes || ""}
           />
         </div>
 
@@ -198,7 +199,7 @@ const EditForm = ({ order }: EditFormProps) => {
             id="address"
             name="address"
             rows={6}
-            defaultValue={formData.address}
+            defaultValue={formData.address || ""}
           />
         </div>
 
