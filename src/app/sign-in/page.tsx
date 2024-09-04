@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-import Image from "next/image";
 import {
   Card,
   CardDescription,
@@ -8,6 +6,7 @@ import {
 } from "@/components/ui/card";
 import Logo from "@/components/ui/Logo";
 import { Metadata } from "next";
+import Image from "next/image";
 import FormContent from "./FormContent";
 
 export const metadata: Metadata = {

@@ -1,5 +1,4 @@
 "use server";
-
 import { signIn, signOut } from "@/auth";
 import { getAdminByEmail } from "@/lib/prisma";
 import { AuthError } from "next-auth";

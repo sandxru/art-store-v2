@@ -1,12 +1,12 @@
 "use client";
-import React, { useState } from "react";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { TriangleAlert } from "lucide-react";
-import { Label } from "@/components/ui/label";
-import { CardContent } from "@/components/ui/card";
 import { loginWithCreds } from "@/actions/auth";
+import { Button } from "@/components/ui/button";
+import { CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { TriangleAlert } from "lucide-react";
+import Link from "next/link";
+import React, { useState } from "react";
 
 const FormContent = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
