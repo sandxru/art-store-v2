@@ -274,4 +274,29 @@ export async function getAdminByEmail(email: string) {
   return admin;
 }
 
+export async function getFrameCounts() {
+  const frameCount = {
+    one: await prisma.order.count({
+      where: {
+        frameID: 1,
+        status: "p",
+      },
+    }),
+    two: await prisma.order.count({
+      where: {
+        frameID: 2,
+        status: "p",
+      },
+    }),
+    three: await prisma.order.count({
+      where: {
+        frameID: 3,
+        status: "p",
+      },
+    }),
+  };
+
+  return frameCount;
+}
+
 export default prisma;
