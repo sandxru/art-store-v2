@@ -12,7 +12,7 @@ import {
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
   CircleUser,
-  Contact,
+  Layers,
   Headset,
   House,
   LogOut,
@@ -100,12 +100,12 @@ const NavBar = () => {
         </DropdownMenu> */}
 
         <div className="flex gap-2 items-center ">
-          <Contact className="h-5 w-5 text-muted-foreground" />
+          <Layers className="h-5 w-5 text-muted-foreground" />
           <Link
-            href="/dashboard/orders"
+            href="/dashboard/stock"
             className="text-base text-slate-500 transition-colors hover:text-slate-600"
           >
-            Customers
+            Stock
           </Link>
         </div>
       </nav>
@@ -142,12 +142,12 @@ const NavBar = () => {
             </div>
 
             <div className="flex gap-2 items-center">
-              <Contact className="h-5 w-5 text-muted-foreground" />
+              <Layers className="h-5 w-5 text-muted-foreground" />
               <Link
-                href="/dashboard/orders"
+                href="/dashboard/stock"
                 className="text-base text-muted-foreground transition-colors hover:text-foreground"
               >
-                Customers
+                Stock
               </Link>
             </div>
           </nav>
