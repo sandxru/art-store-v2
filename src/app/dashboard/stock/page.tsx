@@ -75,7 +75,7 @@ export default async function Orders() {
               <CardHeader>
                 <CardTitle className="text-2xl">Frame Stock</CardTitle>
                 <CardDescription>
-                  Manage your stock and view their details.
+                  Manage and view frame stock details.
                 </CardDescription>
               </CardHeader>
 

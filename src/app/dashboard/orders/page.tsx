@@ -66,9 +66,7 @@ export default async function Orders() {
           <Card x-chunk="dashboard-06-chunk-0">
             <CardHeader>
               <CardTitle className="text-2xl">Orders</CardTitle>
-              <CardDescription>
-                Manage your orders and view their details.
-              </CardDescription>
+              <CardDescription>Manage and view order.</CardDescription>
             </CardHeader>
 
             <CardContent>
