@@ -284,13 +284,13 @@ export async function getFrameCounts() {
     }),
     two: await prisma.order.count({
       where: {
-        frameID: 2,
+        frameID: 3,
         status: "p",
       },
     }),
     three: await prisma.order.count({
       where: {
-        frameID: 3,
+        frameID: 5,
         status: "p",
       },
     }),
