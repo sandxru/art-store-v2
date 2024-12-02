@@ -24,21 +24,6 @@ import { addOrder } from "@/lib/updateordersubmit";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-// export type Order = {
-//   id: number;
-//   cname: string;
-//   delivery: number;
-//   status: "p" | "c";
-//   notes: string | undefined;
-//   photo: string;
-//   frameID: number;
-//   price: number;
-//   contact: string;
-//   createdAt: Date;
-//   updatedAt: Date;
-//   address: string | undefined;
-// };
-
 type EditFormProps = {
   order: Order;
 };
@@ -137,7 +122,7 @@ const EditForm = ({ order }: EditFormProps) => {
             <SelectContent>
               <SelectGroup>
                 <SelectItem value="0">No frame</SelectItem>
-                <SelectItem value="1">6 x 8</SelectItem>
+                <SelectItem value="1">6 x 9</SelectItem>
                 <SelectItem value="3">8 x 12</SelectItem>
                 <SelectItem value="5">12 x 18</SelectItem>
               </SelectGroup>

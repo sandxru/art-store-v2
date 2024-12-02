@@ -90,7 +90,7 @@ const NewForm = () => {
             <SelectContent>
               <SelectGroup>
                 <SelectItem value="0">No frame</SelectItem>
-                <SelectItem value="1">6 x 8</SelectItem>
+                <SelectItem value="1">6 x 9</SelectItem>
                 <SelectItem value="3">8 x 12</SelectItem>
                 <SelectItem value="5">12 x 18</SelectItem>
               </SelectGroup>
