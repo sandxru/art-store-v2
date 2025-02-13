@@ -21,7 +21,7 @@ import {
   getOrdersWithStatusC,
   getOrdersWithStatusP,
 } from "@/lib/prisma";
-import { PlusCircle } from "lucide-react";
+import { Plus } from "lucide-react";
 import { Metadata } from "next";
 import Link from "next/link";
 import { columns } from "./columns";
@@ -79,17 +79,14 @@ export default async function Orders() {
                   </TabsList>
 
                   <div className="ml-auto flex items-center gap-2">
-                    {/* <Button size="sm" variant="outline" className="h-8 gap-1">
-                      <File className="h-3.5 w-3.5" />
-                      <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                        Export
-                      </span>
-                    </Button> */}
                     <Link href="/dashboard/orders/new-order">
-                      <Button size="sm" className="h-8 gap-1">
-                        <PlusCircle className="h-4 w-4" />
+                      <Button
+                        size="sm"
+                        className="gap-1 hover:scale-105 transition-transform duration-200 ease-in-out"
+                      >
+                        <Plus className="h-4 w-4" />
                         <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                          Add Order
+                          New Order
                         </span>
                       </Button>
                     </Link>

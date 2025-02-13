@@ -51,7 +51,11 @@ export default async function Dashboard() {
               Welcome, {admin_name} 👋🏻
             </h2>
 
-            <Button asChild size="sm" className="ml-auto gap-1">
+            <Button
+              asChild
+              size="sm"
+              className="ml-auto gap-1 hover:scale-105 transition-transform duration-200 ease-in-out"
+            >
               <Link href="/dashboard/orders/new-order" className="text-base">
                 <Plus className="h-5 w-5" />
                 New Order
@@ -122,7 +126,11 @@ export default async function Dashboard() {
                     Recent orders from your store.
                   </CardDescription>
                 </div>
-                <Button asChild size="sm" className="ml-auto gap-1">
+                <Button
+                  asChild
+                  size="sm"
+                  className="ml-auto gap-1 hover:scale-105 transition-transform duration-200 ease-in-out"
+                >
                   <Link href="/dashboard/orders">
                     View All
                     <ArrowUpRight className="h-4 w-4" />
