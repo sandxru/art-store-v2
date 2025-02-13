@@ -24,10 +24,6 @@ import StatusCell from "./StatusCell";
 
 export const columns: ColumnDef<Order>[] = [
   {
-    accessorKey: "id",
-    header: "#",
-  },
-  {
     accessorKey: "createdAt",
     header: "Date",
     cell: ({ row }) => {
