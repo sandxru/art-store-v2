@@ -44,12 +44,10 @@ export default async function Dashboard() {
   const admin_name = (await auth())?.user?.name;
   const completedOrdersLast12Months = await countCompletedOrdersLast12Months();
 
-  //console.log(completedOrdersLast12Months);
-
   // Prepare chart data based on completed orders
   const chartData = completedOrdersLast12Months.map((order) => ({
-    month: order.month, // Use the month string directly
-    desktop: order.count, // Use the count directly
+    month: order.month,
+    desktop: order.count,
   }));
 
   return (
@@ -128,55 +126,56 @@ export default async function Dashboard() {
               </CardContent>
             </Card>
           </div>
-          <div className="grid gap-4 md:gap-8 lg:grid-cols-2 xl:grid-cols-3">
-            <Card className="xl:col-span-2" x-chunk="dashboard-01-chunk-4">
-              <CardHeader className="flex flex-row items-center">
-                <div className="grid gap-2">
-                  <CardTitle className="text-2xl">Past 12 Months</CardTitle>
-                  <CardDescription>
-                    View the performance of your store over the past 12 months.
-                  </CardDescription>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <OrdersChart data={chartData} />
-              </CardContent>
-            </Card>
-          </div>
 
-          <div className="grid gap-4 md:gap-8 lg:grid-cols-2 xl:grid-cols-3">
-            <Card className="xl:col-span-2" x-chunk="dashboard-01-chunk-4">
-              <CardHeader className="flex flex-row items-center">
-                <div className="grid gap-2">
-                  <CardTitle className="text-2xl">Recent Orders</CardTitle>
-                  <CardDescription>
-                    Recent orders from your store.
-                  </CardDescription>
-                </div>
-                <Button
-                  asChild
-                  size="sm"
-                  className="ml-auto gap-1 hover:scale-105 transition-transform duration-200 ease-in-out"
-                >
-                  <Link href="/dashboard/orders">
-                    View All
-                    <ArrowUpRight className="h-4 w-4" />
-                  </Link>
-                </Button>
-              </CardHeader>
-              <CardContent>
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Customer</TableHead>
+          <div className="grid gap-4 md:gap-8 lg:grid-cols-1">
+            <div className="grid gap-4 md:grid-cols-2">
+              <Card className="col-span-1" x-chunk="dashboard-01-chunk-4">
+                <CardHeader className="flex flex-row items-center">
+                  <div className="grid gap-2">
+                    <CardTitle className="text-2xl">Past 12 Months</CardTitle>
+                    <CardDescription>
+                      View the performance of your store over the past 12
+                      months.
+                    </CardDescription>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <OrdersChart data={chartData} />
+                </CardContent>
+              </Card>
 
-                      <TableHead className="text-right">Amount</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <RecentOrdersTableBody />
-                </Table>
-              </CardContent>
-            </Card>
+              <Card className="col-span-1" x-chunk="dashboard-01-chunk-4">
+                <CardHeader className="flex flex-row items-center">
+                  <div className="grid gap-2">
+                    <CardTitle className="text-2xl">Recent Orders</CardTitle>
+                    <CardDescription>
+                      Recent orders from your store.
+                    </CardDescription>
+                  </div>
+                  <Button
+                    asChild
+                    size="sm"
+                    className="ml-auto gap-1 hover:scale-105 transition-transform duration-200 ease-in-out"
+                  >
+                    <Link href="/dashboard/orders">
+                      View All
+                      <ArrowUpRight className="h-4 w-4" />
+                    </Link>
+                  </Button>
+                </CardHeader>
+                <CardContent>
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Customer</TableHead>
+                        <TableHead className="text-right">Amount</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <RecentOrdersTableBody />
+                  </Table>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </main>
       </div>
