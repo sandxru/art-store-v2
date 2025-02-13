@@ -10,16 +10,22 @@ import React, { useState } from "react";
 
 const FormContent = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false); // Add loading state
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true); // Set loading to true
     const formData = new FormData(e.currentTarget);
     const response = await loginWithCreds(formData);
+    setLoading(false); // Set loading to false after response
+
     if (response?.error) {
       setErrorMessage(response.error);
     } else {
       setErrorMessage(null);
     }
   };
+
   return (
     <>
       <CardContent>
@@ -33,17 +39,28 @@ const FormContent = () => {
                 name="email"
                 placeholder="me@example.com"
                 required
+                disabled={loading} // Disable input if loading
               />
             </div>
             <div className="grid gap-3">
               <div className="flex items-center">
                 <Label htmlFor="password">Password</Label>
               </div>
-              <Input name="password" id="password" type="password" required />
+              <Input
+                name="password"
+                id="password"
+                type="password"
+                required
+                disabled={loading} // Disable input if loading
+              />
             </div>
 
-            <Button type="submit" className="w-full bg-slate-900">
-              Login
+            <Button
+              type="submit"
+              className="w-full bg-slate-900"
+              disabled={loading}
+            >
+              {loading ? "Loading..." : "Login"}
             </Button>
           </div>
         </form>
