@@ -24,10 +24,13 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation"; // Import usePathname
 import Logo from "./Logo";
 
 const NavBar = () => {
   const [adminName, setAdminName] = useState(null);
+  const pathname = usePathname(); // Get the current pathname
+
   useEffect(() => {
     const fetchAdminName = async () => {
       try {
@@ -55,9 +58,15 @@ const NavBar = () => {
         <div className="flex gap-2 items-center border-r-2 border-slate-100 pr-5">
           <Link
             href="/dashboard"
-            className="flex items-center text-base text-slate-500 transition-all duration-200 hover:text-slate-600 hover:scale-105 hover:bg-slate-50 p-2 rounded"
+            className={`flex items-center text-base transition-all duration-200 
+              ${pathname === "/dashboard" ? "text-red-500" : "text-slate-500"} 
+              hover:scale-105 hover:bg-slate-50 p-2 rounded`}
           >
-            <House className="h-5 w-5 text-muted-foreground mr-2 text-slate-400" />
+            <House
+              className={`h-5 w-5 mr-2 ${
+                pathname === "/dashboard" ? "text-red-500" : "text-slate-400"
+              }`}
+            />
             Dashboard
           </Link>
         </div>
@@ -65,9 +74,21 @@ const NavBar = () => {
         <div className="flex gap-2 items-center border-r-2 border-slate-100 pr-5">
           <Link
             href="/dashboard/orders"
-            className="flex items-center text-base text-slate-500 transition-all duration-200 hover:text-slate-600 hover:scale-105 hover:bg-slate-50 p-2 rounded"
+            className={`flex items-center text-base transition-all duration-200 
+              ${
+                pathname === "/dashboard/orders"
+                  ? "text-red-500"
+                  : "text-slate-500"
+              } 
+              hover:scale-105 hover:bg-slate-50 p-2 rounded`}
           >
-            <Package className="h-5 w-5 text-muted-foreground mr-2 text-slate-400" />
+            <Package
+              className={`h-5 w-5 mr-2 ${
+                pathname === "/dashboard/orders"
+                  ? "text-red-500"
+                  : "text-slate-400"
+              }`}
+            />
             Orders
           </Link>
         </div>
@@ -75,9 +96,21 @@ const NavBar = () => {
         <div className="flex gap-2 items-center">
           <Link
             href="/dashboard/stock"
-            className="flex items-center text-base text-slate-500 transition-all duration-200 hover:text-slate-600 hover:scale-105 hover:bg-slate-50 p-2 rounded"
+            className={`flex items-center text-base transition-all duration-200 
+              ${
+                pathname === "/dashboard/stock"
+                  ? "text-red-500"
+                  : "text-slate-500"
+              } 
+              hover:scale-105 hover:bg-slate-50 p-2 rounded`}
           >
-            <Layers className="h-5 w-5 text-muted-foreground mr-2 text-slate-400" />
+            <Layers
+              className={`h-5 w-5 mr-2 ${
+                pathname === "/dashboard/stock"
+                  ? "text-red-500"
+                  : "text-slate-400"
+              }`}
+            />
             Stock
           </Link>
         </div>
@@ -96,30 +129,45 @@ const NavBar = () => {
             <Logo />
 
             <div className="flex gap-2 items-center">
-              <House className="h-5 w-5 text-muted-foreground" />
+              <House
+                className={`h-5 w-5 text-muted-foreground ${
+                  pathname === "/dashboard" ? "text-red-500" : ""
+                }`}
+              />
               <Link
                 href="/dashboard"
-                className="text-base text-muted-foreground transition-colors hover:text-foreground"
+                className={`text-base text-muted-foreground transition-colors hover:text-foreground 
+                  ${pathname === "/dashboard" ? "text-red-500" : ""}`}
               >
                 Dashboard
               </Link>
             </div>
 
             <div className="flex gap-2 items-center">
-              <Package className="h-5 w-5 text-muted-foreground" />
+              <Package
+                className={`h-5 w-5 text-muted-foreground ${
+                  pathname === "/dashboard/orders" ? "text-red-500" : ""
+                }`}
+              />
               <Link
                 href="/dashboard/orders"
-                className="text-base text-muted-foreground transition-colors hover:text-foreground"
+                className={`text-base text-muted-foreground transition-colors hover:text-foreground 
+                  ${pathname === "/dashboard/orders" ? "text-red-500" : ""}`}
               >
                 Orders
               </Link>
             </div>
 
             <div className="flex gap-2 items-center">
-              <Layers className="h-5 w-5 text-muted-foreground" />
+              <Layers
+                className={`h-5 w-5 text-muted-foreground ${
+                  pathname === "/dashboard/stock" ? "text-red-500" : ""
+                }`}
+              />
               <Link
                 href="/dashboard/stock"
-                className="text-base text-muted-foreground transition-colors hover:text-foreground"
+                className={`text-base text-muted-foreground transition-colors hover:text-foreground 
+                  ${pathname === "/dashboard/stock" ? "text-red-500" : ""}`}
               >
                 Stock
               </Link>
@@ -127,12 +175,12 @@ const NavBar = () => {
           </nav>
         </SheetContent>
       </Sheet>
+
       <div className="justify-end flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="secondary" size="icon" className="rounded-full">
               <CircleUser className="h-6 w-6" />
-
               <span className="sr-only">Toggle user menu</span>
             </Button>
           </DropdownMenuTrigger>
@@ -151,7 +199,6 @@ const NavBar = () => {
             </DropdownMenuItem>
             <DropdownMenuItem>
               <Settings2Icon className="w-5 h-4 pr-1" />
-              <div className="pr-1" />
               <div className="pr-1" />
               Preferences
             </DropdownMenuItem>
