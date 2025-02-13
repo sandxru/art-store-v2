@@ -46,6 +46,7 @@ const NavBar = () => {
 
   return (
     <header className="sticky z-50 top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
+      {/* Desktop navigation */}
       <nav className="hidden flex-col gap-6 font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
         <div className="flex p-4">
           <Logo />
@@ -82,6 +83,7 @@ const NavBar = () => {
         </div>
       </nav>
 
+      {/* Mobile navigation */}
       <Sheet>
         <SheetTrigger asChild>
           <Button variant="outline" size="icon" className="shrink-0 md:hidden">
@@ -125,7 +127,6 @@ const NavBar = () => {
           </nav>
         </SheetContent>
       </Sheet>
-
       <div className="justify-end flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
