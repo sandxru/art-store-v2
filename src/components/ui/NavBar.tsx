@@ -52,22 +52,32 @@ const NavBar = () => {
         </div>
 
         <div className="flex gap-2 items-center border-r-2 border-slate-100 pr-5">
-          <House className="h-5 w-5 text-muted-foreground" />
           <Link
             href="/dashboard"
-            className="text-base text-slate-500 transition-colors hover:text-slate-600"
+            className="flex items-center text-base text-slate-500 transition-all duration-200 hover:text-slate-600 hover:scale-105 hover:bg-slate-50 p-2 rounded"
           >
+            <House className="h-5 w-5 text-muted-foreground mr-2" />
             Dashboard
           </Link>
         </div>
 
         <div className="flex gap-2 items-center border-r-2 border-slate-100 pr-5">
-          <Package className="h-5 w-5 text-muted-foreground" />
           <Link
             href="/dashboard/orders"
-            className="text-base text-slate-500 transition-colors hover:text-slate-600"
+            className="flex items-center text-base text-slate-500 transition-all duration-200 hover:text-slate-600 hover:scale-105 hover:bg-slate-50 p-2 rounded"
           >
+            <Package className="h-5 w-5 text-muted-foreground mr-2" />
             Orders
+          </Link>
+        </div>
+
+        <div className="flex gap-2 items-center">
+          <Link
+            href="/dashboard/stock"
+            className="flex items-center text-base text-slate-500 transition-all duration-200 hover:text-slate-600 hover:scale-105 hover:bg-slate-50 p-2 rounded"
+          >
+            <Layers className="h-5 w-5 text-muted-foreground mr-2" />
+            Stock
           </Link>
         </div>
 
@@ -98,16 +108,6 @@ const NavBar = () => {
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu> */}
-
-        <div className="flex gap-2 items-center ">
-          <Layers className="h-5 w-5 text-muted-foreground" />
-          <Link
-            href="/dashboard/stock"
-            className="text-base text-slate-500 transition-colors hover:text-slate-600"
-          >
-            Stock
-          </Link>
-        </div>
       </nav>
 
       <Sheet>
