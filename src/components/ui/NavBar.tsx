@@ -56,7 +56,7 @@ const NavBar = () => {
             href="/dashboard"
             className="flex items-center text-base text-slate-500 transition-all duration-200 hover:text-slate-600 hover:scale-105 hover:bg-slate-50 p-2 rounded"
           >
-            <House className="h-5 w-5 text-muted-foreground mr-2" />
+            <House className="h-5 w-5 text-muted-foreground mr-2 text-slate-400" />
             Dashboard
           </Link>
         </div>
@@ -66,7 +66,7 @@ const NavBar = () => {
             href="/dashboard/orders"
             className="flex items-center text-base text-slate-500 transition-all duration-200 hover:text-slate-600 hover:scale-105 hover:bg-slate-50 p-2 rounded"
           >
-            <Package className="h-5 w-5 text-muted-foreground mr-2" />
+            <Package className="h-5 w-5 text-muted-foreground mr-2 text-slate-400" />
             Orders
           </Link>
         </div>
@@ -76,7 +76,7 @@ const NavBar = () => {
             href="/dashboard/stock"
             className="flex items-center text-base text-slate-500 transition-all duration-200 hover:text-slate-600 hover:scale-105 hover:bg-slate-50 p-2 rounded"
           >
-            <Layers className="h-5 w-5 text-muted-foreground mr-2" />
+            <Layers className="h-5 w-5 text-muted-foreground mr-2 text-slate-400" />
             Stock
           </Link>
         </div>
