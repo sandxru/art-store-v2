@@ -76,7 +76,7 @@ const NavBar = () => {
             href="/dashboard/orders"
             className={`flex items-center text-base transition-all duration-200 
               ${
-                pathname === "/dashboard/orders"
+                pathname.startsWith("/dashboard/orders")
                   ? "text-red-500"
                   : "text-slate-500"
               } 
@@ -84,7 +84,7 @@ const NavBar = () => {
           >
             <Package
               className={`h-5 w-5 mr-2 ${
-                pathname === "/dashboard/orders"
+                pathname.startsWith("/dashboard/orders")
                   ? "text-red-500"
                   : "text-slate-400"
               }`}
@@ -146,13 +146,17 @@ const NavBar = () => {
             <div className="flex gap-2 items-center">
               <Package
                 className={`h-5 w-5 text-muted-foreground ${
-                  pathname === "/dashboard/orders" ? "text-red-500" : ""
+                  pathname.startsWith("/dashboard/orders") ? "text-red-500" : ""
                 }`}
               />
               <Link
                 href="/dashboard/orders"
                 className={`text-base text-muted-foreground transition-colors hover:text-foreground 
-                  ${pathname === "/dashboard/orders" ? "text-red-500" : ""}`}
+                  ${
+                    pathname.startsWith("/dashboard/orders")
+                      ? "text-red-500"
+                      : ""
+                  }`}
               >
                 Orders
               </Link>
