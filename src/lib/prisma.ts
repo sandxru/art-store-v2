@@ -1,17 +1,16 @@
-import { PrismaClient } from "@prisma/client/edge";
-import { withAccelerate } from "@prisma/extension-accelerate";
+import { PrismaClient } from "@prisma/client";
 
 declare global {
   var prisma: PrismaClient | undefined;
 }
 
 export const prisma =
-  //  global.prisma ||
+  global.prisma ||
   new PrismaClient({
     log: ["info", "warn", "error"],
-  }).$extends(withAccelerate());
+  });
 
-//if (process.env.NODE_ENV === "development") global.prisma = prisma;
+if (process.env.NODE_ENV === "development") global.prisma = prisma;
 
 // Keep all the Prisma functions in this file.
 export async function countOrdersInCurrentMonth(): Promise<number> {
