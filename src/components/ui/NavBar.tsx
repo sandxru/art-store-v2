@@ -14,7 +14,7 @@ import {
   CircleUser,
   Layers,
   Headset,
-  House,
+  Gauge,
   LogOut,
   Menu,
   Package,
@@ -59,12 +59,14 @@ const NavBar = () => {
           <Link
             href="/dashboard"
             className={`flex items-center text-base transition-all duration-200 
-              ${pathname === "/dashboard" ? "text-red-500" : "text-slate-500"} 
+              ${
+                pathname === "/dashboard" ? "text-slate-800" : "text-slate-500"
+              } 
               hover:scale-105 hover:bg-slate-50 p-2 rounded`}
           >
-            <House
+            <Gauge
               className={`h-5 w-5 mr-2 ${
-                pathname === "/dashboard" ? "text-red-500" : "text-slate-400"
+                pathname === "/dashboard" ? "text-slate-800" : "text-slate-400"
               }`}
             />
             Dashboard
@@ -77,7 +79,7 @@ const NavBar = () => {
             className={`flex items-center text-base transition-all duration-200 
               ${
                 pathname.startsWith("/dashboard/orders")
-                  ? "text-red-500"
+                  ? "text-slate-800"
                   : "text-slate-500"
               } 
               hover:scale-105 hover:bg-slate-50 p-2 rounded`}
@@ -85,7 +87,7 @@ const NavBar = () => {
             <Package
               className={`h-5 w-5 mr-2 ${
                 pathname.startsWith("/dashboard/orders")
-                  ? "text-red-500"
+                  ? "text-slate-800"
                   : "text-slate-400"
               }`}
             />
@@ -99,7 +101,7 @@ const NavBar = () => {
             className={`flex items-center text-base transition-all duration-200 
               ${
                 pathname === "/dashboard/stock"
-                  ? "text-red-500"
+                  ? "text-slate-800"
                   : "text-slate-500"
               } 
               hover:scale-105 hover:bg-slate-50 p-2 rounded`}
@@ -107,7 +109,7 @@ const NavBar = () => {
             <Layers
               className={`h-5 w-5 mr-2 ${
                 pathname === "/dashboard/stock"
-                  ? "text-red-500"
+                  ? "text-slate-800"
                   : "text-slate-400"
               }`}
             />
@@ -129,15 +131,15 @@ const NavBar = () => {
             <Logo />
 
             <div className="flex gap-2 items-center">
-              <House
+              <Gauge
                 className={`h-5 w-5 text-muted-foreground ${
-                  pathname === "/dashboard" ? "text-red-500" : ""
+                  pathname === "/dashboard" ? "text-slate-800" : ""
                 }`}
               />
               <Link
                 href="/dashboard"
                 className={`text-base text-muted-foreground transition-colors hover:text-foreground 
-                  ${pathname === "/dashboard" ? "text-red-500" : ""}`}
+                  ${pathname === "/dashboard" ? "text-slate-800" : ""}`}
               >
                 Dashboard
               </Link>
@@ -146,7 +148,9 @@ const NavBar = () => {
             <div className="flex gap-2 items-center">
               <Package
                 className={`h-5 w-5 text-muted-foreground ${
-                  pathname.startsWith("/dashboard/orders") ? "text-red-500" : ""
+                  pathname.startsWith("/dashboard/orders")
+                    ? "text-slate-800"
+                    : ""
                 }`}
               />
               <Link
@@ -154,7 +158,7 @@ const NavBar = () => {
                 className={`text-base text-muted-foreground transition-colors hover:text-foreground 
                   ${
                     pathname.startsWith("/dashboard/orders")
-                      ? "text-red-500"
+                      ? "text-slate-800"
                       : ""
                   }`}
               >
@@ -165,13 +169,13 @@ const NavBar = () => {
             <div className="flex gap-2 items-center">
               <Layers
                 className={`h-5 w-5 text-muted-foreground ${
-                  pathname === "/dashboard/stock" ? "text-red-500" : ""
+                  pathname === "/dashboard/stock" ? "text-slate-800" : ""
                 }`}
               />
               <Link
                 href="/dashboard/stock"
                 className={`text-base text-muted-foreground transition-colors hover:text-foreground 
-                  ${pathname === "/dashboard/stock" ? "text-red-500" : ""}`}
+                  ${pathname === "/dashboard/stock" ? "text-slate-800" : ""}`}
               >
                 Stock
               </Link>
@@ -220,8 +224,14 @@ const NavBar = () => {
             </DropdownMenuItem>
             <DropdownMenuSeparator />
 
-            <DropdownMenuItem className="text-red-500" onClick={() => logout()}>
-              <LogOut id="icon-log-out" className="text-red-500 w-5 h-4 pl-1" />
+            <DropdownMenuItem
+              className="text-slate-800"
+              onClick={() => logout()}
+            >
+              <LogOut
+                id="icon-log-out"
+                className="text-slate-800 w-5 h-4 pl-1"
+              />
               <div className="pr-1" />
               Sign out
             </DropdownMenuItem>
