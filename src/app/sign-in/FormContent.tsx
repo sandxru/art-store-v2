@@ -7,22 +7,28 @@ import { Label } from "@/components/ui/label";
 import { TriangleAlert } from "lucide-react";
 import Link from "next/link";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const FormContent = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [loading, setLoading] = useState<boolean>(false); // Add loading state
+  const [loading, setLoading] = useState<boolean>(false);
+  const [redirecting, setRedirecting] = useState<boolean>(false); // New state
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true); // Set loading to true
+    setLoading(true);
     const formData = new FormData(e.currentTarget);
     const response = await loginWithCreds(formData);
-    setLoading(false); // Set loading to false after response
 
     if (response?.error) {
+      setLoading(false); // Only set loading to false on error
       setErrorMessage(response.error);
     } else {
+      // Assuming loginWithCreds handles the redirect on success
       setErrorMessage(null);
+      setRedirecting(true); // Set redirecting to true
+      router.push("/dashboard");
     }
   };
 
@@ -39,7 +45,7 @@ const FormContent = () => {
                 name="email"
                 placeholder="me@example.com"
                 required
-                disabled={loading} // Disable input if loading
+                disabled={loading}
               />
             </div>
             <div className="grid gap-3">
@@ -51,14 +57,14 @@ const FormContent = () => {
                 id="password"
                 type="password"
                 required
-                disabled={loading} // Disable input if loading
+                disabled={loading}
               />
             </div>
 
             <Button
               type="submit"
               className="w-full bg-slate-900"
-              disabled={loading}
+              disabled={loading || redirecting} // Disable during redirect
             >
               {loading ? "Loading..." : "Login"}
             </Button>
