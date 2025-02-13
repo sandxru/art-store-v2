@@ -12,22 +12,25 @@ import { useRouter } from "next/navigation";
 const FormContent = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  const [redirecting, setRedirecting] = useState<boolean>(false); // New state
+  const [redirecting, setRedirecting] = useState<boolean>(false);
   const router = useRouter();
+  const [buttonText, setButtonText] = useState<string>("Login");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
+    setButtonText("Loading..."); // Initial loading text
     const formData = new FormData(e.currentTarget);
     const response = await loginWithCreds(formData);
 
     if (response?.error) {
-      setLoading(false); // Only set loading to false on error
+      setLoading(false);
+      setButtonText("Login"); // Reset button text on error
       setErrorMessage(response.error);
     } else {
-      // Assuming loginWithCreds handles the redirect on success
       setErrorMessage(null);
-      setRedirecting(true); // Set redirecting to true
+      setButtonText("Success, Redirecting..."); // Change button text
+      setRedirecting(true);
       router.push("/dashboard");
     }
   };
@@ -45,7 +48,7 @@ const FormContent = () => {
                 name="email"
                 placeholder="me@example.com"
                 required
-                disabled={loading}
+                disabled={loading || redirecting}
               />
             </div>
             <div className="grid gap-3">
@@ -64,9 +67,9 @@ const FormContent = () => {
             <Button
               type="submit"
               className="w-full bg-slate-900"
-              disabled={loading || redirecting} // Disable during redirect
+              disabled={loading || redirecting}
             >
-              {loading ? "Loading..." : "Login"}
+              {buttonText}
             </Button>
           </div>
         </form>
