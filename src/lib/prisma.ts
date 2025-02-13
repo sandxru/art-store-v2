@@ -299,4 +299,36 @@ export async function getFrameCounts() {
   return frameCount;
 }
 
+export async function countCompletedOrdersLast12Months(): Promise<
+  { month: string; count: number }[]
+> {
+  const now = new Date();
+  const last12Months = Array.from({ length: 12 }, (_, i) => {
+    const date = new Date(now.getFullYear(), now.getMonth() - i, 1);
+    return date.toLocaleString("default", { month: "long" });
+  });
+
+  const counts: { month: string; count: number }[] = [];
+
+  for (let i = 0; i < last12Months.length; i++) {
+    const monthName = last12Months[i];
+
+    // Calculate the start and end of the month
+    const startOfMonth = new Date(now.getFullYear(), now.getMonth() - i, 1);
+    const endOfMonth = new Date(now.getFullYear(), now.getMonth() - i + 1, 0); // Last day of the month
+
+    const count = await prisma.order.count({
+      where: {
+        createdAt: {
+          gte: startOfMonth,
+          lt: endOfMonth,
+        },
+      },
+    });
+    counts.push({ month: monthName, count });
+  }
+
+  return counts.reverse();
+}
+
 export default prisma;

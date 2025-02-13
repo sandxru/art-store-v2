@@ -4,6 +4,7 @@ import {
   countOrdersInCurrentMonth,
   countPendingOrders,
   getOrderPercentageChange,
+  countCompletedOrdersLast12Months,
 } from "@/lib/prisma";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -28,6 +29,7 @@ import {
   Plus,
 } from "lucide-react";
 import RecentOrdersTableBody from "./RecentOrdersTableBody";
+import OrdersChart from "@/components/ui/OrdersChart";
 
 export const metadata: Metadata = {
   title: "Dashboard - ArtStore",
@@ -40,6 +42,15 @@ export default async function Dashboard() {
   const completed_orders = await countCompletedOrders();
   const all_orders = await countAllOrders();
   const admin_name = (await auth())?.user?.name;
+  const completedOrdersLast12Months = await countCompletedOrdersLast12Months();
+
+  //console.log(completedOrdersLast12Months);
+
+  // Prepare chart data based on completed orders
+  const chartData = completedOrdersLast12Months.map((order) => ({
+    month: order.month, // Use the month string directly
+    desktop: order.count, // Use the count directly
+  }));
 
   return (
     <>
@@ -148,6 +159,32 @@ export default async function Dashboard() {
                   </TableHeader>
                   <RecentOrdersTableBody />
                 </Table>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="grid gap-4 md:gap-8 lg:grid-cols-2 xl:grid-cols-3">
+            <Card className="xl:col-span-2" x-chunk="dashboard-01-chunk-4">
+              <CardHeader className="flex flex-row items-center">
+                <div className="grid gap-2">
+                  <CardTitle className="text-2xl">Charts</CardTitle>
+                  <CardDescription>
+                    Recent orders from your store.
+                  </CardDescription>
+                </div>
+                <Button
+                  asChild
+                  size="sm"
+                  className="ml-auto gap-1 hover:scale-105 transition-transform duration-200 ease-in-out"
+                >
+                  <Link href="/dashboard/orders">
+                    View All
+                    <ArrowUpRight className="h-4 w-4" />
+                  </Link>
+                </Button>
+              </CardHeader>
+              <CardContent>
+                <OrdersChart data={chartData} />
               </CardContent>
             </Card>
           </div>
