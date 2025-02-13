@@ -80,34 +80,6 @@ const NavBar = () => {
             Stock
           </Link>
         </div>
-
-        {/* <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <div className="flex gap-2 items-center  border-r-2 border-slate-100 pr-5">
-              <Package className="h-5 w-5 text-muted-foreground" />
-              <Link
-                href="/orders"
-                className="text-base text-slate-500 transition-colors hover:text-slate-600"
-              >
-                Orders
-              </Link>
-            </div>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem className="text-base text-slate-500 transition-colors hover:text-slate-600">
-              <div className="pr-1" />
-              Pending
-            </DropdownMenuItem>
-            <DropdownMenuItem className="text-base text-slate-500 transition-colors hover:text-slate-600">
-              <div className="pr-1" />
-              Completed
-            </DropdownMenuItem>
-            <DropdownMenuItem className="text-base text-slate-500 transition-colors hover:text-slate-600">
-              <div className="pr-1" />
-              All
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu> */}
       </nav>
 
       <Sheet>
