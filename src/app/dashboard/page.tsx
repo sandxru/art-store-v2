@@ -133,7 +133,7 @@ export default async function Dashboard() {
                 <div className="grid gap-2">
                   <CardTitle className="text-2xl">Past 12 Months</CardTitle>
                   <CardDescription>
-                    View the performance of your store over the past 12 months.
+                    Performance of your store over the past 12 months.
                   </CardDescription>
                 </div>
               </CardHeader>

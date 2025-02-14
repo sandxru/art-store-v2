@@ -40,7 +40,7 @@ export function OrdersChart({ data }: OrdersChartProps) {
         />
         <ChartTooltip
           cursor={false}
-          content={<ChartTooltipContent indicator="dot" hideLabel />}
+          content={<ChartTooltipContent indicator="dot" />}
         />
         <Area
           dataKey="desktop"
@@ -54,6 +54,7 @@ export function OrdersChart({ data }: OrdersChartProps) {
             position="top"
             fontSize={12}
             fill="slate-800"
+            dy={-5}
           />
         </Area>
       </AreaChart>
