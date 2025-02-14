@@ -1,5 +1,4 @@
 "use client";
-
 import { Area, AreaChart, CartesianGrid, XAxis, LabelList } from "recharts";
 import {
   ChartConfig,
@@ -11,7 +10,7 @@ import {
 const chartConfig = {
   desktop: {
     label: "Orders",
-    color: "hsl(var(--chart-1))",
+    color: "hsl(var(--chart-2))",
   },
 } satisfies ChartConfig;
 
@@ -40,7 +39,7 @@ export function OrdersChart({ data }: OrdersChartProps) {
         />
         <ChartTooltip
           cursor={false}
-          content={<ChartTooltipContent indicator="dot" />}
+          content={<ChartTooltipContent indicator="dot" hideIndicator />}
         />
         <Area
           dataKey="desktop"
