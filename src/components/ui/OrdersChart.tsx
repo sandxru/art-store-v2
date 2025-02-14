@@ -1,6 +1,6 @@
 "use client";
 
-import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
+import { Area, AreaChart, CartesianGrid, XAxis, LabelList } from "recharts";
 import {
   ChartConfig,
   ChartContainer,
@@ -48,7 +48,14 @@ export function OrdersChart({ data }: OrdersChartProps) {
           fill="var(--color-desktop)"
           fillOpacity={0.4}
           stroke="var(--color-desktop)"
-        />
+        >
+          <LabelList
+            dataKey="desktop"
+            position="top"
+            fontSize={12}
+            fill="slate-800"
+          />
+        </Area>
       </AreaChart>
     </ChartContainer>
   );
