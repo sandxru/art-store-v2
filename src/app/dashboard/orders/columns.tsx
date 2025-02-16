@@ -24,7 +24,6 @@ import {
   Sheet,
   SheetClose,
   SheetContent,
-  SheetDescription,
   SheetFooter,
   SheetHeader,
   SheetTitle,
@@ -33,6 +32,15 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { toast } from "sonner";
+
+// Function to handle clipboard copy
+const handleCopyClick = (url: string) => {
+  navigator.clipboard
+    .writeText(url)
+    .then(() => toast.success("Copied to clipboard!", { duration: 1000 }))
+    .catch(() => toast.error("Failed to copy!"));
+};
 
 export const columns: ColumnDef<Order>[] = [
   {
@@ -140,17 +148,6 @@ export const columns: ColumnDef<Order>[] = [
       const rowdata = row.original;
       const id = rowdata.id;
 
-      const handleCopyClick = () => {
-        navigator.clipboard
-          .writeText(rowdata.photo)
-          .then(() => {
-            console.log("Image URL copied to clipboard:", rowdata.photo);
-          })
-          .catch((error) => {
-            console.error("Failed to copy URL:", error);
-          });
-      };
-
       return (
         <>
           {/* View Button */}
@@ -216,7 +213,7 @@ export const columns: ColumnDef<Order>[] = [
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={handleCopyClick}>
+              <DropdownMenuItem onClick={() => handleCopyClick(rowdata.photo)}>
                 <LucideLink className="w-5 h-5 pr-1" />
                 <div className="pr-1" />
                 Copy Image URL
