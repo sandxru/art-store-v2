@@ -24,6 +24,7 @@ import {
   Sheet,
   SheetClose,
   SheetContent,
+  SheetDescription,
   SheetFooter,
   SheetHeader,
   SheetTitle,
@@ -32,29 +33,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { toast } from "sonner";
-// Mapping for frameID
-const frameOptions: Record<number, string> = {
-  0: "No Frame",
-  1: "6 x 9",
-  3: "8 x 12",
-  5: "12 x 18",
-};
-
-// Mapping for delivery types
-const deliveryOptions: Record<number, string> = {
-  0: "Pick-up",
-  1: "Courier",
-  2: "Softcopy Only",
-};
-
-// Function to handle clipboard copy
-const handleCopyClick = (url: string) => {
-  navigator.clipboard
-    .writeText(url)
-    .then(() => toast.success("Copied to clipboard!", { duration: 1000 }))
-    .catch(() => toast.error("Failed to copy!"));
-};
 
 export const columns: ColumnDef<Order>[] = [
   {
@@ -65,8 +43,17 @@ export const columns: ColumnDef<Order>[] = [
     accessorKey: "createdAt",
     header: "Date",
     cell: ({ row }) => {
-      const date = new Date(row.original.createdAt).toISOString().split("T")[0];
-      return <p>{date}</p>;
+      const rowdata = row.original;
+      const date = new Date(rowdata.createdAt);
+
+      const options: Intl.DateTimeFormatOptions = {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      };
+      const formattedDate = date.toLocaleDateString("en-US", options);
+
+      return <p>{formattedDate}</p>;
     },
   },
   {
@@ -76,52 +63,97 @@ export const columns: ColumnDef<Order>[] = [
   {
     accessorKey: "photo",
     header: "Image",
-    cell: ({ row }) => (
-      <Image
-        src={row.original.photo}
-        alt="Order Image"
-        width={1080}
-        height={1080}
-        className="h-36 w-auto p-0 border-white border-4 rounded-lg drop-shadow"
-        unoptimized={false}
-        priority
-      />
-    ),
+    cell: ({ row }) => {
+      const rowdata = row.original;
+
+      return (
+        <Image
+          src={rowdata.photo}
+          alt="img"
+          width={1080}
+          height={1080}
+          className="h-36 w-auto p-0 border-white border-4 rounded-lg drop-shadow"
+          unoptimized
+        />
+      );
+    },
   },
   {
     accessorKey: "frameID",
     header: "Frame Option",
-    cell: ({ row }) => (
-      <Badge className="text-xs py-1 rounded-md" variant="outline">
-        {frameOptions[row.original.frameID] ?? "Unknown"}
-      </Badge>
-    ),
+    cell: ({ row }) => {
+      const rowdata = row.original;
+      var order_frame = rowdata.frameID;
+      var label;
+      if (order_frame == 0) {
+        label = "No Frame";
+      } else if (order_frame == 1) {
+        label = "6 x 9";
+      } else if (order_frame == 3) {
+        label = "8 x 12";
+      } else if (order_frame == 5) {
+        label = "12 x 18";
+      }
+
+      return (
+        <Badge className="text-xs py-1 rounded-md" variant="outline">
+          {label}
+        </Badge>
+      );
+    },
   },
   {
     accessorKey: "delivery",
     header: "Delivery",
-    cell: ({ row }) => (
-      <Badge className="text-xs py-1 rounded-md" variant="outline">
-        {deliveryOptions[row.original.delivery] ?? "Unknown"}
-      </Badge>
-    ),
+    cell: ({ row }) => {
+      const rowdata = row.original;
+      var order_delivery = rowdata.delivery;
+      var label;
+      if (order_delivery == 0) {
+        label = "Pick-up";
+      } else if (order_delivery == 1) {
+        label = "Courier";
+      } else if (order_delivery == 2) {
+        label = "Softcopy Only";
+      }
+
+      return (
+        <Badge className="text-xs py-1 rounded-md" variant="outline">
+          {label}
+        </Badge>
+      );
+    },
   },
+
   {
     accessorKey: "status",
     header: "Status",
-    cell: ({ row }) => (
-      <StatusCell id={row.original.id} status={row.original.status} />
-    ),
+    cell: ({ row }) => {
+      const { id, status } = row.original;
+      return <StatusCell id={id} status={status} />;
+    },
   },
   {
     header: "Action",
     id: "cl_actions",
     cell: ({ row }) => {
-      const { id, photo, cname, contact, notes, address } = row.original;
+      const rowdata = row.original;
+      const id = rowdata.id;
+
+      const handleCopyClick = () => {
+        navigator.clipboard
+          .writeText(rowdata.photo)
+          .then(() => {
+            console.log("Image URL copied to clipboard:", rowdata.photo);
+          })
+          .catch((error) => {
+            console.error("Failed to copy URL:", error);
+          });
+      };
 
       return (
         <>
-          {/* Quick View Button */}
+          {/* View Button */}
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="link" className="text-blue-500">
@@ -133,21 +165,36 @@ export const columns: ColumnDef<Order>[] = [
                 <SheetTitle>Quick view</SheetTitle>
               </SheetHeader>
               <div className="grid gap-4 py-4">
-                <div>
-                  <Label htmlFor="name">Name</Label>
-                  <Input id="name" value={cname} readOnly />
+                <div className="grid grid-cols-1 gap-4">
+                  <Label htmlFor="name" className="text-left">
+                    Name
+                  </Label>
+                  <Input id="name" value={rowdata.cname} readOnly />
                 </div>
-                <div>
-                  <Label htmlFor="contact">Contact</Label>
-                  <Input id="contact" value={contact} readOnly />
+
+                <div className="grid grid-cols-1 gap-4">
+                  <Label htmlFor="name" className="text-left">
+                    Contact
+                  </Label>
+                  <Input id="name" value={rowdata.contact} readOnly />
                 </div>
-                <div>
-                  <Label htmlFor="notes">Notes</Label>
-                  <Textarea id="notes" value={notes ?? ""} readOnly />
+
+                <div className="grid grid-cols-1 gap-4">
+                  <Label htmlFor="notes" className="text-left">
+                    Notes
+                  </Label>
+                  <Textarea id="notes" value={rowdata.notes ?? ""} readOnly />
                 </div>
-                <div>
-                  <Label htmlFor="address">Address</Label>
-                  <Textarea id="address" value={address ?? ""} readOnly />
+
+                <div className="grid grid-cols-1 gap-4">
+                  <Label htmlFor="address" className="text-left">
+                    Address
+                  </Label>
+                  <Textarea
+                    id="address"
+                    value={rowdata.address ?? ""}
+                    readOnly
+                  />
                 </div>
               </div>
               <SheetFooter>
@@ -169,20 +216,23 @@ export const columns: ColumnDef<Order>[] = [
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={() => handleCopyClick(photo)}>
+              <DropdownMenuItem onClick={handleCopyClick}>
                 <LucideLink className="w-5 h-5 pr-1" />
+                <div className="pr-1" />
                 Copy Image URL
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <Link href={"orders/edit-order/" + id}>
                 <DropdownMenuItem>
                   <Pencil className="w-5 h-4 pr-1" />
+                  <div className="pr-1" />
                   Edit
                 </DropdownMenuItem>
               </Link>
               <DropdownMenuSeparator />
               <DropdownMenuItem className="text-red-500">
                 <Trash2 className="w-5 h-4 pr-1 text-red-500" />
+                <div className="pr-1" />
                 Delete
               </DropdownMenuItem>
             </DropdownMenuContent>
