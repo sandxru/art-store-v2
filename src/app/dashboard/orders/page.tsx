@@ -32,10 +32,28 @@ export const metadata: Metadata = {
   title: "Orders - ArtStore",
 };
 
-export default async function Orders() {
-  const pending_data = await getOrdersWithStatusP();
-  const completed_data = await getOrdersWithStatusC();
-  const all_data = await getOrdersWithStatusAll();
+export default async function Orders({
+  searchParams,
+}: {
+  searchParams: { tab?: string };
+}) {
+  const activeTab = searchParams.tab || "pending";
+
+  // Fetch data based on active tab
+  let data;
+  switch (activeTab) {
+    case "pending":
+      data = await getOrdersWithStatusP();
+      break;
+    case "completed":
+      data = await getOrdersWithStatusC();
+      break;
+    case "all":
+      data = await getOrdersWithStatusAll();
+      break;
+    default:
+      data = await getOrdersWithStatusP();
+  }
 
   return (
     <>
@@ -73,12 +91,18 @@ export default async function Orders() {
             </CardHeader>
 
             <CardContent>
-              <Tabs defaultValue="tab-pending">
+              <Tabs value={activeTab}>
                 <div className="flex items-center">
                   <TabsList>
-                    <TabsTrigger value="tab-pending">Pendings</TabsTrigger>
-                    <TabsTrigger value="tab-completed">Completed</TabsTrigger>
-                    <TabsTrigger value="tab-all">All Orders</TabsTrigger>
+                    <Link href="/dashboard/orders?tab=pending" replace>
+                      <TabsTrigger value="pending">Pendings</TabsTrigger>
+                    </Link>
+                    <Link href="/dashboard/orders?tab=completed" replace>
+                      <TabsTrigger value="completed">Completed</TabsTrigger>
+                    </Link>
+                    <Link href="/dashboard/orders?tab=all" replace>
+                      <TabsTrigger value="all">All Orders</TabsTrigger>
+                    </Link>
                   </TabsList>
 
                   <div className="ml-auto flex items-center gap-2">
@@ -96,21 +120,21 @@ export default async function Orders() {
                   </div>
                 </div>
 
-                <TabsContent value="tab-pending">
+                <TabsContent value="pending">
                   <div className="mx-auto py-2">
-                    <DataTable columns={columns} data={pending_data} />
+                    <DataTable columns={columns} data={data} />
                   </div>
                 </TabsContent>
 
-                <TabsContent value="tab-completed">
+                <TabsContent value="completed">
                   <div className="mx-auto py-2">
-                    <DataTable columns={columns} data={completed_data} />
+                    <DataTable columns={columns} data={data} />
                   </div>
                 </TabsContent>
 
-                <TabsContent value="tab-all">
+                <TabsContent value="all">
                   <div className="mx-auto py-2">
-                    <DataTable columns={columns} data={all_data} />
+                    <DataTable columns={columns} data={data} />
                   </div>
                 </TabsContent>
               </Tabs>
