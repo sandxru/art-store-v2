@@ -33,6 +33,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
+import { Separator } from "@radix-ui/react-dropdown-menu";
 
 // Constants for frame and delivery labels
 const FRAME_LABELS: Record<number, string> = {
@@ -158,41 +159,53 @@ export const columns: ColumnDef<Order>[] = [
               </SheetHeader>
               <div className="grid gap-4 py-4">
                 <div className="grid grid-cols-1 gap-4">
-                  <Label htmlFor="name" className="text-left">
+                  <Label
+                    htmlFor="name"
+                    className="text-left text-sm text-slate-800"
+                  >
                     Name
                   </Label>
-                  <Input id="name" value={rowdata.cname} readOnly />
+                  <div className="text-sm text-slate-500">{rowdata.cname}</div>
                 </div>
 
                 <div className="grid grid-cols-1 gap-4">
-                  <Label htmlFor="name" className="text-left">
+                  <Label
+                    htmlFor="contact"
+                    className="text-left text-sm text-slate-800"
+                  >
                     Contact
                   </Label>
-                  <Input id="name" value={rowdata.contact} readOnly />
+                  <div className="text-sm text-slate-500">
+                    {rowdata.contact}
+                  </div>
                 </div>
 
                 <div className="grid grid-cols-1 gap-4">
-                  <Label htmlFor="notes" className="text-left">
+                  <Label
+                    htmlFor="notes"
+                    className="text-left text-sm text-slate-800"
+                  >
                     Notes
                   </Label>
-                  <Textarea id="notes" value={rowdata.notes ?? ""} readOnly />
+                  <div className="text-sm text-slate-500">
+                    {rowdata.notes ?? "No notes"}
+                  </div>
                 </div>
 
                 <div className="grid grid-cols-1 gap-4">
-                  <Label htmlFor="address" className="text-left">
+                  <Label
+                    htmlFor="address"
+                    className="text-left text-sm text-slate-800"
+                  >
                     Address
                   </Label>
-                  <Textarea
-                    id="address"
-                    value={rowdata.address ?? ""}
-                    readOnly
-                  />
+                  <div className="text-sm text-slate-500">
+                    {rowdata.address ?? "No address"}
+                  </div>
                 </div>
               </div>
               <SheetFooter>
-                <SheetClose asChild>
-                  <Button variant="outline">Close</Button>
-                </SheetClose>
+                <SheetClose asChild></SheetClose>
               </SheetFooter>
             </SheetContent>
           </Sheet>
