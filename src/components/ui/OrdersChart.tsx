@@ -27,6 +27,7 @@ export function OrdersChart({ data }: OrdersChartProps) {
         margin={{
           left: 12,
           right: 12,
+          top: 20,
         }}
       >
         <CartesianGrid vertical={false} />
