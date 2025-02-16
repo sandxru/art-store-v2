@@ -150,12 +150,12 @@ export const columns: ColumnDef<Order>[] = [
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="link" className="text-blue-500">
-                Quick View
+                View
               </Button>
             </SheetTrigger>
             <SheetContent side="left">
               <SheetHeader>
-                <SheetTitle>Quick view</SheetTitle>
+                <SheetTitle>Quick View</SheetTitle>
               </SheetHeader>
               <div className="grid gap-4 py-4">
                 <div className="grid grid-cols-1 gap-4">
