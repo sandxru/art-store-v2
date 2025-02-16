@@ -32,7 +32,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-
+import { toast } from "sonner";
 // Mapping for frameID
 const frameOptions: Record<number, string> = {
   0: "No Frame",
@@ -52,8 +52,8 @@ const deliveryOptions: Record<number, string> = {
 const handleCopyClick = (url: string) => {
   navigator.clipboard
     .writeText(url)
-    .then(() => console.log("Image URL copied:", url))
-    .catch((error) => console.error("Clipboard copy failed:", error));
+    .then(() => toast.success("Copied to clipboard!", { duration: 1000 }))
+    .catch(() => toast.error("Failed to copy!"));
 };
 
 export const columns: ColumnDef<Order>[] = [

@@ -26,6 +26,8 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { columns } from "./columns";
 
+import { Toaster } from "@/components/ui/sonner";
+
 export const metadata: Metadata = {
   title: "Orders - ArtStore",
 };
@@ -40,6 +42,7 @@ export default async function Orders() {
       <NavBar />
       <div className="flex min-h-screen w-full flex-col">
         <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-10">
+          <Toaster />
           <Breadcrumb className="hidden md:flex">
             <BreadcrumbList>
               <BreadcrumbItem>
