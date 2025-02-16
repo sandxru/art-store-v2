@@ -34,6 +34,27 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 
+// Constants for frame and delivery labels
+const FRAME_LABELS: Record<number, string> = {
+  0: "No Frame",
+  1: "6 x 9",
+  3: "8 x 12",
+  5: "12 x 18",
+};
+
+const DELIVERY_LABELS: Record<number, string> = {
+  0: "Pick-up",
+  1: "Courier",
+  2: "Softcopy Only",
+};
+
+// Date formatter instance
+const dateFormatter = new Intl.DateTimeFormat("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+
 // Function to handle clipboard copy
 const handleCopyClick = (url: string) => {
   navigator.clipboard
@@ -53,14 +74,7 @@ export const columns: ColumnDef<Order>[] = [
     cell: ({ row }) => {
       const rowdata = row.original;
       const date = new Date(rowdata.createdAt);
-
-      const options: Intl.DateTimeFormatOptions = {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      };
-      const formattedDate = date.toLocaleDateString("en-US", options);
-
+      const formattedDate = dateFormatter.format(date);
       return <p>{formattedDate}</p>;
     },
   },
@@ -91,17 +105,7 @@ export const columns: ColumnDef<Order>[] = [
     header: "Frame Option",
     cell: ({ row }) => {
       const rowdata = row.original;
-      var order_frame = rowdata.frameID;
-      var label;
-      if (order_frame == 0) {
-        label = "No Frame";
-      } else if (order_frame == 1) {
-        label = "6 x 9";
-      } else if (order_frame == 3) {
-        label = "8 x 12";
-      } else if (order_frame == 5) {
-        label = "12 x 18";
-      }
+      const label = FRAME_LABELS[rowdata.frameID] || "Unknown Frame";
 
       return (
         <Badge className="text-xs py-1 rounded-md" variant="outline">
@@ -115,15 +119,7 @@ export const columns: ColumnDef<Order>[] = [
     header: "Delivery",
     cell: ({ row }) => {
       const rowdata = row.original;
-      var order_delivery = rowdata.delivery;
-      var label;
-      if (order_delivery == 0) {
-        label = "Pick-up";
-      } else if (order_delivery == 1) {
-        label = "Courier";
-      } else if (order_delivery == 2) {
-        label = "Softcopy Only";
-      }
+      const label = DELIVERY_LABELS[rowdata.delivery] || "Unknown Delivery";
 
       return (
         <Badge className="text-xs py-1 rounded-md" variant="outline">
@@ -132,7 +128,6 @@ export const columns: ColumnDef<Order>[] = [
       );
     },
   },
-
   {
     accessorKey: "status",
     header: "Status",
