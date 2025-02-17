@@ -103,20 +103,20 @@ export const columns: ColumnDef<Order>[] = [
       );
     },
   },
-  {
-    accessorKey: "frameID",
-    header: "Frame Option",
-    cell: ({ row }) => {
-      const rowdata = row.original;
-      const label = FRAME_LABELS[rowdata.frameID] || "Unknown Frame";
+  // {
+  //   accessorKey: "frameID",
+  //   header: "Frame Option",
+  //   cell: ({ row }) => {
+  //     const rowdata = row.original;
+  //     const label = FRAME_LABELS[rowdata.frameID] || "Unknown Frame";
 
-      return (
-        <Badge className="text-xs py-1 rounded-md" variant="outline">
-          {label}
-        </Badge>
-      );
-    },
-  },
+  //     return (
+  //       <Badge className="text-xs py-1 rounded-md" variant="outline">
+  //         {label}
+  //       </Badge>
+  //     );
+  //   },
+  // },
   {
     accessorKey: "delivery",
     header: "Delivery",
@@ -221,7 +221,7 @@ export const columns: ColumnDef<Order>[] = [
                     <p className="text-sm font-medium text-slate-500">
                       Address
                     </p>
-                    <p className="text-sm text-slate-800">
+                    <p className="text-sm text-slate-800 whitespace-pre-line">
                       {rowdata.address ?? "No address"}
                     </p>
                   </div>
