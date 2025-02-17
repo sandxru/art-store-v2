@@ -12,6 +12,29 @@ export const prisma =
 
 if (process.env.NODE_ENV === "development") global.prisma = prisma;
 
+// FORMAT CUSTOMER NAMES
+export async function formatCustomerNames() {
+  const orders = await prisma.order.findMany({
+    select: {
+      id: true,
+      cname: true,
+    },
+  });
+
+  for (const order of orders) {
+    const formattedName = order.cname
+      .toLowerCase()
+      .replace(/\b\w/g, (char) => char.toUpperCase());
+
+    if (formattedName !== order.cname) {
+      await prisma.order.update({
+        where: { id: order.id },
+        data: { cname: formattedName },
+      });
+    }
+  }
+}
+
 // Keep all the Prisma functions in this file.
 export async function countOrdersInCurrentMonth(): Promise<number> {
   const now = new Date();
