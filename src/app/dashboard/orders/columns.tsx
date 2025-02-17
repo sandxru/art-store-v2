@@ -64,7 +64,6 @@ const handleCopyClick = (url: string) => {
 export const columns: ColumnDef<Order>[] = [
   {
     accessorKey: "id",
-    header: "#",
   },
   {
     accessorKey: "createdAt",

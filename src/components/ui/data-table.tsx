@@ -31,9 +31,15 @@ export function DataTable<TData, TValue>({
   const [searchQuery, setSearchQuery] = useState("");
   const [sorting, setSorting] = useState([{ id: "id", desc: true }]);
 
+  // Hide 'id' column from rendering
+  const visibleColumns = useMemo(
+    () => columns.filter((col) => col.accessorKey !== "id"),
+    [columns]
+  );
+
   const filteredData = useMemo(() => {
     return data.filter((row) => {
-      return columns.some((column) => {
+      return visibleColumns.some((column) => {
         const cellValue = row[column.accessorKey as keyof TData];
         return cellValue
           ? cellValue
@@ -43,11 +49,11 @@ export function DataTable<TData, TValue>({
           : false;
       });
     });
-  }, [data, searchQuery, columns]);
+  }, [data, searchQuery, visibleColumns]);
 
   const table = useReactTable({
     data: filteredData,
-    columns,
+    columns, // Keep 'id' column for sorting but hide it from UI
     state: { sorting },
     onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
@@ -71,8 +77,9 @@ export function DataTable<TData, TValue>({
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
+                {headerGroup.headers
+                  .filter((header) => header.column.id !== "id") // Hide 'id' from headers
+                  .map((header) => (
                     <TableHead
                       key={header.id}
                       className="font-medium text-slate-500"
@@ -84,8 +91,7 @@ export function DataTable<TData, TValue>({
                             header.getContext()
                           )}
                     </TableHead>
-                  );
-                })}
+                  ))}
               </TableRow>
             ))}
           </TableHeader>
@@ -96,20 +102,23 @@ export function DataTable<TData, TValue>({
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                 >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </TableCell>
-                  ))}
+                  {row
+                    .getVisibleCells()
+                    .filter((cell) => cell.column.id !== "id") // Hide 'id' from rows
+                    .map((cell) => (
+                      <TableCell key={cell.id}>
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </TableCell>
+                    ))}
                 </TableRow>
               ))
             ) : (
               <TableRow>
                 <TableCell
-                  colSpan={columns.length}
+                  colSpan={visibleColumns.length}
                   className="h-24 text-center"
                 >
                   No results.
