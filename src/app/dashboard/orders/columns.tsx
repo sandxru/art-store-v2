@@ -171,24 +171,23 @@ export const columns: ColumnDef<Order>[] = [
                 <CardContent className="p-4 space-y-4">
                   <SheetTitle>Order Details</SheetTitle>
 
-                  {/* Frame Size & Delivery in the same row */}
                   <div className="flex gap-4 relative">
-                    <div className="flex flex-col">
+                    <div className="flex flex-col gap-2">
                       <p className="text-sm font-medium text-slate-500">
                         Frame Size
                       </p>
                       <p className="text-sm text-slate-800">
-                        {rowdata.frameID}
+                        {FRAME_LABELS[rowdata.frameID] || "Unknown Frame"}
                       </p>
                     </div>
 
-                    {/* Center-align Delivery */}
-                    <div className="flex flex-col absolute right-1/2 transform translate-x-1/2">
+                    <div className="flex flex-col gap-2 absolute right-1/2 transform translate-x-1/2">
                       <p className="text-sm font-medium text-slate-500">
                         Delivery
                       </p>
                       <p className="text-sm text-slate-800">
-                        {rowdata.delivery}
+                        {DELIVERY_LABELS[rowdata.delivery] ||
+                          "Unknown Delivery"}
                       </p>
                     </div>
                   </div>
