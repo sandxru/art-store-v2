@@ -12,53 +12,46 @@ export const prisma =
 
 if (process.env.NODE_ENV === "development") global.prisma = prisma;
 
+// Helper function to get the start and end of a month
+const getMonthStartEnd = (date: Date) => {
+  const year = date.getFullYear();
+  const month = date.getMonth();
+  const start = new Date(year, month, 1);
+  const end = new Date(year, month + 1, 0, 23, 59, 59, 999);
+  return { start, end };
+};
+
 // Keep all the Prisma functions in this file.
 export async function countOrdersInCurrentMonth(): Promise<number> {
-  const now = new Date();
-  // Calculate start and end dates for the current calendar month
-  const currentMonthStart = new Date(now.getFullYear(), now.getMonth(), 1);
-  const currentMonthEnd = new Date(
-    now.getFullYear(),
-    now.getMonth() + 1,
-    0,
-    23,
-    59,
-    59,
-    999
-  ); // End of current month
-  // Count orders in the current month
-  const count = await prisma.order.count({
+  const { start, end } = getMonthStartEnd(new Date());
+  return prisma.order.count({
     where: {
       createdAt: {
-        gte: currentMonthStart,
-        lt: currentMonthEnd,
+        gte: start,
+        lt: end,
       },
     },
   });
-  return count;
 }
 
 export async function countPendingOrders(): Promise<number> {
-  const count = await prisma.order.count({
+  return prisma.order.count({
     where: {
       status: "p",
     },
   });
-  return count;
 }
 
 export async function countCompletedOrders(): Promise<number> {
-  const count = await prisma.order.count({
+  return prisma.order.count({
     where: {
       status: "c",
     },
   });
-  return count;
 }
 
 export async function countAllOrders(): Promise<number> {
-  const count = await prisma.order.count();
-  return count;
+  return prisma.order.count();
 }
 
 export async function countOrdersInRange(
@@ -77,39 +70,15 @@ export async function countOrdersInRange(
 
 export async function getOrderPercentageChange(): Promise<string> {
   const now = new Date();
-  // Current month start and end dates
-  const currentMonthStart = new Date(now.getFullYear(), now.getMonth(), 1);
-  const currentMonthEnd = new Date(
-    now.getFullYear(),
-    now.getMonth() + 1,
-    0,
-    23,
-    59,
-    59,
-    999
-  ); // End of current month
-
-  // Previous month start and end dates
-  const previousMonthStart = new Date(now.getFullYear(), now.getMonth() - 1, 1);
-  const previousMonthEnd = new Date(
-    now.getFullYear(),
-    now.getMonth(),
-    0,
-    23,
-    59,
-    59,
-    999
-  ); // End of previous month
-
-  // Count orders
-  const currentMonthCount = await countOrdersInRange(
-    currentMonthStart,
-    currentMonthEnd
+  const currentMonth = getMonthStartEnd(now);
+  const previousMonth = getMonthStartEnd(
+    new Date(now.getFullYear(), now.getMonth() - 1, 1)
   );
-  const previousMonthCount = await countOrdersInRange(
-    previousMonthStart,
-    previousMonthEnd
-  );
+
+  const [currentMonthCount, previousMonthCount] = await Promise.all([
+    countOrdersInRange(currentMonth.start, currentMonth.end),
+    countOrdersInRange(previousMonth.start, previousMonth.end),
+  ]);
 
   let percentageChange = 0;
   if (previousMonthCount > 0) {
