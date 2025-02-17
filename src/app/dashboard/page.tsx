@@ -5,7 +5,6 @@ import {
   countPendingOrders,
   getOrderPercentageChange,
   countCompletedOrdersLast12Months,
-  formatCustomerNames,
 } from "@/lib/prisma";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -50,8 +49,6 @@ export default async function Dashboard() {
     month: order.month,
     desktop: order.count,
   }));
-
-  formatCustomerNames();
 
   return (
     <>
