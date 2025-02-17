@@ -79,6 +79,11 @@ export const columns: ColumnDef<Order>[] = [
   {
     accessorKey: "cname",
     header: "Customer",
+    cell: ({ row }) => {
+      const fullName = row.original.cname || "";
+      const firstName = fullName.split(" ")[0]; // Extracts only the first word
+      return <p>{firstName}</p>;
+    },
   },
   {
     accessorKey: "photo",
@@ -92,7 +97,7 @@ export const columns: ColumnDef<Order>[] = [
           alt="img"
           width={1080}
           height={1080}
-          className="h-36 w-auto p-0 border-white border-4 rounded-lg drop-shadow"
+          className="h-32 w-auto p-0 border-white border-4 rounded-lg drop-shadow"
           unoptimized
         />
       );
