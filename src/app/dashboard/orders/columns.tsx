@@ -31,6 +31,7 @@ import {
 } from "@/components/ui/sheet";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
+import { Card, CardContent } from "@/components/ui/card";
 
 // Constants for frame and delivery labels
 const FRAME_LABELS: Record<number, string> = {
@@ -154,58 +155,81 @@ export const columns: ColumnDef<Order>[] = [
                 View
               </Button>
             </SheetTrigger>
-            <SheetContent side="left">
+            <SheetContent side="left" className="bg-slate-50">
               <SheetHeader>
-                <SheetTitle>Quick View</SheetTitle>
+                <SheetTitle className="flex items-center gap-2 text-lg font-semibold text-gray-800">
+                  <Badge
+                    variant="outline"
+                    className="text-sm font-medium px-2 py-1 bg-white"
+                  >
+                    Order #{rowdata.id}
+                  </Badge>
+                </SheetTitle>
               </SheetHeader>
-              <div className="grid gap-4 py-4">
-                <div className="grid grid-cols-1 gap-4">
-                  <Label
-                    htmlFor="name"
-                    className="text-left text-sm text-slate-800"
-                  >
-                    Name
-                  </Label>
-                  <div className="text-sm text-slate-500">{rowdata.cname}</div>
-                </div>
 
-                <div className="grid grid-cols-1 gap-4">
-                  <Label
-                    htmlFor="contact"
-                    className="text-left text-sm text-slate-800"
-                  >
-                    Contact
-                  </Label>
-                  <div className="text-sm text-slate-500">
-                    {rowdata.contact}
-                  </div>
-                </div>
+              <Card x-chunk="dashboard-06-chunk-0" className="mt-4">
+                <CardContent className="p-4 space-y-4">
+                  <SheetTitle>Order Details</SheetTitle>
 
-                <div className="grid grid-cols-1 gap-4">
-                  <Label
-                    htmlFor="notes"
-                    className="text-left text-sm text-slate-800"
-                  >
-                    Notes
-                  </Label>
-                  <div className="text-sm text-slate-500">
-                    {rowdata.notes ?? "No notes"}
-                  </div>
-                </div>
+                  {/* Frame Size & Delivery in the same row */}
+                  <div className="flex gap-4 relative">
+                    <div className="flex flex-col">
+                      <p className="text-sm font-medium text-slate-500">
+                        Frame Size
+                      </p>
+                      <p className="text-sm text-slate-800">
+                        {rowdata.frameID}
+                      </p>
+                    </div>
 
-                <div className="grid grid-cols-1 gap-4">
-                  <Label
-                    htmlFor="address"
-                    className="text-left text-sm text-slate-800"
-                  >
-                    Address
-                  </Label>
-                  <div className="text-sm text-slate-500">
-                    {rowdata.address ?? "No address"}
+                    {/* Center-align Delivery */}
+                    <div className="flex flex-col absolute right-1/2 transform translate-x-1/2">
+                      <p className="text-sm font-medium text-slate-500">
+                        Delivery
+                      </p>
+                      <p className="text-sm text-slate-800">
+                        {rowdata.delivery}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </div>
-              <SheetFooter>
+
+                  {/* Notes */}
+                  <div className="flex flex-col gap-2">
+                    <p className="text-sm font-medium text-slate-500">Notes</p>
+                    <p className="text-sm text-slate-800">
+                      {rowdata.notes ?? "No notes"}
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card x-chunk="dashboard-06-chunk-0" className="mt-4">
+                <CardContent className="p-4 space-y-4">
+                  <SheetTitle>Customer Details</SheetTitle>
+                  <div className="flex flex-col gap-2">
+                    <p className="text-sm font-medium text-slate-500">Name</p>
+                    <p className="text-sm text-slate-800">{rowdata.cname}</p>
+                  </div>
+
+                  <div className="flex flex-col gap-2">
+                    <p className="text-sm font-medium text-slate-500">
+                      Contact
+                    </p>
+                    <p className="text-sm text-slate-800">{rowdata.contact}</p>
+                  </div>
+
+                  <div className="flex flex-col gap-2">
+                    <p className="text-sm font-medium text-slate-500">
+                      Address
+                    </p>
+                    <p className="text-sm text-slate-800">
+                      {rowdata.address ?? "No address"}
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <SheetFooter className="flex justify-end mt-4">
                 <SheetClose asChild></SheetClose>
               </SheetFooter>
             </SheetContent>
